@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/phoenix/main/json-schema/phoenix-datasetversion.json",
+  "title": "DatasetVersion",
+  "description": "Phoenix DatasetVersion schema",
+  "properties": {
+    "version_id": {
+      "type": "string",
+      "title": "Version Id"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Description"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Metadata"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+    }
+  },
+  "type": "object",
+  "required": [
+    "version_id",
+    "description",
+    "metadata",
+    "created_at"
+  ]
+}

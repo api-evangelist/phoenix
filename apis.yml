@@ -51,6 +51,22 @@ apis:
         url: https://arize.com/docs/phoenix
       - type: OpenAPI
         url: https://raw.githubusercontent.com/Arize-ai/phoenix/main/schemas/openapi.json
+      - type: OpenAPI
+        url: openapi/phoenix-rest-api-openapi.yml
+      - type: JSONSchema
+        url: json-schema/phoenix-span.json
+      - type: JSONSchema
+        url: json-schema/phoenix-dataset.json
+      - type: JSONSchema
+        url: json-schema/phoenix-experiment.json
+      - type: JSONSchema
+        url: json-schema/phoenix-annotationresult.json
+      - type: JSONSchema
+        url: json-schema/phoenix-project.json
+      - type: Vocabulary
+        url: vocabulary/phoenix-vocabulary.yml
+      - type: JSONLDContext
+        url: json-ld/phoenix-context.jsonld
       - type: PythonSDK
         url: https://pypi.org/project/arize-phoenix-client/
       - type: TypeScriptSDK

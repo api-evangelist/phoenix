@@ -1,0 +1,177 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "phoenix": "https://arize.com/docs/phoenix/concepts#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "otel": "https://opentelemetry.io/docs/concepts/glossary/#",
+
+    "Span": "phoenix:Span",
+    "Trace": "phoenix:Trace",
+    "Project": "phoenix:Project",
+    "Dataset": "phoenix:Dataset",
+    "DatasetVersion": "phoenix:DatasetVersion",
+    "Experiment": "phoenix:Experiment",
+    "ExperimentRun": "phoenix:ExperimentRun",
+    "Annotation": "phoenix:Annotation",
+    "SpanAnnotation": "phoenix:SpanAnnotation",
+    "TraceAnnotation": "phoenix:TraceAnnotation",
+    "AnnotationConfig": "phoenix:AnnotationConfig",
+    "EvaluationResult": "phoenix:EvaluationResult",
+    "Session": "phoenix:Session",
+    "PromptVersion": "phoenix:PromptVersion",
+    "InferenceSpan": "phoenix:InferenceSpan",
+
+    "id": "@id",
+    "type": "@type",
+
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+
+    "traceId": {
+      "@id": "otel:TraceId",
+      "@type": "xsd:string"
+    },
+    "spanId": {
+      "@id": "otel:SpanId",
+      "@type": "xsd:string"
+    },
+    "parentSpanId": {
+      "@id": "phoenix:parentSpanId",
+      "@type": "xsd:string"
+    },
+    "startTime": {
+      "@id": "phoenix:startTime",
+      "@type": "xsd:dateTime"
+    },
+    "endTime": {
+      "@id": "phoenix:endTime",
+      "@type": "xsd:dateTime"
+    },
+    "statusCode": {
+      "@id": "phoenix:statusCode",
+      "@type": "xsd:string"
+    },
+    "statusMessage": {
+      "@id": "phoenix:statusMessage",
+      "@type": "xsd:string"
+    },
+    "spanKind": {
+      "@id": "phoenix:spanKind",
+      "@type": "xsd:string"
+    },
+    "attributes": {
+      "@id": "phoenix:attributes"
+    },
+    "events": {
+      "@id": "phoenix:events",
+      "@container": "@list"
+    },
+    "spans": {
+      "@id": "phoenix:spans",
+      "@container": "@list"
+    },
+    "traces": {
+      "@id": "phoenix:traces",
+      "@container": "@list"
+    },
+
+    "score": {
+      "@id": "phoenix:score",
+      "@type": "xsd:double"
+    },
+    "label": {
+      "@id": "phoenix:label",
+      "@type": "xsd:string"
+    },
+    "explanation": {
+      "@id": "phoenix:explanation",
+      "@type": "xsd:string"
+    },
+    "annotatorKind": {
+      "@id": "phoenix:annotatorKind",
+      "@type": "xsd:string"
+    },
+
+    "datasetId": {
+      "@id": "phoenix:datasetId",
+      "@type": "xsd:string"
+    },
+    "versionId": {
+      "@id": "phoenix:versionId",
+      "@type": "xsd:string"
+    },
+    "experimentId": {
+      "@id": "phoenix:experimentId",
+      "@type": "xsd:string"
+    },
+    "projectId": {
+      "@id": "phoenix:projectId",
+      "@type": "xsd:string"
+    },
+
+    "metadata": {
+      "@id": "phoenix:metadata"
+    },
+    "modelName": {
+      "@id": "phoenix:modelName",
+      "@type": "xsd:string"
+    },
+    "tokenCount": {
+      "@id": "phoenix:tokenCount",
+      "@type": "xsd:integer"
+    },
+    "promptTokens": {
+      "@id": "phoenix:promptTokens",
+      "@type": "xsd:integer"
+    },
+    "completionTokens": {
+      "@id": "phoenix:completionTokens",
+      "@type": "xsd:integer"
+    },
+    "latencyMs": {
+      "@id": "phoenix:latencyMs",
+      "@type": "xsd:double"
+    },
+
+    "task": {
+      "@id": "phoenix:task"
+    },
+    "input": {
+      "@id": "phoenix:input"
+    },
+    "output": {
+      "@id": "phoenix:output"
+    },
+    "expected": {
+      "@id": "phoenix:expected"
+    },
+
+    "cursorToken": {
+      "@id": "phoenix:cursorToken",
+      "@type": "xsd:string"
+    },
+    "hasNextPage": {
+      "@id": "phoenix:hasNextPage",
+      "@type": "xsd:boolean"
+    }
+  }
+}

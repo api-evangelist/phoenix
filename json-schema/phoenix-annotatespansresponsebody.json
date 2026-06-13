@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/phoenix/main/json-schema/phoenix-annotatespansresponsebody.json",
+  "title": "AnnotateSpansResponseBody",
+  "description": "Phoenix AnnotateSpansResponseBody schema",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/components/schemas/InsertedSpanAnnotation"
+      },
+      "type": "array",
+      "title": "Data"
+    }
+  },
+  "type": "object",
+  "required": [
+    "data"
+  ]
+}

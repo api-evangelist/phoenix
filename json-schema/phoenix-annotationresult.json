@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/phoenix/main/json-schema/phoenix-annotationresult.json",
+  "title": "AnnotationResult",
+  "description": "Phoenix AnnotationResult schema",
+  "properties": {
+    "label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Label",
+      "description": "The label assigned by the annotation"
+    },
+    "score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Score",
+      "description": "The score assigned by the annotation"
+    },
+    "explanation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Explanation",
+      "description": "Explanation of the annotation result"
+    }
+  },
+  "type": "object"
+}

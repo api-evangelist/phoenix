@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/phoenix/main/json-schema/phoenix-experimentrun.json",
+  "title": "ExperimentRun",
+  "description": "Phoenix ExperimentRun schema",
+  "properties": {
+    "dataset_example_id": {
+      "type": "string",
+      "title": "Dataset Example Id",
+      "description": "The ID of the dataset example used in the experiment run"
+    },
+    "output": {
+      "title": "Output",
+      "description": "The output of the experiment task"
+    },
+    "repetition_number": {
+      "type": "integer",
+      "exclusiveMinimum": 0.0,
+      "title": "Repetition Number",
+      "description": "The repetition number of the experiment run"
+    },
+    "start_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Start Time",
+      "description": "The start time of the experiment run"
+    },
+    "end_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "End Time",
+      "description": "The end time of the experiment run"
+    },
+    "trace_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Trace Id",
+      "description": "The ID of the corresponding trace (if one exists)"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Error",
+      "description": "Optional error message if the experiment run encountered an error"
+    },
+    "id": {
+      "type": "string",
+      "title": "Id",
+      "description": "The ID of the experiment run"
+    },
+    "experiment_id": {
+      "type": "string",
+      "title": "Experiment Id",
+      "description": "The ID of the experiment"
+    }
+  },
+  "type": "object",
+  "required": [
+    "dataset_example_id",
+    "output",
+    "repetition_number",
+    "start_time",
+    "end_time",
+    "id",
+    "experiment_id"
+  ]
+}

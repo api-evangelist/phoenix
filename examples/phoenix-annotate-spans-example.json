@@ -1,0 +1,9 @@
+{
+  "data": [
+    {
+      "name": "example-string",
+      "annotator_kind": "LLM",
+      "span_id": "example-string"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+name: Arize Phoenix Vocabulary
+description: Domain vocabulary for the Arize Phoenix AI observability and evaluation
+  platform, covering LLM tracing, evaluation, dataset management, and experiment concepts.
+url: https://arize.com/docs/phoenix
+version: '1.0'
+terms:
+- term: Span
+  definition: A unit of work or operation captured during LLM execution, representing
+    a single traced activity with timing, inputs, outputs, and metadata.
+  relatedTerms: []
+- term: Trace
+  definition: A collection of spans that represent a complete end-to-end request through
+    an LLM application, linked by a trace ID.
+  relatedTerms: []
+- term: Annotation
+  definition: A human or automated label attached to a span or trace, used to evaluate
+    quality, correctness, or other dimensions of LLM output.
+  relatedTerms: []
+- term: Dataset
+  definition: A named collection of data records used as input for LLM experiments,
+    evaluations, or fine-tuning.
+  relatedTerms: []
+- term: DatasetVersion
+  definition: A snapshot of a dataset at a specific point in time, enabling reproducible
+    experiments.
+  relatedTerms: []
+- term: Experiment
+  definition: A structured evaluation run that applies a task or prompt to a dataset
+    and records the resulting outputs and metrics.
+  relatedTerms: []
+- term: ExperimentRun
+  definition: A single execution within an experiment, pairing one dataset record
+    with its corresponding LLM output.
+  relatedTerms: []
+- term: Project
+  definition: A logical grouping of traces, spans, and experiments in Phoenix, typically
+    corresponding to a single LLM application or use case.
+  relatedTerms: []
+- term: AnnotationConfig
+  definition: A schema definition for an annotation, specifying the label name, type
+    (categorical or continuous), and allowed values.
+  relatedTerms: []
+- term: EvaluationResult
+  definition: The outcome of an evaluation step, including a score, label, and optional
+    explanation produced by a judge or human reviewer.
+  relatedTerms: []
+- term: InferencesSpan
+  definition: A span specifically representing an LLM model inference call, capturing
+    the input prompt, output, token counts, and model name.
+  relatedTerms: []
+- term: SpanAnnotation
+  definition: An annotation applied to a specific span, enabling evaluation at the
+    span level within a trace.
+  relatedTerms: []
+- term: Session
+  definition: A sequence of related traces representing a multi-turn conversation
+    or user session with an LLM application.
+  relatedTerms: []
+- term: PromptVersion
+  definition: A versioned snapshot of a prompt template, enabling comparison and reproducibility
+    across experiments.
+  relatedTerms: []
+- term: OpenTelemetry
+  definition: An open-source observability framework used by Phoenix for collecting,
+    processing, and exporting telemetry data (traces, metrics, logs) from LLM applications.
+  relatedTerms: []
+- term: OTLP
+  definition: OpenTelemetry Protocol — the wire protocol used to ingest span and trace
+    data into Phoenix from instrumented LLM applications.
+  relatedTerms: []
+- term: AutoInstrumentation
+  definition: Automatic injection of tracing code into LLM framework calls (LangChain,
+    LlamaIndex, OpenAI, etc.) without manual span creation.
+  relatedTerms: []
+- term: LLMOps
+  definition: Practices and tooling for operationalizing LLM applications in production,
+    including monitoring, evaluation, debugging, and iteration.
+  relatedTerms: []
+- term: BearerToken
+  definition: The authentication mechanism for the Phoenix REST API, passed as an
+    Authorization header value.
+  relatedTerms: []
+- term: CursorPagination
+  definition: Phoenix pagination strategy using opaque cursor tokens to navigate through
+    large result sets.
+  relatedTerms: []

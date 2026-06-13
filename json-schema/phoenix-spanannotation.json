@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/phoenix/main/json-schema/phoenix-spanannotation.json",
+  "title": "SpanAnnotation",
+  "description": "Phoenix SpanAnnotation schema",
+  "properties": {
+    "id": {
+      "type": "string",
+      "title": "Id"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Updated At"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "API",
+        "APP"
+      ],
+      "title": "Source"
+    },
+    "user_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "User Id"
+    },
+    "name": {
+      "type": "string",
+      "title": "Name",
+      "description": "The name of the annotation"
+    },
+    "annotator_kind": {
+      "type": "string",
+      "enum": [
+        "LLM",
+        "CODE",
+        "HUMAN"
+      ],
+      "title": "Annotator Kind",
+      "description": "The kind of annotator used for the annotation"
+    },
+    "result": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/AnnotationResult"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The result of the annotation"
+    },
+    "metadata": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Metadata",
+      "description": "Metadata for the annotation"
+    },
+    "identifier": {
+      "type": "string",
+      "title": "Identifier",
+      "description": "The identifier of the annotation. If provided, the annotation will be updated if it already exists.",
+      "default": ""
+    },
+    "span_id": {
+      "type": "string",
+      "title": "Span Id",
+      "description": "OpenTelemetry Span ID (hex format w/o 0x prefix)"
+    }
+  },
+  "type": "object",
+  "required": [
+    "id",
+    "created_at",
+    "updated_at",
+    "source",
+    "user_id",
+    "name",
+    "annotator_kind",
+    "span_id"
+  ]
+}

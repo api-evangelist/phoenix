@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/phoenix/main/json-schema/phoenix-experiment.json",
+  "title": "Experiment",
+  "description": "Phoenix Experiment schema",
+  "properties": {
+    "id": {
+      "type": "string",
+      "title": "Id",
+      "description": "The ID of the experiment"
+    },
+    "dataset_id": {
+      "type": "string",
+      "title": "Dataset Id",
+      "description": "The ID of the dataset associated with the experiment"
+    },
+    "dataset_version_id": {
+      "type": "string",
+      "title": "Dataset Version Id",
+      "description": "The ID of the dataset version associated with the experiment"
+    },
+    "name": {
+      "type": "string",
+      "title": "Name",
+      "description": "The name of the experiment"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Description",
+      "description": "The description of the experiment"
+    },
+    "repetitions": {
+      "type": "integer",
+      "exclusiveMinimum": 0.0,
+      "title": "Repetitions",
+      "description": "Number of times the experiment is repeated"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Metadata",
+      "description": "Metadata of the experiment"
+    },
+    "project_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Project Name",
+      "description": "The name of the project associated with the experiment"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At",
+      "description": "The creation timestamp of the experiment"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Updated At",
+      "description": "The last update timestamp of the experiment"
+    },
+    "example_count": {
+      "type": "integer",
+      "title": "Example Count",
+      "description": "Number of examples in the experiment"
+    },
+    "successful_run_count": {
+      "type": "integer",
+      "title": "Successful Run Count",
+      "description": "Number of successful runs in the experiment"
+    },
+    "failed_run_count": {
+      "type": "integer",
+      "title": "Failed Run Count",
+      "description": "Number of failed runs in the experiment"
+    },
+    "missing_run_count": {
+      "type": "integer",
+      "title": "Missing Run Count",
+      "description": "Number of missing (not yet executed) runs in the experiment"
+    }
+  },
+  "type": "object",
+  "required": [
+    "id",
+    "dataset_id",
+    "dataset_version_id",
+    "name",
+    "description",
+    "repetitions",
+    "metadata",
+    "project_name",
+    "created_at",
+    "updated_at",
+    "example_count",
+    "successful_run_count",
+    "failed_run_count",
+    "missing_run_count"
+  ]
+}

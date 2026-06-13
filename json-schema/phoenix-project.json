@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/phoenix/main/json-schema/phoenix-project.json",
+  "title": "Project",
+  "description": "Phoenix Project schema",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Name"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Description"
+    },
+    "id": {
+      "type": "string",
+      "title": "Id"
+    }
+  },
+  "type": "object",
+  "required": [
+    "name",
+    "id"
+  ]
+}
