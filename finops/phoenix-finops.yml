@@ -1,0 +1,157 @@
+name: Arize Phoenix FinOps Framework
+description: >
+  FinOps cost management profile for Arize Phoenix API usage following the
+  FinOps Foundation FOCUS specification. Covers cost allocation, optimization
+  strategies, and unit economics for teams using the Arize AX managed cloud
+  service or self-hosted Phoenix deployments.
+specificationVersion: '1.0'
+url: https://arize.com/pricing/
+framework: FinOps Foundation FOCUS 1.0
+
+costModel:
+  billingDimensions:
+    - dimension: TraceSpans
+      description: Number of individual spans ingested into the Phoenix platform per month.
+      unit: spans
+      metricName: trace_spans_ingested
+      aggregationPeriod: monthly
+
+    - dimension: DataIngestion
+      description: Volume of trace and telemetry data ingested in gigabytes per month.
+      unit: GB
+      metricName: data_ingestion_gb
+      aggregationPeriod: monthly
+
+    - dimension: DataRetention
+      description: Number of days trace and span data is retained in the platform.
+      unit: days
+      metricName: retention_days
+      aggregationPeriod: monthly
+
+    - dimension: UserSeats
+      description: >
+        Number of user accounts on managed AX plans. Enterprise contracts may
+        price per-seat for larger organizations.
+      unit: users
+      metricName: active_users
+      aggregationPeriod: monthly
+
+tiers:
+  - tier: AX Free
+    monthlyBasePrice: 0.00
+    currency: USD
+    includedSpans: 25000
+    includedIngestionGB: 1
+    retentionDays: 15
+    costPerAdditionalSpan: 0
+    costPerAdditionalGB: 0
+    overageAllowed: false
+
+  - tier: AX Pro
+    monthlyBasePrice: 50.00
+    currency: USD
+    includedSpans: 50000
+    includedIngestionGB: 10
+    retentionDays: 30
+    costPerAdditionalSpan: 0.0008
+    costPerAdditionalGB: 3.00
+    overageAllowed: true
+
+  - tier: AX Enterprise
+    monthlyBasePrice: custom
+    currency: USD
+    includedSpans: custom
+    includedIngestionGB: custom
+    retentionDays: custom
+    costPerAdditionalSpan: custom
+    costPerAdditionalGB: custom
+    overageAllowed: custom
+
+  - tier: Open Source (Self-Hosted)
+    monthlyBasePrice: 0.00
+    currency: USD
+    includedSpans: unlimited
+    includedIngestionGB: unlimited
+    retentionDays: unlimited
+    infrastructureCost: external
+    notes: >
+      Self-hosted deployments have no Arize licensing cost but incur compute,
+      storage, and network infrastructure costs on the hosting provider.
+
+unitEconomics:
+  - metric: CostPerSpan
+    description: Total monthly platform cost divided by total spans ingested.
+    formula: "total_monthly_cost / total_spans_ingested"
+    unit: USD/span
+    targetBenchmark: "<$0.001 per span"
+
+  - metric: CostPerGB
+    description: Total monthly platform cost divided by total data ingested in GB.
+    formula: "total_monthly_cost / total_data_ingestion_gb"
+    unit: USD/GB
+    targetBenchmark: "<$3.00 per GB on Pro"
+
+  - metric: SpanUtilizationRate
+    description: Percentage of included monthly spans actually consumed.
+    formula: "spans_used / included_spans * 100"
+    unit: percent
+    targetBenchmark: "70-90% to justify plan tier"
+
+optimization:
+  recommendations:
+    - id: right-size-plan
+      title: Right-Size Plan Tier
+      description: >
+        Monitor monthly span consumption and ingestion volume. Upgrade from
+        Free to Pro when approaching 80% of the 25k span limit. Evaluate
+        Enterprise when Pro overage charges consistently exceed $100/month.
+      action: Monitor utilization and adjust plan quarterly.
+
+    - id: sampling-strategy
+      title: Implement Trace Sampling
+      description: >
+        Use OpenTelemetry head-based or tail-based sampling to reduce span
+        volume. Sampling at 10-50% can significantly reduce monthly costs while
+        maintaining visibility into error rates and latency distributions.
+      action: Configure OTEL_TRACES_SAMPLER and OTEL_TRACES_SAMPLER_ARG.
+
+    - id: self-host-at-scale
+      title: Self-Host for High Volume
+      description: >
+        At high span volumes (>500k/month), self-hosting Phoenix on cloud
+        infrastructure (e.g., AWS ECS, GCP Cloud Run, Kubernetes) may be more
+        cost-effective than managed AX Enterprise pricing.
+      action: >
+        Evaluate infrastructure cost of self-hosted deployment vs. AX Enterprise
+        contract pricing when monthly managed cost exceeds $500.
+
+    - id: retention-optimization
+      title: Optimize Retention Settings
+      description: >
+        Tune data retention periods to match compliance and debugging needs.
+        Longer retention increases storage costs in self-hosted deployments and
+        may influence Enterprise contract pricing.
+      action: Set retention to match the minimum required for incident investigation.
+
+    - id: tag-cost-allocation
+      title: Tag Spans for Cost Allocation
+      description: >
+        Use OpenTelemetry resource attributes and span attributes to tag traces
+        by team, application, model, or environment. This enables accurate
+        chargeback and showback reporting by business unit.
+      action: >
+        Add attributes like service.name, deployment.environment, team.name to
+        OTEL resource configuration.
+
+allocation:
+  - strategy: ByProject
+    description: Allocate span costs to Phoenix projects (mapped to application or team).
+    method: spans_per_project / total_spans * monthly_cost
+
+  - strategy: ByEnvironment
+    description: Separate cost tracking for production, staging, and development traces.
+    method: Filter by deployment.environment attribute on spans.
+
+  - strategy: ByModel
+    description: Track observability costs per LLM model being monitored.
+    method: Filter by gen_ai.system and gen_ai.request.model span attributes.

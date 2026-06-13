@@ -1,0 +1,84 @@
+aid: phoenix
+name: Arize Phoenix
+description: >
+  Arize Phoenix is an open-source AI observability and evaluation platform built
+  on OpenTelemetry, enabling developers to trace, evaluate, and debug LLM
+  applications in production or locally. Phoenix exposes a REST API for
+  programmatically ingesting spans and traces, managing datasets, running
+  experiments, submitting annotations, and querying evaluation results. The
+  platform supports a wide range of LLM frameworks including LangChain,
+  LlamaIndex, OpenAI, Anthropic, and CrewAI through auto-instrumentation. Phoenix
+  can be self-hosted in a single command or used as a managed cloud service (Arize
+  AX), with authentication via API keys and OAuth2/OIDC for enterprise
+  deployments.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/phoenix/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - LLM Observability
+  - AI Evaluation
+  - OpenTelemetry
+  - Tracing
+  - LLMOps
+  - AI Monitoring
+  - Open Source
+  - Prompt Engineering
+  - Datasets
+  - Experiments
+apis:
+  - name: Arize Phoenix REST API
+    description: >
+      The Phoenix REST API provides programmatic access to all platform
+      capabilities including trace ingestion via OpenTelemetry, span and trace
+      annotation management, dataset upload and export, experiment creation and
+      execution, annotation configuration, and project management. The API
+      follows REST conventions with JSON request and response bodies and uses
+      bearer token authentication via API keys.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://arize.com/docs/phoenix
+    baseURL: https://app.phoenix.arize.com
+    tags:
+      - LLM Observability
+      - Tracing
+      - Evaluation
+      - Datasets
+      - Experiments
+    properties:
+      - type: Documentation
+        url: https://arize.com/docs/phoenix
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/Arize-ai/phoenix/main/schemas/openapi.json
+      - type: PythonSDK
+        url: https://pypi.org/project/arize-phoenix-client/
+      - type: TypeScriptSDK
+        url: https://www.npmjs.com/package/@arizeai/phoenix-client
+    contact:
+      - FN: Arize AI Support
+        url: https://arize.com/contact/
+common:
+  - type: Website
+    url: https://arize.com/phoenix/
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: GitHubOrg
+    url: https://github.com/Arize-ai
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/arizeai
+  - type: Blog
+    url: https://arize.com/blog/
+  - type: Pricing
+    url: https://arize.com/pricing/
+  - type: X
+    url: https://twitter.com/arizeai
+  - type: Plans
+    url: plans/phoenix-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/phoenix-rate-limits.yml
+  - type: FinOps
+    url: finops/phoenix-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

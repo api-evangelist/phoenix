@@ -1,0 +1,112 @@
+name: Arize Phoenix Rate Limits
+description: >
+  Rate limits for the Arize Phoenix REST API vary by deployment type and plan.
+  Self-hosted deployments have no enforced API rate limits beyond hardware
+  capacity. The managed Arize AX cloud service enforces monthly volume limits
+  on trace spans and data ingestion, with additional per-request limits applied
+  at the HTTP layer. Authentication is required for all API calls via bearer
+  token (API key).
+specificationVersion: '0.1'
+url: https://arize.com/docs/phoenix/self-hosting/features/authentication
+authentication:
+  - type: BearerToken
+    description: >
+      API keys are passed as HTTP Authorization headers using bearer token
+      format. Two key types are supported: System keys (admin-created,
+      act on behalf of the system) and User keys (scoped to individual users).
+    header: Authorization
+    format: "Bearer <api-key>"
+    environmentVariable: PHOENIX_API_KEY
+  - type: CloudHeader
+    description: >
+      For Phoenix Cloud (Arize AX), an alternative api-key header can be used
+      instead of the Authorization bearer scheme.
+    header: api-key
+    format: "<api-key>"
+limits:
+  - plan: Phoenix Open Source (Self-Hosted)
+    scope: global
+    description: No enforced API rate limits. Constrained only by host infrastructure.
+    enforced: false
+
+  - plan: AX Free
+    scope: monthly
+    traceSpans:
+      limit: 25000
+      period: month
+      unit: spans
+    ingestion:
+      limit: 1
+      period: month
+      unit: GB
+    retention:
+      limit: 15
+      unit: days
+    rateLimitHeader: X-RateLimit-Limit
+    notes: >
+      Monthly volume limits reset on the billing cycle. Requests exceeding
+      monthly limits may be rejected or queued depending on overage settings.
+
+  - plan: AX Pro
+    scope: monthly
+    traceSpans:
+      limit: 50000
+      period: month
+      unit: spans
+    ingestion:
+      limit: 10
+      period: month
+      unit: GB
+    retention:
+      limit: 30
+      unit: days
+    overage:
+      enabled: true
+      spanOverageRate: 0.0008 USD per span
+      ingestionOverageRate: 3.00 USD per GB
+    notes: >
+      Pro plan includes overage pricing to continue beyond monthly allocation
+      rather than hard-blocking requests.
+
+  - plan: AX Enterprise
+    scope: custom
+    description: >
+      Custom limits negotiated per contract. Higher or unlimited spans,
+      ingestion, and retention as defined in the enterprise agreement.
+    enforced: custom
+
+bruteForceProtection:
+  enabled: true
+  maxFailedAttempts: 5
+  lockoutDuration: 5 minutes
+  scope: login authentication
+
+passwordPolicy:
+  default:
+    minimumLength: 4
+  strong:
+    minimumLength: 12
+    requireUppercase: true
+    requireLowercase: true
+    requireNumeric: true
+    requireSpecialCharacter: true
+
+rolePermissions:
+  - role: Admin
+    readAccess: true
+    writeAccess: true
+    deleteAccess: true
+    canManageUsers: true
+    canManageAPIKeys: true
+  - role: Member
+    readAccess: true
+    writeAccess: true
+    deleteAccess: true
+    canManageUsers: false
+    canManageAPIKeys: personal only
+  - role: Viewer
+    readAccess: true
+    writeAccess: false
+    deleteAccess: false
+    canManageUsers: false
+    canManageAPIKeys: false

@@ -1,0 +1,116 @@
+name: Arize Phoenix Plans and Pricing
+description: >
+  Arize Phoenix offers multiple deployment and pricing tiers. The open-source
+  self-hosted version is always free. The managed cloud service (Arize AX) has
+  a free tier for individuals, a Pro tier for small teams, and Enterprise
+  pricing for large organizations.
+specificationVersion: '0.1'
+url: https://arize.com/pricing/
+plans:
+  - name: Phoenix Open Source
+    description: >
+      Self-hosted open-source version of Phoenix. Run locally or deploy on your
+      own infrastructure. Unlimited usage with no trace or data limits beyond
+      your own hardware. Licensed under the Elastic License 2.0 (ELv2).
+    price: 0
+    currency: USD
+    billingCycle: free
+    features:
+      - Self-hosted deployment (Docker, Kubernetes, local)
+      - Unlimited trace spans (infrastructure-limited)
+      - Unlimited data ingestion (infrastructure-limited)
+      - Full REST API access
+      - OpenTelemetry-based tracing
+      - LLM evaluation tools
+      - Prompt management
+      - Datasets and experiments
+      - Community Slack support
+      - All framework integrations (LangChain, LlamaIndex, OpenAI, Anthropic, etc.)
+    limits:
+      traces: unlimited (self-hosted)
+      retention: unlimited (self-hosted)
+      users: unlimited (self-hosted)
+    url: https://github.com/Arize-ai/phoenix
+
+  - name: AX Free
+    description: >
+      Managed cloud-hosted Phoenix for individuals and startups. Includes a
+      generous free allocation of trace spans and storage per month with
+      community-based support.
+    price: 0
+    currency: USD
+    billingCycle: monthly
+    features:
+      - Managed cloud hosting
+      - Alyx AI debugging agent
+      - Online evaluations
+      - Product observability
+      - Community support
+    limits:
+      traceSpans: 25000/month
+      ingestion: 1 GB/month
+      retention: 15 days
+    url: https://arize.com/pricing/
+
+  - name: AX Pro
+    description: >
+      Managed cloud plan for small teams and startups who need higher trace
+      volume, longer retention, and email support. Includes overage pricing
+      for usage beyond the monthly allocation.
+    price: 50
+    currency: USD
+    billingCycle: monthly
+    features:
+      - All AX Free features
+      - Higher trace span limits
+      - Extended data retention
+      - Email support
+      - Overage pricing available
+    limits:
+      traceSpans: 50000/month
+      ingestion: 10 GB/month
+      retention: 30 days
+    overage:
+      additionalSpan: 0.0008 USD per span
+      additionalIngestion: 3.00 USD per GB
+    url: https://arize.com/pricing/
+
+  - name: AX Enterprise
+    description: >
+      Custom enterprise pricing for large organizations requiring dedicated
+      support, SLA guarantees, compliance certifications, and flexible
+      deployment options including self-hosted and multi-region deployments.
+    price: custom
+    currency: USD
+    billingCycle: custom
+    features:
+      - All AX Pro features
+      - Custom trace span limits
+      - Custom ingestion limits
+      - Configurable data retention
+      - SaaS or self-hosted deployment
+      - Dedicated customer support
+      - Uptime SLA
+      - SOC2 compliance
+      - HIPAA compliance
+      - Training and onboarding
+      - Data residency options
+      - Multi-region deployments
+      - Arize Data Fabric (adb)
+    limits:
+      traceSpans: custom
+      ingestion: custom
+      retention: custom
+    url: https://arize.com/pricing/
+
+  - name: Startup Program
+    description: >
+      Special reduced pricing for qualifying early-stage companies building
+      LLM applications. Contact Arize to check eligibility.
+    price: reduced
+    currency: USD
+    billingCycle: monthly
+    features:
+      - Reduced AX Pro or Enterprise pricing
+      - Full platform access
+    url: https://arize.com/pricing/
