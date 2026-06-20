@@ -12,7 +12,7 @@ description: >
   AX), with authentication via API keys and OAuth2/OIDC for enterprise
   deployments.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/phoenix/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -37,7 +37,7 @@ apis:
       execution, annotation configuration, and project management. The API
       follows REST conventions with JSON request and response bodies and uses
       bearer token authentication via API keys.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://arize.com/docs/phoenix
     baseURL: https://app.phoenix.arize.com
     tags:
