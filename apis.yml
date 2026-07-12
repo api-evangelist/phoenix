@@ -75,6 +75,8 @@ apis:
       - FN: Arize AI Support
         url: https://arize.com/contact/
 common:
+  - type: DomainSecurity
+    url: security/phoenix-domain-security.yml
   - type: Website
     url: https://arize.com/phoenix/
   - type: Documentation
