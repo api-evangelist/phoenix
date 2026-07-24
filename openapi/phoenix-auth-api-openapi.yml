@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: Arize-Phoenix REST annotation_configs Auth API
+  description: Schema for Arize-Phoenix REST API
+  version: '1.0'
+tags:
+- name: Auth
+paths:
+  /auth/login:
+    post:
+      summary: ' Login'
+      description: Authenticate user via email/password and return access/refresh tokens.
+      operationId: _login_auth_login_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Auth
+  /auth/logout:
+    get:
+      summary: ' Logout'
+      description: Log out user by revoking tokens and clearing cookies.
+      operationId: _logout_auth_logout_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Auth
+  /auth/refresh:
+    post:
+      summary: ' Refresh Tokens'
+      description: Refresh access and refresh tokens.
+      operationId: _refresh_tokens_auth_refresh_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Auth
+  /auth/password-reset-email:
+    post:
+      summary: ' Initiate Password Reset'
+      description: Send password reset email to user.
+      operationId: _initiate_password_reset_auth_password_reset_email_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Auth
+  /auth/password-reset:
+    post:
+      summary: ' Reset Password'
+      description: Reset user password using a valid reset token.
+      operationId: _reset_password_auth_password_reset_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Auth
+  /auth/ldap/login:
+    post:
+      summary: ' Ldap Login'
+      description: Authenticate user via LDAP and return access/refresh tokens.
+      operationId: _ldap_login_auth_ldap_login_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Auth

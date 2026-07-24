@@ -1,0 +1,485 @@
+openapi: 3.0.3
+info:
+  title: Arize-Phoenix REST annotation_configs users API
+  description: Schema for Arize-Phoenix REST API
+  version: '1.0'
+tags:
+- name: users
+paths:
+  /v1/user:
+    get:
+      tags:
+      - users
+      summary: Get the authenticated user
+      description: Returns the profile of the currently authenticated user. When authentication is disabled, returns an anonymous user representation.
+      operationId: getViewer
+      responses:
+        '200':
+          description: The authenticated user's profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetViewerResponseBody'
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: User not found.
+          content:
+            text/plain:
+              schema:
+                type: string
+  /v1/users:
+    get:
+      tags:
+      - users
+      summary: List all users
+      description: Retrieve a paginated list of all users in the system.
+      operationId: getUsers
+      parameters:
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Cursor for pagination (base64-encoded user ID)
+          title: Cursor
+        description: Cursor for pagination (base64-encoded user ID)
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: The max number of users to return at a time.
+          default: 100
+          title: Limit
+        description: The max number of users to return at a time.
+      responses:
+        '200':
+          description: A list of users.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUsersResponseBody'
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Unprocessable Entity
+    post:
+      tags:
+      - users
+      summary: Create a new user
+      description: Create a new user with the specified configuration.
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequestBody'
+      responses:
+        '201':
+          description: The newly created user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserResponseBody'
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '400':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Role not found.
+        '409':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Username or email already exists.
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Unprocessable Entity
+  /v1/users/{user_id}:
+    delete:
+      tags:
+      - users
+      summary: Delete a user by ID
+      description: Delete an existing user by their unique GlobalID.
+      operationId: deleteUser
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: The GlobalID of the user (e.g. 'VXNlcjox').
+          title: User Id
+        description: The GlobalID of the user (e.g. 'VXNlcjox').
+      responses:
+        '204':
+          description: No content returned on successful deletion.
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Cannot delete the default admin or system user
+        '404':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: User not found.
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Unprocessable Entity
+components:
+  schemas:
+    OAuth2UserData:
+      properties:
+        email:
+          type: string
+          title: Email
+        username:
+          type: string
+          title: Username
+        role:
+          type: string
+          enum:
+          - SYSTEM
+          - ADMIN
+          - MEMBER
+          - VIEWER
+          title: Role
+        auth_method:
+          type: string
+          const: OAUTH2
+          title: Auth Method
+        oauth2_client_id:
+          type: string
+          title: Oauth2 Client Id
+        oauth2_user_id:
+          type: string
+          title: Oauth2 User Id
+      type: object
+      required:
+      - email
+      - username
+      - role
+      - auth_method
+      title: OAuth2UserData
+    GetUsersResponseBody:
+      properties:
+        data:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/LocalUser'
+            - $ref: '#/components/schemas/OAuth2User'
+            - $ref: '#/components/schemas/LDAPUser'
+            discriminator:
+              propertyName: auth_method
+              mapping:
+                LDAP: '#/components/schemas/LDAPUser'
+                LOCAL: '#/components/schemas/LocalUser'
+                OAUTH2: '#/components/schemas/OAuth2User'
+          type: array
+          title: Data
+        next_cursor:
+          type: string
+          nullable: true
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: GetUsersResponseBody
+    LDAPUser:
+      properties:
+        id:
+          type: string
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        email:
+          type: string
+          title: Email
+        username:
+          type: string
+          title: Username
+        role:
+          type: string
+          enum:
+          - SYSTEM
+          - ADMIN
+          - MEMBER
+          - VIEWER
+          title: Role
+        auth_method:
+          type: string
+          const: LDAP
+          title: Auth Method
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      - email
+      - username
+      - role
+      - auth_method
+      title: LDAPUser
+    GetViewerResponseBody:
+      properties:
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/LocalUser'
+          - $ref: '#/components/schemas/OAuth2User'
+          - $ref: '#/components/schemas/LDAPUser'
+          - $ref: '#/components/schemas/AnonymousUser'
+          title: Data
+          discriminator:
+            propertyName: auth_method
+            mapping:
+              ANONYMOUS: '#/components/schemas/AnonymousUser'
+              LDAP: '#/components/schemas/LDAPUser'
+              LOCAL: '#/components/schemas/LocalUser'
+              OAUTH2: '#/components/schemas/OAuth2User'
+      type: object
+      required:
+      - data
+      title: GetViewerResponseBody
+    CreateUserRequestBody:
+      properties:
+        user:
+          oneOf:
+          - $ref: '#/components/schemas/LocalUserData'
+          - $ref: '#/components/schemas/OAuth2UserData'
+          - $ref: '#/components/schemas/LDAPUserData'
+          title: User
+          discriminator:
+            propertyName: auth_method
+            mapping:
+              LDAP: '#/components/schemas/LDAPUserData'
+              LOCAL: '#/components/schemas/LocalUserData'
+              OAUTH2: '#/components/schemas/OAuth2UserData'
+        send_welcome_email:
+          type: boolean
+          title: Send Welcome Email
+          default: true
+      type: object
+      required:
+      - user
+      title: CreateUserRequestBody
+    LDAPUserData:
+      properties:
+        email:
+          type: string
+          title: Email
+        username:
+          type: string
+          title: Username
+        role:
+          type: string
+          enum:
+          - SYSTEM
+          - ADMIN
+          - MEMBER
+          - VIEWER
+          title: Role
+        auth_method:
+          type: string
+          const: LDAP
+          title: Auth Method
+      type: object
+      required:
+      - email
+      - username
+      - role
+      - auth_method
+      title: LDAPUserData
+    LocalUser:
+      properties:
+        id:
+          type: string
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        email:
+          type: string
+          title: Email
+        username:
+          type: string
+          title: Username
+        role:
+          type: string
+          enum:
+          - SYSTEM
+          - ADMIN
+          - MEMBER
+          - VIEWER
+          title: Role
+        auth_method:
+          type: string
+          const: LOCAL
+          title: Auth Method
+        password:
+          type: string
+          title: Password
+        password_needs_reset:
+          type: boolean
+          title: Password Needs Reset
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      - email
+      - username
+      - role
+      - auth_method
+      - password_needs_reset
+      title: LocalUser
+    CreateUserResponseBody:
+      properties:
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/LocalUser'
+          - $ref: '#/components/schemas/OAuth2User'
+          - $ref: '#/components/schemas/LDAPUser'
+          title: Data
+          discriminator:
+            propertyName: auth_method
+            mapping:
+              LDAP: '#/components/schemas/LDAPUser'
+              LOCAL: '#/components/schemas/LocalUser'
+              OAUTH2: '#/components/schemas/OAuth2User'
+      type: object
+      required:
+      - data
+      title: CreateUserResponseBody
+    OAuth2User:
+      properties:
+        id:
+          type: string
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        email:
+          type: string
+          title: Email
+        username:
+          type: string
+          title: Username
+        role:
+          type: string
+          enum:
+          - SYSTEM
+          - ADMIN
+          - MEMBER
+          - VIEWER
+          title: Role
+        auth_method:
+          type: string
+          const: OAUTH2
+          title: Auth Method
+        oauth2_client_id:
+          type: string
+          title: Oauth2 Client Id
+        oauth2_user_id:
+          type: string
+          title: Oauth2 User Id
+        profile_picture_url:
+          type: string
+          title: Profile Picture Url
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      - email
+      - username
+      - role
+      - auth_method
+      title: OAuth2User
+    AnonymousUser:
+      properties:
+        auth_method:
+          type: string
+          const: ANONYMOUS
+          title: Auth Method
+      type: object
+      required:
+      - auth_method
+      title: AnonymousUser
+    LocalUserData:
+      properties:
+        email:
+          type: string
+          title: Email
+        username:
+          type: string
+          title: Username
+        role:
+          type: string
+          enum:
+          - SYSTEM
+          - ADMIN
+          - MEMBER
+          - VIEWER
+          title: Role
+        auth_method:
+          type: string
+          const: LOCAL
+          title: Auth Method
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+      - email
+      - username
+      - role
+      - auth_method
+      title: LocalUserData

@@ -1,0 +1,852 @@
+openapi: 3.0.3
+info:
+  title: Arize-Phoenix REST annotation_configs datasets API
+  description: Schema for Arize-Phoenix REST API
+  version: '1.0'
+tags:
+- name: datasets
+paths:
+  /v1/datasets:
+    get:
+      tags:
+      - datasets
+      summary: List datasets
+      operationId: listDatasets
+      parameters:
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+          description: Cursor for pagination
+          title: Cursor
+        description: Cursor for pagination
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+          description: An optional dataset name to filter by
+          title: Name
+        description: An optional dataset name to filter by
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: The max number of datasets to return at a time.
+          default: 10
+          title: Limit
+        description: The max number of datasets to return at a time.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatasetsResponseBody'
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Unprocessable Entity
+  /v1/datasets/{id}:
+    delete:
+      tags:
+      - datasets
+      summary: Delete dataset by ID
+      operationId: deleteDatasetById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: The ID of the dataset to delete.
+          title: Id
+        description: The ID of the dataset to delete.
+      responses:
+        '204':
+          description: Successful Response
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '404':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Dataset not found
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Invalid dataset ID
+    get:
+      tags:
+      - datasets
+      summary: Get dataset by ID
+      operationId: getDataset
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: The ID of the dataset
+          title: Id
+        description: The ID of the dataset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDatasetResponseBody'
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '404':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Not Found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/datasets/{id}/versions:
+    get:
+      tags:
+      - datasets
+      summary: List dataset versions
+      operationId: listDatasetVersionsByDatasetId
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: The ID of the dataset
+          title: Id
+        description: The ID of the dataset
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+          description: Cursor for pagination
+          title: Cursor
+        description: Cursor for pagination
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: The max number of dataset versions to return at a time
+          default: 10
+          title: Limit
+        description: The max number of dataset versions to return at a time
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatasetVersionsResponseBody'
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Unprocessable Entity
+  /v1/datasets/upload:
+    post:
+      tags:
+      - datasets
+      summary: Upload dataset from JSON, JSONL, CSV, or PyArrow
+      operationId: uploadDataset
+      parameters:
+      - name: sync
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: If true, fulfill request synchronously and return JSON containing dataset_id.
+          default: false
+          title: Sync
+        description: If true, fulfill request synchronously and return JSON containing dataset_id.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadDatasetResponseBody'
+                nullable: true
+                title: Response Uploaddataset
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '409':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Dataset with the given name already exists (action=create).
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Invalid request body
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - inputs
+              properties:
+                action:
+                  type: string
+                  enum:
+                  - create
+                  - append
+                  - update
+                name:
+                  type: string
+                description:
+                  type: string
+                inputs:
+                  type: array
+                  items:
+                    type: object
+                outputs:
+                  type: array
+                  items:
+                    type: object
+                metadata:
+                  type: array
+                  items:
+                    type: object
+                splits:
+                  type: array
+                  items:
+                    oneOf:
+                    - type: string
+                    - type: array
+                      items:
+                        type: string
+                    - type: 'null'
+                  description: 'Split per example: string, string array, or null'
+                span_ids:
+                  type: array
+                  items:
+                    oneOf:
+                    - type: string
+                    - type: 'null'
+                  description: Span IDs to link examples back to spans
+                example_ids:
+                  type: array
+                  items:
+                    oneOf:
+                    - type: string
+                    - type: 'null'
+                  description: Optional example ID per example. If provided, it is used as the example's stable public ID.
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - name
+              - input_keys[]
+              - output_keys[]
+              - file
+              properties:
+                action:
+                  type: string
+                  enum:
+                  - create
+                  - append
+                  - update
+                name:
+                  type: string
+                description:
+                  type: string
+                input_keys[]:
+                  type: array
+                  items:
+                    type: string
+                  uniqueItems: true
+                output_keys[]:
+                  type: array
+                  items:
+                    type: string
+                  uniqueItems: true
+                metadata_keys[]:
+                  type: array
+                  items:
+                    type: string
+                  uniqueItems: true
+                split_keys[]:
+                  type: array
+                  items:
+                    type: string
+                  uniqueItems: true
+                  description: 'Deprecated: use split_key instead. Column names for auto-assigning examples to splits'
+                split_key:
+                  type: string
+                  description: Single column name containing split names (plain string or JSON list) per row
+                flatten_keys[]:
+                  type: array
+                  items:
+                    type: string
+                  uniqueItems: true
+                  description: Column names whose object values should be flattened into their selected bucket
+                span_id_key:
+                  type: string
+                  description: Column name for span IDs to link examples back to spans
+                example_id_key:
+                  type: string
+                  description: Column name containing stable IDs for examples. When provided, examples with matching IDs are updated in place when their content changes.
+                file:
+                  type: string
+                  format: binary
+  /v1/datasets/{id}/examples:
+    get:
+      tags:
+      - datasets
+      summary: Get examples from a dataset
+      operationId: getDatasetExamples
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: The ID of the dataset
+          title: Id
+        description: The ID of the dataset
+      - name: version_id
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+          description: The ID of the dataset version (if omitted, returns data from the latest version)
+          title: Version Id
+        description: The ID of the dataset version (if omitted, returns data from the latest version)
+      - name: split
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+          nullable: true
+          description: List of dataset split identifiers (GlobalIDs or names) to filter by
+          title: Split
+        description: List of dataset split identifiers (GlobalIDs or names) to filter by
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatasetExamplesResponseBody'
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '404':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Not Found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/datasets/{id}/csv:
+    get:
+      tags:
+      - datasets
+      summary: Download dataset examples as CSV file
+      operationId: getDatasetCsv
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: The ID of the dataset
+          title: Id
+        description: The ID of the dataset
+      - name: version_id
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+          description: The ID of the dataset version (if omitted, returns data from the latest version)
+          title: Version Id
+        description: The ID of the dataset version (if omitted, returns data from the latest version)
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/csv:
+              schema:
+                type: string
+                contentMediaType: text/csv
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Unprocessable Entity
+  /v1/datasets/{id}/jsonl:
+    get:
+      tags:
+      - datasets
+      summary: Download dataset examples as JSONL file
+      operationId: getDatasetJSONL
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: The ID of the dataset
+          title: Id
+        description: The ID of the dataset
+      - name: version_id
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+          description: The ID of the dataset version (if omitted, returns data from the latest version)
+          title: Version Id
+        description: The ID of the dataset version (if omitted, returns data from the latest version)
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Invalid dataset or version ID
+  /v1/datasets/{id}/jsonl/openai_ft:
+    get:
+      tags:
+      - datasets
+      summary: Download dataset examples as OpenAI fine-tuning JSONL file
+      operationId: getDatasetJSONLOpenAIFineTuning
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: The ID of the dataset
+          title: Id
+        description: The ID of the dataset
+      - name: version_id
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+          description: The ID of the dataset version (if omitted, returns data from the latest version)
+          title: Version Id
+        description: The ID of the dataset version (if omitted, returns data from the latest version)
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Invalid dataset or version ID
+  /v1/datasets/{id}/jsonl/openai_evals:
+    get:
+      tags:
+      - datasets
+      summary: Download dataset examples as OpenAI evals JSONL file
+      operationId: getDatasetJSONLOpenAIEvals
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: The ID of the dataset
+          title: Id
+        description: The ID of the dataset
+      - name: version_id
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+          description: The ID of the dataset version (if omitted, returns data from the latest version)
+          title: Version Id
+        description: The ID of the dataset version (if omitted, returns data from the latest version)
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Invalid dataset or version ID
+components:
+  schemas:
+    ListDatasetExamplesResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/ListDatasetExamplesData'
+      type: object
+      required:
+      - data
+      title: ListDatasetExamplesResponseBody
+    GetDatasetResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/DatasetWithExampleCount'
+      type: object
+      required:
+      - data
+      title: GetDatasetResponseBody
+    UploadDatasetResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/UploadDatasetData'
+      type: object
+      required:
+      - data
+      title: UploadDatasetResponseBody
+    ListDatasetExamplesData:
+      properties:
+        dataset_id:
+          type: string
+          title: Dataset Id
+        version_id:
+          type: string
+          title: Version Id
+        filtered_splits:
+          items:
+            type: string
+          type: array
+          title: Filtered Splits
+        examples:
+          items:
+            $ref: '#/components/schemas/DatasetExample'
+          type: array
+          title: Examples
+      type: object
+      required:
+      - dataset_id
+      - version_id
+      - examples
+      title: ListDatasetExamplesData
+    DatasetWithExampleCount:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          nullable: true
+          title: Description
+        metadata:
+          additionalProperties: true
+          type: object
+          title: Metadata
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        example_count:
+          type: integer
+          title: Example Count
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - metadata
+      - created_at
+      - updated_at
+      - example_count
+      title: DatasetWithExampleCount
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Dataset:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          nullable: true
+          title: Description
+        metadata:
+          additionalProperties: true
+          type: object
+          title: Metadata
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        example_count:
+          type: integer
+          title: Example Count
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - metadata
+      - created_at
+      - updated_at
+      - example_count
+      title: Dataset
+    UploadDatasetData:
+      properties:
+        dataset_id:
+          type: string
+          title: Dataset Id
+        version_id:
+          type: string
+          title: Version Id
+        num_created_examples:
+          type: integer
+          title: Num Created Examples
+        num_updated_examples:
+          type: integer
+          title: Num Updated Examples
+        num_deleted_examples:
+          type: integer
+          title: Num Deleted Examples
+      type: object
+      required:
+      - dataset_id
+      - version_id
+      - num_created_examples
+      - num_updated_examples
+      - num_deleted_examples
+      title: UploadDatasetData
+    ListDatasetsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Dataset'
+          type: array
+          title: Data
+        next_cursor:
+          type: string
+          nullable: true
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: ListDatasetsResponseBody
+    ListDatasetVersionsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DatasetVersion'
+          type: array
+          title: Data
+        next_cursor:
+          type: string
+          nullable: true
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: ListDatasetVersionsResponseBody
+    DatasetExample:
+      properties:
+        id:
+          type: string
+          title: Id
+        node_id:
+          type: string
+          title: Node Id
+        input:
+          additionalProperties: true
+          type: object
+          title: Input
+        output:
+          additionalProperties: true
+          type: object
+          title: Output
+        metadata:
+          additionalProperties: true
+          type: object
+          title: Metadata
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - node_id
+      - input
+      - output
+      - metadata
+      - updated_at
+      title: DatasetExample
+    DatasetVersion:
+      properties:
+        version_id:
+          type: string
+          title: Version Id
+        description:
+          type: string
+          nullable: true
+          title: Description
+        metadata:
+          additionalProperties: true
+          type: object
+          title: Metadata
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+      type: object
+      required:
+      - version_id
+      - description
+      - metadata
+      - created_at
+      title: DatasetVersion

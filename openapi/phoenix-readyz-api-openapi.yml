@@ -1,0 +1,20 @@
+openapi: 3.0.3
+info:
+  title: Arize-Phoenix REST annotation_configs Readyz API
+  description: Schema for Arize-Phoenix REST API
+  version: '1.0'
+tags:
+- name: Readyz
+paths:
+  /readyz:
+    get:
+      summary: Check Readyz
+      operationId: check_readyz_readyz_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Readyz

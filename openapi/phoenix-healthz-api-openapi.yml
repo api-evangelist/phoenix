@@ -1,0 +1,20 @@
+openapi: 3.0.3
+info:
+  title: Arize-Phoenix REST annotation_configs Healthz API
+  description: Schema for Arize-Phoenix REST API
+  version: '1.0'
+tags:
+- name: Healthz
+paths:
+  /healthz:
+    get:
+      summary: Check Healthz
+      operationId: check_healthz_healthz_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Healthz

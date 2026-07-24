@@ -1,0 +1,547 @@
+openapi: 3.0.3
+info:
+  title: Arize-Phoenix REST annotation_configs sessions API
+  description: Schema for Arize-Phoenix REST API
+  version: '1.0'
+tags:
+- name: sessions
+paths:
+  /v1/sessions/{session_identifier}:
+    get:
+      tags:
+      - sessions
+      summary: Get session by ID or session_id
+      operationId: getSession
+      parameters:
+      - name: session_identifier
+        in: path
+        required: true
+        schema:
+          type: string
+          description: 'The session identifier: either a GlobalID or user-provided session_id string.'
+          title: Session Identifier
+        description: 'The session identifier: either a GlobalID or user-provided session_id string.'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSessionResponseBody'
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '404':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Not Found
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Unprocessable Entity
+    delete:
+      tags:
+      - sessions
+      summary: Delete a session by identifier
+      description: 'Delete a session by its identifier. The identifier can be either:
+
+        1. A global ID (base64-encoded)
+
+        2. A user-provided session_id string
+
+
+        This will permanently remove the session and all associated traces, spans, and annotations via cascade delete.'
+      operationId: deleteSession
+      parameters:
+      - name: session_identifier
+        in: path
+        required: true
+        schema:
+          type: string
+          description: 'The session identifier: either a GlobalID or user-provided session_id string.'
+          title: Session Identifier
+        description: 'The session identifier: either a GlobalID or user-provided session_id string.'
+      responses:
+        '204':
+          description: Successful Response
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '404':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Not Found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/sessions/delete:
+    post:
+      tags:
+      - sessions
+      summary: Bulk delete sessions
+      description: Delete multiple sessions by their identifiers (GlobalIDs or session_id strings). All identifiers in a single request must be the same type. Non-existent IDs are silently skipped. All associated traces, spans, and annotations are cascade deleted.
+      operationId: deleteSessions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSessionsRequestBody'
+        required: true
+      responses:
+        '204':
+          description: Successful Response
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '422':
+          description: Unprocessable Entity
+          content:
+            text/plain:
+              schema:
+                type: string
+  /v1/projects/{project_identifier}/sessions:
+    get:
+      tags:
+      - sessions
+      summary: List sessions for a project
+      operationId: listProjectSessions
+      parameters:
+      - name: project_identifier
+        in: path
+        required: true
+        schema:
+          type: string
+          description: 'The project identifier: either project ID or project name.'
+          title: Project Identifier
+        description: 'The project identifier: either project ID or project name.'
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+          description: Cursor for pagination (session ID)
+          title: Cursor
+        description: Cursor for pagination (session ID)
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: The max number of sessions to return at a time.
+          default: 100
+          title: Limit
+        description: The max number of sessions to return at a time.
+      - name: order
+        in: query
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+          description: 'Sort order by ID: ''asc'' (ascending) or ''desc'' (descending).'
+          default: asc
+          title: Order
+        description: 'Sort order by ID: ''asc'' (ascending) or ''desc'' (descending).'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSessionsResponseBody'
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '404':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Not Found
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Unprocessable Entity
+  /v1/session_annotations:
+    post:
+      tags:
+      - sessions
+      summary: Create session annotations
+      operationId: annotateSessions
+      parameters:
+      - name: sync
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: If true, fulfill request synchronously.
+          default: false
+          title: Sync
+        description: If true, fulfill request synchronously.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnnotateSessionsRequestBody'
+      responses:
+        '200':
+          description: Session annotations inserted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotateSessionsResponseBody'
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '404':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Session not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/session_notes:
+    post:
+      tags:
+      - sessions
+      summary: Create a session note
+      description: Add a note annotation to a session. By default each call appends a new note with an auto-generated UUIDv4 identifier, so multiple notes accumulate on the same session. Callers may supply a non-empty `identifier` to upsert on (session_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note, matching the semantics of structured annotations.
+      operationId: createSessionNote
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionNoteRequestBody'
+        required: true
+      responses:
+        '200':
+          description: Session note created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSessionNoteResponseBody'
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Session not found
+          content:
+            text/plain:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AnnotateSessionsRequestBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SessionAnnotationData'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AnnotateSessionsRequestBody
+    CreateSessionNoteResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/InsertedSessionAnnotation'
+      type: object
+      required:
+      - data
+      title: CreateSessionNoteResponseBody
+    SessionTraceData:
+      properties:
+        id:
+          type: string
+          title: Id
+        trace_id:
+          type: string
+          title: Trace Id
+        start_time:
+          type: string
+          format: date-time
+          title: Start Time
+        end_time:
+          type: string
+          format: date-time
+          title: End Time
+      type: object
+      required:
+      - id
+      - trace_id
+      - start_time
+      - end_time
+      title: SessionTraceData
+    SessionAnnotationData:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: The name of the annotation
+        annotator_kind:
+          type: string
+          enum:
+          - LLM
+          - CODE
+          - HUMAN
+          title: Annotator Kind
+          description: The kind of annotator used for the annotation
+        result:
+          $ref: '#/components/schemas/AnnotationResult'
+          nullable: true
+          description: The result of the annotation
+        metadata:
+          additionalProperties: true
+          type: object
+          nullable: true
+          title: Metadata
+          description: Metadata for the annotation
+        identifier:
+          type: string
+          title: Identifier
+          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
+          default: ''
+        session_id:
+          type: string
+          title: Session Id
+          description: Session ID
+      type: object
+      required:
+      - name
+      - annotator_kind
+      - session_id
+      title: SessionAnnotationData
+    AnnotationResult:
+      properties:
+        label:
+          type: string
+          nullable: true
+          title: Label
+          description: The label assigned by the annotation
+        score:
+          type: number
+          nullable: true
+          title: Score
+          description: The score assigned by the annotation
+        explanation:
+          type: string
+          nullable: true
+          title: Explanation
+          description: Explanation of the annotation result
+      type: object
+      title: AnnotationResult
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    InsertedSessionAnnotation:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the inserted session annotation
+      type: object
+      required:
+      - id
+      title: InsertedSessionAnnotation
+    AnnotateSessionsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/InsertedSessionAnnotation'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AnnotateSessionsResponseBody
+    GetSessionResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/SessionData'
+      type: object
+      required:
+      - data
+      title: GetSessionResponseBody
+    CreateSessionNoteRequestBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/SessionNoteData'
+      type: object
+      required:
+      - data
+      title: CreateSessionNoteRequestBody
+    SessionNoteData:
+      properties:
+        session_id:
+          type: string
+          minLength: 1
+          title: Session Id
+          description: Session ID
+        note:
+          type: string
+          minLength: 1
+          title: Note
+          description: The note text to add to the session
+        identifier:
+          type: string
+          title: Identifier
+          description: Optional caller-supplied identifier. When non-empty, the note is upserted on (session_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note. When omitted or empty, the server stamps a unique 'px-session-note:<uuid>' identifier so each call appends a new note.
+          default: ''
+      type: object
+      required:
+      - session_id
+      - note
+      title: SessionNoteData
+    DeleteSessionsRequestBody:
+      properties:
+        session_identifiers:
+          items:
+            type: string
+          type: array
+          title: Session Identifiers
+          description: 'List of session identifiers to delete. All identifiers must be the same type: either all GlobalIDs or all user-provided session_id strings.'
+      type: object
+      required:
+      - session_identifiers
+      title: DeleteSessionsRequestBody
+    GetSessionsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SessionData'
+          type: array
+          title: Data
+        next_cursor:
+          type: string
+          nullable: true
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: GetSessionsResponseBody
+    SessionData:
+      properties:
+        id:
+          type: string
+          title: Id
+        session_id:
+          type: string
+          title: Session Id
+        project_id:
+          type: string
+          title: Project Id
+        start_time:
+          type: string
+          format: date-time
+          title: Start Time
+        end_time:
+          type: string
+          format: date-time
+          title: End Time
+        traces:
+          items:
+            $ref: '#/components/schemas/SessionTraceData'
+          type: array
+          title: Traces
+        token_count_prompt:
+          type: integer
+          title: Token Count Prompt
+          description: Cumulative prompt token count across all spans in the session.
+          default: 0
+        token_count_completion:
+          type: integer
+          title: Token Count Completion
+          description: Cumulative completion token count across all spans in the session.
+          default: 0
+        token_count_total:
+          type: integer
+          title: Token Count Total
+          description: Cumulative total token count across all spans in the session (prompt + completion).
+          default: 0
+      type: object
+      required:
+      - id
+      - session_id
+      - project_id
+      - start_time
+      - end_time
+      - traces
+      title: SessionData
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

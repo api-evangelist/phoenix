@@ -1,0 +1,20 @@
+openapi: 3.0.3
+info:
+  title: Arize-Phoenix REST annotation_configs Arize Phoenix Version API
+  description: Schema for Arize-Phoenix REST API
+  version: '1.0'
+tags:
+- name: Arize Phoenix Version
+paths:
+  /arize_phoenix_version:
+    get:
+      summary: Version
+      operationId: version_arize_phoenix_version_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Arize Phoenix Version

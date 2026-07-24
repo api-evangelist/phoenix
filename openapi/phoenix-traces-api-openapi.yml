@@ -1,0 +1,531 @@
+openapi: 3.0.3
+info:
+  title: Arize-Phoenix REST annotation_configs traces API
+  description: Schema for Arize-Phoenix REST API
+  version: '1.0'
+tags:
+- name: traces
+paths:
+  /v1/projects/{project_identifier}/traces:
+    get:
+      tags:
+      - traces
+      summary: List traces for a project
+      operationId: listProjectTraces
+      parameters:
+      - name: project_identifier
+        in: path
+        required: true
+        schema:
+          type: string
+          description: 'The project identifier: either project ID or project name.'
+          title: Project Identifier
+        description: 'The project identifier: either project ID or project name.'
+      - name: start_time
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          nullable: true
+          description: Inclusive lower bound on trace start time (ISO 8601)
+          title: Start Time
+        description: Inclusive lower bound on trace start time (ISO 8601)
+      - name: end_time
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          nullable: true
+          description: Exclusive upper bound on trace start time (ISO 8601)
+          title: End Time
+        description: Exclusive upper bound on trace start time (ISO 8601)
+      - name: sort
+        in: query
+        required: false
+        schema:
+          enum:
+          - start_time
+          - latency_ms
+          type: string
+          description: Sort field
+          default: start_time
+          title: Sort
+        description: Sort field
+      - name: order
+        in: query
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+          description: Sort direction
+          default: desc
+          title: Order
+        description: Sort direction
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          exclusiveMinimum: 0
+          description: Maximum number of traces to return
+          default: 100
+          title: Limit
+        description: Maximum number of traces to return
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+          description: Pagination cursor (Trace GlobalID)
+          title: Cursor
+        description: Pagination cursor (Trace GlobalID)
+      - name: include_spans
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: If true, include full span details for each trace. This significantly increases response size and query latency, especially with large page sizes. Prefer fetching spans lazily for individual traces when possible.
+          default: false
+          title: Include Spans
+        description: If true, include full span details for each trace. This significantly increases response size and query latency, especially with large page sizes. Prefer fetching spans lazily for individual traces when possible.
+      - name: session_identifier
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+          nullable: true
+          description: List of session identifiers to filter traces by. Each value can be either a session_id string or a session GlobalID. Only traces belonging to the specified sessions will be returned.
+          title: Session Identifier
+        description: List of session identifiers to filter traces by. Each value can be either a session_id string or a session GlobalID. Only traces belonging to the specified sessions will be returned.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTracesResponseBody'
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '404':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Not Found
+        '422':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Unprocessable Entity
+  /v1/trace_annotations:
+    post:
+      tags:
+      - traces
+      summary: Create trace annotations
+      operationId: annotateTraces
+      parameters:
+      - name: sync
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: If true, fulfill request synchronously.
+          default: false
+          title: Sync
+        description: If true, fulfill request synchronously.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnnotateTracesRequestBody'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotateTracesResponseBody'
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '404':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Trace not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/trace_notes:
+    post:
+      tags:
+      - traces
+      summary: Create a trace note
+      description: Add a note annotation to a trace. By default each call appends a new note with an auto-generated UUIDv4 identifier, so multiple notes accumulate on the same trace. Callers may supply a non-empty `identifier` to upsert on (trace_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note, matching the semantics of structured annotations.
+      operationId: createTraceNote
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTraceNoteRequestBody'
+        required: true
+      responses:
+        '200':
+          description: Trace note created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTraceNoteResponseBody'
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Trace not found
+          content:
+            text/plain:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/traces/{trace_identifier}:
+    delete:
+      tags:
+      - traces
+      summary: Delete a trace by identifier
+      description: 'Delete an entire trace by its identifier. The identifier can be either:
+
+        1. A Relay node ID (base64-encoded)
+
+        2. An OpenTelemetry trace_id (hex string)
+
+
+        This will permanently remove all spans in the trace and their associated data.'
+      operationId: deleteTrace
+      parameters:
+      - name: trace_identifier
+        in: path
+        required: true
+        schema:
+          type: string
+          description: 'The trace identifier: either a relay GlobalID or OpenTelemetry trace_id'
+          title: Trace Identifier
+        description: 'The trace identifier: either a relay GlobalID or OpenTelemetry trace_id'
+      responses:
+        '204':
+          description: Successful Response
+        '403':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Forbidden
+        '404':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Not Found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    CreateTraceNoteRequestBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/TraceNoteData'
+      type: object
+      required:
+      - data
+      title: CreateTraceNoteRequestBody
+    TraceSpanData:
+      properties:
+        id:
+          type: string
+          title: Id
+        span_id:
+          type: string
+          title: Span Id
+        parent_id:
+          type: string
+          nullable: true
+          title: Parent Id
+        name:
+          type: string
+          title: Name
+        span_kind:
+          type: string
+          title: Span Kind
+        status_code:
+          type: string
+          title: Status Code
+        start_time:
+          type: string
+          format: date-time
+          title: Start Time
+        end_time:
+          type: string
+          format: date-time
+          title: End Time
+      type: object
+      required:
+      - id
+      - span_id
+      - parent_id
+      - name
+      - span_kind
+      - status_code
+      - start_time
+      - end_time
+      title: TraceSpanData
+    CreateTraceNoteResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/InsertedTraceAnnotation'
+      type: object
+      required:
+      - data
+      title: CreateTraceNoteResponseBody
+    AnnotateTracesResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/InsertedTraceAnnotation'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AnnotateTracesResponseBody
+    AnnotationResult:
+      properties:
+        label:
+          type: string
+          nullable: true
+          title: Label
+          description: The label assigned by the annotation
+        score:
+          type: number
+          nullable: true
+          title: Score
+          description: The score assigned by the annotation
+        explanation:
+          type: string
+          nullable: true
+          title: Explanation
+          description: Explanation of the annotation result
+      type: object
+      title: AnnotationResult
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    TraceNoteData:
+      properties:
+        trace_id:
+          type: string
+          minLength: 1
+          title: Trace Id
+          description: OpenTelemetry Trace ID (hex format w/o 0x prefix)
+        note:
+          type: string
+          minLength: 1
+          title: Note
+          description: The note text to add to the trace
+        identifier:
+          type: string
+          title: Identifier
+          description: Optional caller-supplied identifier. When non-empty, the note is upserted on (trace_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note. When omitted or empty, the server stamps a unique 'px-trace-note:<uuid>' identifier so each call appends a new note.
+          default: ''
+      type: object
+      required:
+      - trace_id
+      - note
+      title: TraceNoteData
+    InsertedTraceAnnotation:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the inserted trace annotation
+      type: object
+      required:
+      - id
+      title: InsertedTraceAnnotation
+    AnnotateTracesRequestBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TraceAnnotationData'
+          type: array
+          title: Data
+          description: The trace annotations to be upserted
+      type: object
+      required:
+      - data
+      title: AnnotateTracesRequestBody
+    TraceData:
+      properties:
+        id:
+          type: string
+          title: Id
+        trace_id:
+          type: string
+          title: Trace Id
+        project_id:
+          type: string
+          title: Project Id
+        start_time:
+          type: string
+          format: date-time
+          title: Start Time
+        end_time:
+          type: string
+          format: date-time
+          title: End Time
+        token_count_prompt:
+          type: integer
+          title: Token Count Prompt
+          description: Cumulative prompt token count across all spans in the trace.
+          default: 0
+        token_count_completion:
+          type: integer
+          title: Token Count Completion
+          description: Cumulative completion token count across all spans in the trace.
+          default: 0
+        token_count_total:
+          type: integer
+          title: Token Count Total
+          description: Cumulative total token count across all spans in the trace (prompt + completion).
+          default: 0
+        spans:
+          items:
+            $ref: '#/components/schemas/TraceSpanData'
+          type: array
+          nullable: true
+          title: Spans
+      type: object
+      required:
+      - id
+      - trace_id
+      - project_id
+      - start_time
+      - end_time
+      title: TraceData
+    TraceAnnotationData:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: The name of the annotation
+        annotator_kind:
+          type: string
+          enum:
+          - LLM
+          - CODE
+          - HUMAN
+          title: Annotator Kind
+          description: The kind of annotator used for the annotation
+        result:
+          $ref: '#/components/schemas/AnnotationResult'
+          nullable: true
+          description: The result of the annotation
+        metadata:
+          additionalProperties: true
+          type: object
+          nullable: true
+          title: Metadata
+          description: Metadata for the annotation
+        identifier:
+          type: string
+          title: Identifier
+          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
+          default: ''
+        trace_id:
+          type: string
+          title: Trace Id
+          description: OpenTelemetry Trace ID (hex format w/o 0x prefix)
+      type: object
+      required:
+      - name
+      - annotator_kind
+      - trace_id
+      title: TraceAnnotationData
+    GetTracesResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TraceData'
+          type: array
+          title: Data
+        next_cursor:
+          type: string
+          nullable: true
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: GetTracesResponseBody
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
