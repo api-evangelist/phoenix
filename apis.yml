@@ -12,7 +12,19 @@ description: >
   AX), with authentication via API keys and OAuth2/OIDC for enterprise
   deployments.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/phoenix.png
 url: https://raw.githubusercontent.com/api-evangelist/phoenix/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -29,51 +41,517 @@ tags:
   - Datasets
   - Experiments
 apis:
-  - name: Arize Phoenix REST API
-    description: >
-      The Phoenix REST API provides programmatic access to all platform
-      capabilities including trace ingestion via OpenTelemetry, span and trace
-      annotation management, dataset upload and export, experiment creation and
-      execution, annotation configuration, and project management. The API
-      follows REST conventions with JSON request and response bodies and uses
-      bearer token authentication via API keys.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://arize.com/docs/phoenix
-    baseURL: https://app.phoenix.arize.com
-    tags:
-      - LLM Observability
-      - Tracing
-      - Evaluation
-      - Datasets
-      - Experiments
-    properties:
-      - type: Documentation
-        url: https://arize.com/docs/phoenix
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/Arize-ai/phoenix/main/schemas/openapi.json
-      - type: OpenAPI
-        url: openapi/phoenix-rest-api-openapi.yml
-      - type: JSONSchema
-        url: json-schema/phoenix-span.json
-      - type: JSONSchema
-        url: json-schema/phoenix-dataset.json
-      - type: JSONSchema
-        url: json-schema/phoenix-experiment.json
-      - type: JSONSchema
-        url: json-schema/phoenix-annotationresult.json
-      - type: JSONSchema
-        url: json-schema/phoenix-project.json
-      - type: Vocabulary
-        url: vocabulary/phoenix-vocabulary.yml
-      - type: JSONLDContext
-        url: json-ld/phoenix-context.jsonld
-      - type: PythonSDK
-        url: https://pypi.org/project/arize-phoenix-client/
-      - type: TypeScriptSDK
-        url: https://www.npmjs.com/package/@arizeai/phoenix-client
-    contact:
-      - FN: Arize AI Support
-        url: https://arize.com/contact/
+- aid: phoenix:phoenix-annotation-configs-api
+  name: Arize Phoenix annotation_configs API
+  description: The annotation_configs API from Arize Phoenix — 3 operation(s) for annotation_configs.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - annotation_configs
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-annotation-configs-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-annotations-api
+  name: Arize Phoenix annotations API
+  description: The annotations API from Arize Phoenix — 3 operation(s) for annotations.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - annotations
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-annotations-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-arize-phoenix-version-api
+  name: Arize Phoenix Arize Phoenix Version API
+  description: >-
+    The Arize Phoenix Version API from Arize Phoenix — 1 operation(s) for arize phoenix version.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - Arize Phoenix Version
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-arize-phoenix-version-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-auth-api
+  name: Arize Phoenix Auth API
+  description: The Auth API from Arize Phoenix — 6 operation(s) for auth.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-auth-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-chat-api
+  name: Arize Phoenix chat API
+  description: The chat API from Arize Phoenix — 2 operation(s) for chat.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - chat
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-chat-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-datasets-api
+  name: Arize Phoenix datasets API
+  description: The datasets API from Arize Phoenix — 9 operation(s) for datasets.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-experiments-api
+  name: Arize Phoenix experiments API
+  description: The experiments API from Arize Phoenix — 8 operation(s) for experiments.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - experiments
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-experiments-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-healthz-api
+  name: Arize Phoenix Healthz API
+  description: The Healthz API from Arize Phoenix — 1 operation(s) for healthz.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - Healthz
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-healthz-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-oauth2-api
+  name: Arize Phoenix Oauth2 API
+  description: The Oauth2 API from Arize Phoenix — 2 operation(s) for oauth2.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - Oauth2
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-oauth2-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-projects-api
+  name: Arize Phoenix projects API
+  description: The projects API from Arize Phoenix — 2 operation(s) for projects.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - projects
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-projects-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-prompts-api
+  name: Arize Phoenix prompts API
+  description: The prompts API from Arize Phoenix — 8 operation(s) for prompts.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - prompts
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-prompts-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-readyz-api
+  name: Arize Phoenix Readyz API
+  description: The Readyz API from Arize Phoenix — 1 operation(s) for readyz.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - Readyz
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-readyz-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-secrets-api
+  name: Arize Phoenix secrets API
+  description: The secrets API from Arize Phoenix — 1 operation(s) for secrets.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - secrets
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-secrets-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-sessions-api
+  name: Arize Phoenix sessions API
+  description: The sessions API from Arize Phoenix — 5 operation(s) for sessions.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-spans-api
+  name: Arize Phoenix spans API
+  description: The spans API from Arize Phoenix — 6 operation(s) for spans.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - spans
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-spans-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-traces-api
+  name: Arize Phoenix traces API
+  description: The traces API from Arize Phoenix — 4 operation(s) for traces.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - traces
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-traces-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-users-api
+  name: Arize Phoenix users API
+  description: The users API from Arize Phoenix — 3 operation(s) for users.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-users-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
 common:
   - type: AgenticAccess
     url: agentic-access/phoenix-agentic-access.yml
