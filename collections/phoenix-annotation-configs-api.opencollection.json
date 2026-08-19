@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arize-Phoenix REST annotation_configs API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "annotation_configs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List annotation configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/annotation_configs",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination (base64-encoded annotation config ID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of configs to return"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of all annotation configurations in the system."
+        },
+        {
+          "info": {
+            "name": "Create an annotation configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/annotation_configs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an annotation configuration"
+        },
+        {
+          "info": {
+            "name": "Get an annotation configuration by ID or name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/annotation_configs/:config_identifier",
+            "params": [
+              {
+                "name": "config_identifier",
+                "value": "",
+                "type": "path",
+                "description": "ID or name of the annotation configuration"
+              }
+            ]
+          },
+          "docs": "Get an annotation configuration by ID or name"
+        },
+        {
+          "info": {
+            "name": "Update an annotation configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/annotation_configs/:config_id",
+            "params": [
+              {
+                "name": "config_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the annotation configuration"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an annotation configuration"
+        },
+        {
+          "info": {
+            "name": "Delete an annotation configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/annotation_configs/:config_id",
+            "params": [
+              {
+                "name": "config_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the annotation configuration"
+              }
+            ]
+          },
+          "docs": "Delete an annotation configuration"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

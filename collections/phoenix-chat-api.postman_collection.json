@@ -1,0 +1,408 @@
+{
+  "item": [
+    {
+      "id": "8136e244-c3fe-4b72-8eec-05f1a03d7507",
+      "name": "chat",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "01a6e891-8fa4-4c7b-8999-10dc520bdbc2",
+          "name": "Chat",
+          "request": {
+            "name": "Chat",
+            "description": {},
+            "url": {
+              "path": [
+                "agents",
+                ":agent_id",
+                "sessions",
+                ":session_id",
+                "chat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "agent_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"messages\": [\n    {\n      \"id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"parts\": [\n        {\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"providerMetadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"providerMetadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"metadata\": {\n        \"sessionId\": \"<string>\",\n        \"trace\": {\n          \"traceId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rootSpanId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"usage\": {\n          \"tokens\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"promptDetails\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"parts\": [\n        {\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"providerMetadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"providerMetadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"metadata\": {\n        \"sessionId\": \"<string>\",\n        \"trace\": {\n          \"traceId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rootSpanId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"usage\": {\n          \"tokens\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"promptDetails\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"model\": {\n    \"providerType\": \"<string>\",\n    \"providerId\": \"<string>\",\n    \"modelName\": \"<string>\"\n  },\n  \"trigger\": \"submit-message\",\n  \"ingestTraces\": false,\n  \"exportRemoteTraces\": false,\n  \"contexts\": [\n    {\n      \"type\": \"<string>\",\n      \"currentDateTime\": \"<string>\",\n      \"timeZone\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"currentDateTime\": \"<string>\",\n      \"timeZone\": \"<string>\"\n    }\n  ],\n  \"editPermission\": \"manual\",\n  \"requestedSkills\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "22f88b4b-268a-4a8f-a5fc-8a91d4119468",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    ":agent_id",
+                    "sessions",
+                    ":session_id",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agent_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"messages\": [\n    {\n      \"id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"parts\": [\n        {\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"providerMetadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"providerMetadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"metadata\": {\n        \"sessionId\": \"<string>\",\n        \"trace\": {\n          \"traceId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rootSpanId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"usage\": {\n          \"tokens\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"promptDetails\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"parts\": [\n        {\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"providerMetadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"providerMetadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"metadata\": {\n        \"sessionId\": \"<string>\",\n        \"trace\": {\n          \"traceId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rootSpanId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"usage\": {\n          \"tokens\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"promptDetails\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"model\": {\n    \"providerType\": \"<string>\",\n    \"providerId\": \"<string>\",\n    \"modelName\": \"<string>\"\n  },\n  \"trigger\": \"submit-message\",\n  \"ingestTraces\": false,\n  \"exportRemoteTraces\": false,\n  \"contexts\": [\n    {\n      \"type\": \"<string>\",\n      \"currentDateTime\": \"<string>\",\n      \"timeZone\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"currentDateTime\": \"<string>\",\n      \"timeZone\": \"<string>\"\n    }\n  ],\n  \"editPermission\": \"manual\",\n  \"requestedSkills\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "969ba160-9022-4ca1-96f2-5c11490e3024",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    ":agent_id",
+                    "sessions",
+                    ":session_id",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agent_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"messages\": [\n    {\n      \"id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"parts\": [\n        {\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"providerMetadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"providerMetadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"metadata\": {\n        \"sessionId\": \"<string>\",\n        \"trace\": {\n          \"traceId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rootSpanId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"usage\": {\n          \"tokens\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"promptDetails\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"parts\": [\n        {\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"providerMetadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"providerMetadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"metadata\": {\n        \"sessionId\": \"<string>\",\n        \"trace\": {\n          \"traceId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rootSpanId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"usage\": {\n          \"tokens\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"promptDetails\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"model\": {\n    \"providerType\": \"<string>\",\n    \"providerId\": \"<string>\",\n    \"modelName\": \"<string>\"\n  },\n  \"trigger\": \"submit-message\",\n  \"ingestTraces\": false,\n  \"exportRemoteTraces\": false,\n  \"contexts\": [\n    {\n      \"type\": \"<string>\",\n      \"currentDateTime\": \"<string>\",\n      \"timeZone\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"currentDateTime\": \"<string>\",\n      \"timeZone\": \"<string>\"\n    }\n  ],\n  \"editPermission\": \"manual\",\n  \"requestedSkills\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3540edd9-a392-42ab-9e1a-0a915bbfc97e",
+          "name": "Summarize Endpoint",
+          "request": {
+            "name": "Summarize Endpoint",
+            "description": {},
+            "url": {
+              "path": [
+                "agents",
+                ":agent_id",
+                "sessions",
+                ":session_id",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "agent_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"parts\": [\n        {\n          \"text\": \"<string>\",\n          \"type\": \"text\",\n          \"state\": \"<string>\",\n          \"providerMetadata\": {\n            \"key_0\": {\n              \"key_0\": 6908,\n              \"key_1\": \"string\",\n              \"key_2\": 9600,\n              \"key_3\": false\n            }\n          }\n        },\n        {\n          \"text\": \"<string>\",\n          \"type\": \"text\",\n          \"state\": \"<string>\",\n          \"providerMetadata\": {\n            \"key_0\": {\n              \"key_0\": 8620,\n              \"key_1\": false\n            },\n            \"key_1\": {\n              \"key_0\": 8849,\n              \"key_1\": 8072,\n              \"key_2\": \"string\",\n              \"key_3\": \"string\",\n              \"key_4\": 2353\n            },\n            \"key_2\": {\n              \"key_0\": 7346,\n              \"key_1\": \"string\",\n              \"key_2\": 6778.8104997558585,\n              \"key_3\": 5471\n            }\n          }\n        }\n      ],\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"parts\": [\n        {\n          \"text\": \"<string>\",\n          \"type\": \"text\",\n          \"state\": \"<string>\",\n          \"providerMetadata\": {\n            \"key_0\": {\n              \"key_0\": \"string\",\n              \"key_1\": 2182.717956906798\n            },\n            \"key_1\": {\n              \"key_0\": 332.75704019611,\n              \"key_1\": 8481\n            }\n          }\n        },\n        {\n          \"text\": \"<string>\",\n          \"type\": \"text\",\n          \"state\": \"<string>\",\n          \"providerMetadata\": {\n            \"key_0\": {\n              \"key_0\": 2088.2348019961337\n            },\n            \"key_1\": {\n              \"key_0\": 3779\n            }\n          }\n        }\n      ],\n      \"metadata\": {}\n    }\n  ],\n  \"model\": {\n    \"providerType\": \"<string>\",\n    \"providerId\": \"<string>\",\n    \"modelName\": \"<string>\"\n  },\n  \"ingestTraces\": false,\n  \"exportRemoteTraces\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "368ddf2e-9658-4429-87ec-d2dd79ef5a11",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    ":agent_id",
+                    "sessions",
+                    ":session_id",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agent_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"parts\": [\n        {\n          \"text\": \"<string>\",\n          \"type\": \"text\",\n          \"state\": \"<string>\",\n          \"providerMetadata\": {\n            \"key_0\": {\n              \"key_0\": 9133.645475148429,\n              \"key_1\": 4944.558098173685\n            }\n          }\n        },\n        {\n          \"text\": \"<string>\",\n          \"type\": \"text\",\n          \"state\": \"<string>\",\n          \"providerMetadata\": {\n            \"key_0\": {\n              \"key_0\": 625.3454981642958,\n              \"key_1\": false\n            },\n            \"key_1\": {\n              \"key_0\": 9277\n            },\n            \"key_2\": {\n              \"key_0\": \"string\"\n            }\n          }\n        }\n      ],\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"parts\": [\n        {\n          \"text\": \"<string>\",\n          \"type\": \"text\",\n          \"state\": \"<string>\",\n          \"providerMetadata\": {\n            \"key_0\": {\n              \"key_0\": \"string\",\n              \"key_1\": true\n            },\n            \"key_1\": {\n              \"key_0\": false,\n              \"key_1\": 6935.669343415083\n            },\n            \"key_2\": {\n              \"key_0\": \"string\",\n              \"key_1\": false\n            }\n          }\n        },\n        {\n          \"text\": \"<string>\",\n          \"type\": \"text\",\n          \"state\": \"<string>\",\n          \"providerMetadata\": {\n            \"key_0\": {\n              \"key_0\": true,\n              \"key_1\": true\n            },\n            \"key_1\": {\n              \"key_0\": \"string\",\n              \"key_1\": 3939,\n              \"key_2\": \"string\"\n            },\n            \"key_2\": {\n              \"key_0\": \"string\"\n            },\n            \"key_3\": {\n              \"key_0\": 9865\n            }\n          }\n        }\n      ],\n      \"metadata\": {}\n    }\n  ],\n  \"model\": {\n    \"providerType\": \"<string>\",\n    \"providerId\": \"<string>\",\n    \"modelName\": \"<string>\"\n  },\n  \"ingestTraces\": false,\n  \"exportRemoteTraces\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8f9f73f-fb56-4aea-bd4d-2aa21c1de8be",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    ":agent_id",
+                    "sessions",
+                    ":session_id",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agent_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"parts\": [\n        {\n          \"text\": \"<string>\",\n          \"type\": \"text\",\n          \"state\": \"<string>\",\n          \"providerMetadata\": {\n            \"key_0\": {\n              \"key_0\": 9133.645475148429,\n              \"key_1\": 4944.558098173685\n            }\n          }\n        },\n        {\n          \"text\": \"<string>\",\n          \"type\": \"text\",\n          \"state\": \"<string>\",\n          \"providerMetadata\": {\n            \"key_0\": {\n              \"key_0\": 625.3454981642958,\n              \"key_1\": false\n            },\n            \"key_1\": {\n              \"key_0\": 9277\n            },\n            \"key_2\": {\n              \"key_0\": \"string\"\n            }\n          }\n        }\n      ],\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"parts\": [\n        {\n          \"text\": \"<string>\",\n          \"type\": \"text\",\n          \"state\": \"<string>\",\n          \"providerMetadata\": {\n            \"key_0\": {\n              \"key_0\": \"string\",\n              \"key_1\": true\n            },\n            \"key_1\": {\n              \"key_0\": false,\n              \"key_1\": 6935.669343415083\n            },\n            \"key_2\": {\n              \"key_0\": \"string\",\n              \"key_1\": false\n            }\n          }\n        },\n        {\n          \"text\": \"<string>\",\n          \"type\": \"text\",\n          \"state\": \"<string>\",\n          \"providerMetadata\": {\n            \"key_0\": {\n              \"key_0\": true,\n              \"key_1\": true\n            },\n            \"key_1\": {\n              \"key_0\": \"string\",\n              \"key_1\": 3939,\n              \"key_2\": \"string\"\n            },\n            \"key_2\": {\n              \"key_0\": \"string\"\n            },\n            \"key_3\": {\n              \"key_0\": 9865\n            }\n          }\n        }\n      ],\n      \"metadata\": {}\n    }\n  ],\n  \"model\": {\n    \"providerType\": \"<string>\",\n    \"providerId\": \"<string>\",\n    \"modelName\": \"<string>\"\n  },\n  \"ingestTraces\": false,\n  \"exportRemoteTraces\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c9a0ad58-b4d1-4e7d-ba83-700b3b87ba09",
+    "name": "Arize-Phoenix REST annotation_configs chat API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Schema for Arize-Phoenix REST API",
+      "type": "text/plain"
+    }
+  }
+}

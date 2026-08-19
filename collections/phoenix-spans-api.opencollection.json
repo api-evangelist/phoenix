@@ -1,0 +1,273 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arize-Phoenix REST annotation_configs spans API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "spans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search spans with simple filters (no DSL)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/:project_identifier/spans/otlpv1",
+            "params": [
+              {
+                "name": "project_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor (Span Global ID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of spans to return"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive lower bound time"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "Exclusive upper bound time"
+              },
+              {
+                "name": "trace_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by one or more trace IDs"
+              },
+              {
+                "name": "parent_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by parent span ID. Use \"null\" to get root spans only."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by span name(s)"
+              },
+              {
+                "name": "status_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status code(s). Values: OK, ERROR, UNSET"
+              },
+              {
+                "name": "attribute",
+                "value": "",
+                "type": "query",
+                "description": "Filter spans by `key:value`. Key is a dot-path (e.g. `user.id`, `metadata.tier`). Value is JSON-parsed: `k:12345` is int, `k:true` is bool, otherwise string (`k:user-42`). To match a numeric- or boolean-looking STRING, JSON-quote it: `user.id:\"12345\"` (URL-encoded `%2212345%22`). Split is on the first `:` only, so values may contain colons (`session.id:sess:abc:123`, ISO timestamps). Repeat the param to AND filters. List-valued attributes (e.g. `tag.tags`) cannot be matched here. Returns 422 on malformed input (missing colon, empty key/value, or list/dict/null value)."
+              }
+            ]
+          },
+          "docs": "Return spans within a project filtered by time range. Supports cursor-based pagination."
+        },
+        {
+          "info": {
+            "name": "List spans with simple filters (no DSL)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/:project_identifier/spans",
+            "params": [
+              {
+                "name": "project_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor (Span Global ID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of spans to return"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive lower bound time"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "Exclusive upper bound time"
+              },
+              {
+                "name": "trace_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by one or more trace IDs"
+              },
+              {
+                "name": "parent_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by parent span ID. Use \"null\" to get root spans only."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by span name(s)"
+              },
+              {
+                "name": "span_kind",
+                "value": "",
+                "type": "query",
+                "description": "Filter by span kind(s). Values: LLM, CHAIN, TOOL, RETRIEVER, EMBEDDING, AGENT, RERANKER, GUARDRAIL, EVALUATOR, UNKNOWN"
+              },
+              {
+                "name": "status_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status code(s). Values: OK, ERROR, UNSET"
+              },
+              {
+                "name": "attribute",
+                "value": "",
+                "type": "query",
+                "description": "Filter spans by `key:value`. Key is a dot-path (e.g. `user.id`, `metadata.tier`). Value is JSON-parsed: `k:12345` is int, `k:true` is bool, otherwise string (`k:user-42`). To match a numeric- or boolean-looking STRING, JSON-quote it: `user.id:\"12345\"` (URL-encoded `%2212345%22`). Split is on the first `:` only, so values may contain colons (`session.id:sess:abc:123`, ISO timestamps). Repeat the param to AND filters. List-valued attributes (e.g. `tag.tags`) cannot be matched here. Returns 422 on malformed input (missing colon, empty key/value, or list/dict/null value)."
+              }
+            ]
+          },
+          "docs": "Return spans within a project filtered by time range. Supports cursor-based pagination."
+        },
+        {
+          "info": {
+            "name": "Create spans",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/projects/:project_identifier/spans",
+            "params": [
+              {
+                "name": "project_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit spans to be inserted into a project. If any spans are invalid or duplicates, no spans will be inserted."
+        },
+        {
+          "info": {
+            "name": "Create span annotations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/span_annotations",
+            "params": [
+              {
+                "name": "sync",
+                "value": "",
+                "type": "query",
+                "description": "If true, fulfill request synchronously."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create span annotations"
+        },
+        {
+          "info": {
+            "name": "Create a span note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/span_notes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a note annotation to a span. By default each call appends a new note with an auto-generated UUIDv4 identifier, so multiple notes accumulate on the same span. Callers may supply a non-empty `identifier` to upsert on (span_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note, matching the semantics of structured annotations."
+        },
+        {
+          "info": {
+            "name": "Delete a span by span_identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/spans/:span_identifier",
+            "params": [
+              {
+                "name": "span_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The span identifier: either a relay GlobalID or OpenTelemetry span_id"
+              }
+            ]
+          },
+          "docs": "Delete a single span by identifier.\n\n        **Important**: This operation deletes ONLY the specified span itself and does NOT\n        delete its descendants/children. All child spans will remain in the trace and\n        become orphaned (their parent_id will point to a non-existent span).\n\n        Behavior:\n        - Deletes only the target span (preserves all descendant spans)\n        - If this was the last span in the trace, the trace record is also deleted\n        - If the deleted span had a "
+        },
+        {
+          "info": {
+            "name": "Annotate Span Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/document_annotations",
+            "params": [
+              {
+                "name": "sync",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the annotations are inserted synchronously."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Annotate Span Documents"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arize-Phoenix REST annotation_configs Oauth2 API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Oauth2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/oauth2/:idp_name/login",
+            "params": [
+              {
+                "name": "idp_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "returnUrl",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Login"
+        },
+        {
+          "info": {
+            "name": "Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/oauth2/:idp_name/login",
+            "params": [
+              {
+                "name": "idp_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "returnUrl",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Login"
+        },
+        {
+          "info": {
+            "name": "Create Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/oauth2/:idp_name/tokens",
+            "params": [
+              {
+                "name": "idp_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "error",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "error_description",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Create Tokens"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

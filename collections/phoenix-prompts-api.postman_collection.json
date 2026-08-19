@@ -1,0 +1,2432 @@
+{
+  "item": [
+    {
+      "id": "7b8dea14-d2cc-4c35-8432-bf2a688e9aff",
+      "name": "prompts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5bd0f62-7960-4c67-bbbb-c54e2c3f652e",
+          "name": "List all prompts",
+          "request": {
+            "name": "List all prompts",
+            "description": {
+              "content": "Retrieve a paginated list of all prompts in the system. A prompt can have multiple versions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prompts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Cursor for pagination (base64-encoded prompt ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "The max number of prompts to return at a time."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d100720-415d-4fbe-b760-5f0d8ec4a0e1",
+              "name": "A list of prompts with pagination information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"su\",\n      \"id\": \"string\",\n      \"description\": \"string\",\n      \"source_prompt_id\": \"string\",\n      \"metadata\": {\n        \"key_0\": 1757.9128642809771\n      }\n    },\n    {\n      \"name\": \"p\",\n      \"id\": \"string\",\n      \"description\": \"string\",\n      \"source_prompt_id\": \"string\",\n      \"metadata\": {\n        \"key_0\": false,\n        \"key_1\": 8062.672921216188\n      }\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82bbfcc0-4d2a-42eb-82af-b47b55820a2b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "278e2e4a-4fb4-4366-a1c3-33224d885c21",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f646850-94c0-47d7-912e-bdb71655949f",
+          "name": "Create a new prompt",
+          "request": {
+            "name": "Create a new prompt",
+            "description": {
+              "content": "Create a new prompt and its initial version. A prompt can have multiple versions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prompts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"source_prompt_id\": \"<string>\",\n    \"metadata\": {\n      \"key_0\": 2820,\n      \"key_1\": 3792.55477361256\n    }\n  },\n  \"version\": {\n    \"model_provider\": \"<string>\",\n    \"model_name\": \"<string>\",\n    \"template\": {\n      \"type\": \"<string>\",\n      \"messages\": [\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"template_type\": \"<string>\",\n    \"template_format\": \"<string>\",\n    \"invocation_parameters\": {\n      \"type\": \"<string>\",\n      \"openai\": {\n        \"temperature\": \"<number>\",\n        \"max_tokens\": \"<integer>\",\n        \"max_completion_tokens\": \"<integer>\",\n        \"frequency_penalty\": \"<number>\",\n        \"presence_penalty\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"seed\": \"<integer>\",\n        \"stop\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"reasoning_effort\": \"<string>\",\n        \"extra_body\": {\n          \"key_0\": 6516.174745003082\n        }\n      }\n    },\n    \"description\": \"<string>\",\n    \"tools\": {\n      \"type\": \"<string>\",\n      \"tools\": [\n        {\n          \"type\": \"<string>\",\n          \"function\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tool_choice\": {\n        \"type\": \"<string>\"\n      },\n      \"disable_parallel_tool_calls\": \"<boolean>\"\n    },\n    \"response_format\": {\n      \"type\": \"<string>\",\n      \"json_schema\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"schema\": {\n          \"key_0\": false\n        },\n        \"strict\": \"<boolean>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "06ab734e-7be6-44c1-9274-08d899202067",
+              "name": "The newly created prompt version",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"source_prompt_id\": \"<string>\",\n    \"metadata\": {\n      \"key_0\": 5818\n    }\n  },\n  \"version\": {\n    \"model_provider\": \"<string>\",\n    \"model_name\": \"<string>\",\n    \"template\": {\n      \"type\": \"<string>\",\n      \"messages\": [\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"template_type\": \"<string>\",\n    \"template_format\": \"<string>\",\n    \"invocation_parameters\": {\n      \"type\": \"<string>\",\n      \"openai\": {\n        \"temperature\": \"<number>\",\n        \"max_tokens\": \"<integer>\",\n        \"max_completion_tokens\": \"<integer>\",\n        \"frequency_penalty\": \"<number>\",\n        \"presence_penalty\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"seed\": \"<integer>\",\n        \"stop\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"reasoning_effort\": \"<string>\",\n        \"extra_body\": {\n          \"key_0\": \"string\"\n        }\n      }\n    },\n    \"description\": \"<string>\",\n    \"tools\": {\n      \"type\": \"<string>\",\n      \"tools\": [\n        {\n          \"type\": \"<string>\",\n          \"function\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tool_choice\": {\n        \"type\": \"<string>\"\n      },\n      \"disable_parallel_tool_calls\": \"<boolean>\"\n    },\n    \"response_format\": {\n      \"type\": \"<string>\",\n      \"json_schema\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"schema\": {\n          \"key_0\": 8030\n        },\n        \"strict\": \"<boolean>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"model_provider\": \"<string>\",\n    \"model_name\": \"string\",\n    \"template\": {\n      \"type\": \"<string>\",\n      \"messages\": [\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"template_type\": \"<string>\",\n    \"template_format\": \"<string>\",\n    \"invocation_parameters\": {\n      \"type\": \"<string>\",\n      \"openai\": {\n        \"temperature\": \"<number>\",\n        \"max_tokens\": \"<integer>\",\n        \"max_completion_tokens\": \"<integer>\",\n        \"frequency_penalty\": \"<number>\",\n        \"presence_penalty\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"seed\": \"<integer>\",\n        \"stop\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"reasoning_effort\": \"<string>\",\n        \"extra_body\": {\n          \"key_0\": 8880.851864210419,\n          \"key_1\": true\n        }\n      }\n    },\n    \"id\": \"string\",\n    \"description\": \"string\",\n    \"tools\": {\n      \"type\": \"<string>\",\n      \"tools\": [\n        {\n          \"type\": \"<string>\",\n          \"function\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tool_choice\": {\n        \"type\": \"<string>\"\n      },\n      \"disable_parallel_tool_calls\": \"<boolean>\"\n    },\n    \"response_format\": {\n      \"type\": \"<string>\",\n      \"json_schema\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"schema\": {\n          \"key_0\": \"string\",\n          \"key_1\": true,\n          \"key_2\": 9710.037123296717,\n          \"key_3\": 1421.0819389376827\n        },\n        \"strict\": \"<boolean>\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d085ec33-5a6c-4073-a8b6-8bba9f0d27e7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"source_prompt_id\": \"<string>\",\n    \"metadata\": {\n      \"key_0\": 5818\n    }\n  },\n  \"version\": {\n    \"model_provider\": \"<string>\",\n    \"model_name\": \"<string>\",\n    \"template\": {\n      \"type\": \"<string>\",\n      \"messages\": [\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"template_type\": \"<string>\",\n    \"template_format\": \"<string>\",\n    \"invocation_parameters\": {\n      \"type\": \"<string>\",\n      \"openai\": {\n        \"temperature\": \"<number>\",\n        \"max_tokens\": \"<integer>\",\n        \"max_completion_tokens\": \"<integer>\",\n        \"frequency_penalty\": \"<number>\",\n        \"presence_penalty\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"seed\": \"<integer>\",\n        \"stop\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"reasoning_effort\": \"<string>\",\n        \"extra_body\": {\n          \"key_0\": \"string\"\n        }\n      }\n    },\n    \"description\": \"<string>\",\n    \"tools\": {\n      \"type\": \"<string>\",\n      \"tools\": [\n        {\n          \"type\": \"<string>\",\n          \"function\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tool_choice\": {\n        \"type\": \"<string>\"\n      },\n      \"disable_parallel_tool_calls\": \"<boolean>\"\n    },\n    \"response_format\": {\n      \"type\": \"<string>\",\n      \"json_schema\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"schema\": {\n          \"key_0\": 8030\n        },\n        \"strict\": \"<boolean>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6a9c94a2-3ac3-4fde-9283-bec5fea40e73",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"source_prompt_id\": \"<string>\",\n    \"metadata\": {\n      \"key_0\": 5818\n    }\n  },\n  \"version\": {\n    \"model_provider\": \"<string>\",\n    \"model_name\": \"<string>\",\n    \"template\": {\n      \"type\": \"<string>\",\n      \"messages\": [\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"template_type\": \"<string>\",\n    \"template_format\": \"<string>\",\n    \"invocation_parameters\": {\n      \"type\": \"<string>\",\n      \"openai\": {\n        \"temperature\": \"<number>\",\n        \"max_tokens\": \"<integer>\",\n        \"max_completion_tokens\": \"<integer>\",\n        \"frequency_penalty\": \"<number>\",\n        \"presence_penalty\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"seed\": \"<integer>\",\n        \"stop\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"reasoning_effort\": \"<string>\",\n        \"extra_body\": {\n          \"key_0\": \"string\"\n        }\n      }\n    },\n    \"description\": \"<string>\",\n    \"tools\": {\n      \"type\": \"<string>\",\n      \"tools\": [\n        {\n          \"type\": \"<string>\",\n          \"function\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tool_choice\": {\n        \"type\": \"<string>\"\n      },\n      \"disable_parallel_tool_calls\": \"<boolean>\"\n    },\n    \"response_format\": {\n      \"type\": \"<string>\",\n      \"json_schema\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"schema\": {\n          \"key_0\": 8030\n        },\n        \"strict\": \"<boolean>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b33b260-031a-4387-80b7-d756ab6b78b3",
+          "name": "List prompt versions",
+          "request": {
+            "name": "List prompt versions",
+            "description": {
+              "content": "Retrieve all versions of a specific prompt with pagination support. Each prompt can have multiple versions with different configurations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prompts",
+                ":prompt_identifier",
+                "versions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Cursor for pagination (base64-encoded promptVersion ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "The max number of prompt versions to return at a time."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prompt_identifier",
+                  "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4736f3d3-28d6-4a29-ab96-21c6e2d6ad56",
+              "name": "A list of prompt versions with pagination information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"model_provider\": \"<string>\",\n      \"model_name\": \"string\",\n      \"template\": {\n        \"type\": \"<string>\",\n        \"messages\": [\n          {\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"template_type\": \"<string>\",\n      \"template_format\": \"<string>\",\n      \"invocation_parameters\": {\n        \"type\": \"<string>\",\n        \"openai\": {\n          \"temperature\": \"<number>\",\n          \"max_tokens\": \"<integer>\",\n          \"max_completion_tokens\": \"<integer>\",\n          \"frequency_penalty\": \"<number>\",\n          \"presence_penalty\": \"<number>\",\n          \"top_p\": \"<number>\",\n          \"seed\": \"<integer>\",\n          \"stop\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"reasoning_effort\": \"<string>\",\n          \"extra_body\": {\n            \"key_0\": 9930,\n            \"key_1\": true,\n            \"key_2\": 5670.881879700285,\n            \"key_3\": false,\n            \"key_4\": \"string\"\n          }\n        }\n      },\n      \"id\": \"string\",\n      \"description\": \"string\",\n      \"tools\": {\n        \"type\": \"<string>\",\n        \"tools\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tool_choice\": {\n          \"type\": \"<string>\"\n        },\n        \"disable_parallel_tool_calls\": \"<boolean>\"\n      },\n      \"response_format\": {\n        \"type\": \"<string>\",\n        \"json_schema\": {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"schema\": {\n            \"key_0\": \"string\",\n            \"key_1\": 3051\n          },\n          \"strict\": \"<boolean>\"\n        }\n      }\n    },\n    {\n      \"model_provider\": \"<string>\",\n      \"model_name\": \"string\",\n      \"template\": {\n        \"type\": \"<string>\",\n        \"messages\": [\n          {\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"template_type\": \"<string>\",\n      \"template_format\": \"<string>\",\n      \"invocation_parameters\": {\n        \"type\": \"<string>\",\n        \"openai\": {\n          \"temperature\": \"<number>\",\n          \"max_tokens\": \"<integer>\",\n          \"max_completion_tokens\": \"<integer>\",\n          \"frequency_penalty\": \"<number>\",\n          \"presence_penalty\": \"<number>\",\n          \"top_p\": \"<number>\",\n          \"seed\": \"<integer>\",\n          \"stop\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"reasoning_effort\": \"<string>\",\n          \"extra_body\": {\n            \"key_0\": \"string\"\n          }\n        }\n      },\n      \"id\": \"string\",\n      \"description\": \"string\",\n      \"tools\": {\n        \"type\": \"<string>\",\n        \"tools\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tool_choice\": {\n          \"type\": \"<string>\"\n        },\n        \"disable_parallel_tool_calls\": \"<boolean>\"\n      },\n      \"response_format\": {\n        \"type\": \"<string>\",\n        \"json_schema\": {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"schema\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": 6696.381594175752,\n            \"key_3\": true\n          },\n          \"strict\": \"<boolean>\"\n        }\n      }\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b373d68-63f8-4a6f-ba2e-ea69c3df03ee",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ba19f9d-a24c-4ee9-aa38-72de57135c0e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e50900d1-089c-4578-90dc-4199aa5e74e8",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f019776-91d4-4fd2-b521-7a770b1088b5",
+          "name": "Get prompt version by ID",
+          "request": {
+            "name": "Get prompt version by ID",
+            "description": {
+              "content": "Retrieve a specific prompt version using its unique identifier. A prompt version contains the actual template and configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prompt_versions",
+                ":prompt_version_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prompt_version_id",
+                  "description": "(Required) The ID of the prompt version."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "25f74b53-7180-429d-afab-0692fb30f647",
+              "name": "The requested prompt version",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"model_provider\": \"<string>\",\n    \"model_name\": \"string\",\n    \"template\": {\n      \"type\": \"<string>\",\n      \"messages\": [\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"template_type\": \"<string>\",\n    \"template_format\": \"<string>\",\n    \"invocation_parameters\": {\n      \"type\": \"<string>\",\n      \"openai\": {\n        \"temperature\": \"<number>\",\n        \"max_tokens\": \"<integer>\",\n        \"max_completion_tokens\": \"<integer>\",\n        \"frequency_penalty\": \"<number>\",\n        \"presence_penalty\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"seed\": \"<integer>\",\n        \"stop\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"reasoning_effort\": \"<string>\",\n        \"extra_body\": {\n          \"key_0\": 4532,\n          \"key_1\": \"string\"\n        }\n      }\n    },\n    \"id\": \"string\",\n    \"description\": \"string\",\n    \"tools\": {\n      \"type\": \"<string>\",\n      \"tools\": [\n        {\n          \"type\": \"<string>\",\n          \"function\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tool_choice\": {\n        \"type\": \"<string>\"\n      },\n      \"disable_parallel_tool_calls\": \"<boolean>\"\n    },\n    \"response_format\": {\n      \"type\": \"<string>\",\n      \"json_schema\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"schema\": {\n          \"key_0\": 2178,\n          \"key_1\": 3006.329049870079,\n          \"key_2\": false\n        },\n        \"strict\": \"<boolean>\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4c102e3-b901-4da3-9c87-e29fa635efbf",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a6efebcb-ea22-451b-a9c6-d93ae3bcef9f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2aee5fe5-ec57-43aa-b295-1be5d6cfc872",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e1cf605-0295-49e3-a5d9-c3d6489168e7",
+          "name": "Get prompt version by tag",
+          "request": {
+            "name": "Get prompt version by tag",
+            "description": {
+              "content": "Retrieve a specific prompt version using its tag name. Tags are used to identify specific versions of a prompt.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prompts",
+                ":prompt_identifier",
+                "tags",
+                ":tag_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prompt_identifier",
+                  "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The tag of the prompt version"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b04a80be-b388-48ee-9092-50e8ba1eec66",
+              "name": "The prompt version with the specified tag",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier",
+                    "tags",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag of the prompt version"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"model_provider\": \"<string>\",\n    \"model_name\": \"string\",\n    \"template\": {\n      \"type\": \"<string>\",\n      \"messages\": [\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"template_type\": \"<string>\",\n    \"template_format\": \"<string>\",\n    \"invocation_parameters\": {\n      \"type\": \"<string>\",\n      \"openai\": {\n        \"temperature\": \"<number>\",\n        \"max_tokens\": \"<integer>\",\n        \"max_completion_tokens\": \"<integer>\",\n        \"frequency_penalty\": \"<number>\",\n        \"presence_penalty\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"seed\": \"<integer>\",\n        \"stop\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"reasoning_effort\": \"<string>\",\n        \"extra_body\": {\n          \"key_0\": 4532,\n          \"key_1\": \"string\"\n        }\n      }\n    },\n    \"id\": \"string\",\n    \"description\": \"string\",\n    \"tools\": {\n      \"type\": \"<string>\",\n      \"tools\": [\n        {\n          \"type\": \"<string>\",\n          \"function\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tool_choice\": {\n        \"type\": \"<string>\"\n      },\n      \"disable_parallel_tool_calls\": \"<boolean>\"\n    },\n    \"response_format\": {\n      \"type\": \"<string>\",\n      \"json_schema\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"schema\": {\n          \"key_0\": 2178,\n          \"key_1\": 3006.329049870079,\n          \"key_2\": false\n        },\n        \"strict\": \"<boolean>\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85d020ca-bcaf-4f8e-b775-6d2d79537ada",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier",
+                    "tags",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag of the prompt version"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c82c117c-155f-49cb-a9c8-4950784d1910",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier",
+                    "tags",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag of the prompt version"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8610ae85-7103-4bc1-8e26-9a2392ace177",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier",
+                    "tags",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag of the prompt version"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc0b48bf-1896-423f-b61d-33353edd4a43",
+          "name": "Get latest prompt version",
+          "request": {
+            "name": "Get latest prompt version",
+            "description": {
+              "content": "Retrieve the most recent version of a specific prompt.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prompts",
+                ":prompt_identifier",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prompt_identifier",
+                  "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "464af77f-0490-4a23-94c3-c4811945eb0f",
+              "name": "The latest version of the specified prompt",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"model_provider\": \"<string>\",\n    \"model_name\": \"string\",\n    \"template\": {\n      \"type\": \"<string>\",\n      \"messages\": [\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": \"<string>\",\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"template_type\": \"<string>\",\n    \"template_format\": \"<string>\",\n    \"invocation_parameters\": {\n      \"type\": \"<string>\",\n      \"openai\": {\n        \"temperature\": \"<number>\",\n        \"max_tokens\": \"<integer>\",\n        \"max_completion_tokens\": \"<integer>\",\n        \"frequency_penalty\": \"<number>\",\n        \"presence_penalty\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"seed\": \"<integer>\",\n        \"stop\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"reasoning_effort\": \"<string>\",\n        \"extra_body\": {\n          \"key_0\": 4532,\n          \"key_1\": \"string\"\n        }\n      }\n    },\n    \"id\": \"string\",\n    \"description\": \"string\",\n    \"tools\": {\n      \"type\": \"<string>\",\n      \"tools\": [\n        {\n          \"type\": \"<string>\",\n          \"function\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tool_choice\": {\n        \"type\": \"<string>\"\n      },\n      \"disable_parallel_tool_calls\": \"<boolean>\"\n    },\n    \"response_format\": {\n      \"type\": \"<string>\",\n      \"json_schema\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"schema\": {\n          \"key_0\": 2178,\n          \"key_1\": 3006.329049870079,\n          \"key_2\": false\n        },\n        \"strict\": \"<boolean>\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7337894f-d718-48b2-aa8a-a5ef0b8f5d86",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3aca5cca-268a-40fb-af14-a27229a5ca74",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d62ba96a-2f16-49a1-bdc8-f7b3d5552330",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1383debc-d46d-4fea-8ce6-ad3f9ea21de4",
+          "name": "List prompt version tags",
+          "request": {
+            "name": "List prompt version tags",
+            "description": {
+              "content": "Retrieve all tags associated with a specific prompt version. Tags are used to identify and categorize different versions of a prompt.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prompt_versions",
+                ":prompt_version_id",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Cursor for pagination (base64-encoded promptVersionTag ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "The max number of tags to return at a time."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prompt_version_id",
+                  "description": "(Required) The ID of the prompt version."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39cd78f6-52ce-409b-9c97-ad9bc68516d0",
+              "name": "A list of tags associated with the prompt version",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"id\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"id\": \"string\",\n      \"description\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ae8c8c2-c1c0-4a83-8cdc-4b39e598a4cd",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a4bc289c-4a64-43fe-8ad8-eda53fa8d921",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cc16f829-1fbd-4d35-a990-c0ba19a69204",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b76ebbd-c3cf-4e88-a82a-c1726c63618e",
+          "name": "Add tag to prompt version",
+          "request": {
+            "name": "Add tag to prompt version",
+            "description": {
+              "content": "Add a new tag to a specific prompt version. Tags help identify and categorize different versions of a prompt.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prompt_versions",
+                ":prompt_version_id",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prompt_version_id",
+                  "description": "(Required) The ID of the prompt version."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "13a8b2a1-d661-4433-ad94-f2f8c0989a9e",
+              "name": "No content returned on successful tag creation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f06c083-f9cf-4d4e-a93a-f6bf2e0a1307",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c36f391-362b-4f24-8d34-8e555f2884d2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bb27e7fd-cbed-4837-95d0-9dc62114c679",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "937bb2a1-33ac-44d8-87ea-262c2df62e53",
+          "name": "Delete a tag from a prompt version",
+          "request": {
+            "name": "Delete a tag from a prompt version",
+            "description": {
+              "content": "Delete a tag from a specific prompt version by tag name. The tag is resolved within the scope of the prompt linked to the version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prompt_versions",
+                ":prompt_version_id",
+                "tags",
+                ":tag_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prompt_version_id",
+                  "description": "(Required) The ID of the prompt version."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The name of the tag to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2693daa-ee6b-4806-b48b-eda233de3a5a",
+              "name": "No content returned on successful tag deletion",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id",
+                    "tags",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The name of the tag to delete."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0361fb08-3563-4234-96c8-d4c577800cdb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id",
+                    "tags",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The name of the tag to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b5449d68-0dd6-46f8-a2c2-1f268228f27f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id",
+                    "tags",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The name of the tag to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "824f33f2-4db3-4aea-b05a-20e0f46c487f",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt_versions",
+                    ":prompt_version_id",
+                    "tags",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_version_id",
+                      "description": "(Required) The ID of the prompt version."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The name of the tag to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7075adad-a41e-4a1d-ac98-128ebe1177f8",
+          "name": "Delete a prompt",
+          "request": {
+            "name": "Delete a prompt",
+            "description": {
+              "content": "Delete a prompt and all its versions, tags, and labels by identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prompts",
+                ":prompt_identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prompt_identifier",
+                  "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03527319-ae50-49b2-9605-5e88caa36ed3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ddb2dc92-9923-4b50-bcd8-6737d4ebf3f5",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "51f29b01-4acd-4d75-8502-1ce94e5d7acc",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "86dd7304-e49e-4f7b-9262-2605cc52520b",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompts",
+                    ":prompt_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_identifier",
+                      "description": "(Required) The identifier of the prompt, i.e. name or ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8514dbfb-017e-49c5-961e-887c43f2e8db",
+    "name": "Arize-Phoenix REST annotation_configs prompts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Schema for Arize-Phoenix REST API",
+      "type": "text/plain"
+    }
+  }
+}

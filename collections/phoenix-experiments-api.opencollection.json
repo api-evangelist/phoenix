@@ -1,0 +1,303 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arize-Phoenix REST annotation_configs experiments API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "experiments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List experiments by dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/datasets/:dataset_id/experiments",
+            "params": [
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination (base64-encoded experiment ID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The max number of experiments to return at a time."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of experiments for the specified dataset."
+        },
+        {
+          "info": {
+            "name": "Create experiment on a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/datasets/:dataset_id/experiments",
+            "params": [
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create experiment on a dataset"
+        },
+        {
+          "info": {
+            "name": "Get experiment by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/experiments/:experiment_id",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get experiment by ID"
+        },
+        {
+          "info": {
+            "name": "Update an experiment by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/experiments/:experiment_id",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update an experiment's name, description, and/or metadata. Only the fields included in the request body are changed; omitted fields are left as-is. Patching an ephemeral experiment refreshes its last-update timestamp, which extends the window before it is swept away."
+        },
+        {
+          "info": {
+            "name": "Delete experiment by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/experiments/:experiment_id",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "delete_project",
+                "value": "",
+                "type": "query",
+                "description": "If true, also delete the project associated with the experiment that contains traces and spans for the experiment tasks."
+              }
+            ]
+          },
+          "docs": "Delete experiment by ID"
+        },
+        {
+          "info": {
+            "name": "Get incomplete runs for an experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/experiments/:experiment_id/incomplete-runs",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of examples with incomplete runs to return"
+              }
+            ]
+          },
+          "docs": "Get runs that need to be completed for this experiment.\n\nReturns all incomplete runs, including both missing runs (not yet attempted)\nand failed runs (attempted but have errors).\n\nArgs:\n    experiment_id: The ID of the experiment\n    cursor: Cursor for pagination\n    limit: Maximum number of results to return\n\nReturns:\n    Paginated list of incomplete runs grouped by dataset example,\n    with repetition numbers that need to be run"
+        },
+        {
+          "info": {
+            "name": "Download experiment runs as a JSON file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/experiments/:experiment_id/json",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download experiment runs as a JSON file"
+        },
+        {
+          "info": {
+            "name": "Download experiment runs as a CSV file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/experiments/:experiment_id/csv",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download experiment runs as a CSV file"
+        },
+        {
+          "info": {
+            "name": "List runs for an experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/experiments/:experiment_id/runs",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination (base64-encoded experiment run ID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The max number of experiment runs to return at a time. If not specified, returns all results."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of runs for an experiment"
+        },
+        {
+          "info": {
+            "name": "Create run for an experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/experiments/:experiment_id/runs",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create run for an experiment"
+        },
+        {
+          "info": {
+            "name": "Get incomplete evaluations for an experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/experiments/:experiment_id/incomplete-evaluations",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "evaluation_name",
+                "value": "",
+                "type": "query",
+                "description": "Evaluation names to check"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of runs with incomplete evaluations to return"
+              }
+            ]
+          },
+          "docs": "Get experiment runs that have incomplete evaluations.\n\nReturns runs with:\n- Missing evaluations (evaluator has not been run)\n- Failed evaluations (evaluator ran but has errors)\n\nArgs:\n    experiment_id: The ID of the experiment\n    evaluation_name: List of evaluation names to check (required, at least one)\n    cursor: Cursor for pagination\n    limit: Maximum number of results to return\n\nReturns:\n    Paginated list of runs with incomplete evaluations"
+        },
+        {
+          "info": {
+            "name": "Create or update evaluation for an experiment run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/experiment_evaluations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update evaluation for an experiment run"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

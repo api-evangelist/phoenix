@@ -1,0 +1,272 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arize-Phoenix REST annotation_configs datasets API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/datasets",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "An optional dataset name to filter by"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The max number of datasets to return at a time."
+              }
+            ]
+          },
+          "docs": "List datasets"
+        },
+        {
+          "info": {
+            "name": "Get dataset by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/datasets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dataset"
+              }
+            ]
+          },
+          "docs": "Get dataset by ID"
+        },
+        {
+          "info": {
+            "name": "Delete dataset by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/datasets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dataset to delete."
+              }
+            ]
+          },
+          "docs": "Delete dataset by ID"
+        },
+        {
+          "info": {
+            "name": "List dataset versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/datasets/:id/versions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dataset"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The max number of dataset versions to return at a time"
+              }
+            ]
+          },
+          "docs": "List dataset versions"
+        },
+        {
+          "info": {
+            "name": "Upload dataset from JSON, JSONL, CSV, or PyArrow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/datasets/upload",
+            "params": [
+              {
+                "name": "sync",
+                "value": "",
+                "type": "query",
+                "description": "If true, fulfill request synchronously and return JSON containing dataset_id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload dataset from JSON, JSONL, CSV, or PyArrow"
+        },
+        {
+          "info": {
+            "name": "Get examples from a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/datasets/:id/examples",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dataset"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the dataset version (if omitted, returns data from the latest version)"
+              },
+              {
+                "name": "split",
+                "value": "",
+                "type": "query",
+                "description": "List of dataset split identifiers (GlobalIDs or names) to filter by"
+              }
+            ]
+          },
+          "docs": "Get examples from a dataset"
+        },
+        {
+          "info": {
+            "name": "Download dataset examples as CSV file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/datasets/:id/csv",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dataset"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the dataset version (if omitted, returns data from the latest version)"
+              }
+            ]
+          },
+          "docs": "Download dataset examples as CSV file"
+        },
+        {
+          "info": {
+            "name": "Download dataset examples as JSONL file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/datasets/:id/jsonl",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dataset"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the dataset version (if omitted, returns data from the latest version)"
+              }
+            ]
+          },
+          "docs": "Download dataset examples as JSONL file"
+        },
+        {
+          "info": {
+            "name": "Download dataset examples as OpenAI fine-tuning JSONL file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/datasets/:id/jsonl/openai_ft",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dataset"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the dataset version (if omitted, returns data from the latest version)"
+              }
+            ]
+          },
+          "docs": "Download dataset examples as OpenAI fine-tuning JSONL file"
+        },
+        {
+          "info": {
+            "name": "Download dataset examples as OpenAI evals JSONL file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/datasets/:id/jsonl/openai_evals",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dataset"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the dataset version (if omitted, returns data from the latest version)"
+              }
+            ]
+          },
+          "docs": "Download dataset examples as OpenAI evals JSONL file"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

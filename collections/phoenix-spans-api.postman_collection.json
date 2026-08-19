@@ -1,0 +1,2394 @@
+{
+  "item": [
+    {
+      "id": "963e1d40-dbc5-4d9f-b804-64312d714270",
+      "name": "spans",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "78ccbe61-3e63-41ee-817c-9d26d2d92182",
+          "name": "Search spans with simple filters (no DSL)",
+          "request": {
+            "name": "Search spans with simple filters (no DSL)",
+            "description": {
+              "content": "Return spans within a project filtered by time range. Supports cursor-based pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":project_identifier",
+                "spans",
+                "otlpv1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor (Span Global ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of spans to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<dateTime>",
+                  "description": "Inclusive lower bound time"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<dateTime>",
+                  "description": "Exclusive upper bound time"
+                },
+                {
+                  "disabled": false,
+                  "key": "trace_id",
+                  "value": "<string>",
+                  "description": "Filter by one or more trace IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "trace_id",
+                  "value": "<string>",
+                  "description": "Filter by one or more trace IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "parent_id",
+                  "value": "<string>",
+                  "description": "Filter by parent span ID. Use \"null\" to get root spans only."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter by span name(s)"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter by span name(s)"
+                },
+                {
+                  "disabled": false,
+                  "key": "status_code",
+                  "value": "<string>",
+                  "description": "Filter by status code(s). Values: OK, ERROR, UNSET"
+                },
+                {
+                  "disabled": false,
+                  "key": "status_code",
+                  "value": "<string>",
+                  "description": "Filter by status code(s). Values: OK, ERROR, UNSET"
+                },
+                {
+                  "disabled": false,
+                  "key": "attribute",
+                  "value": "<string>",
+                  "description": "Filter spans by `key:value`. Key is a dot-path (e.g. `user.id`, `metadata.tier`). Value is JSON-parsed: `k:12345` is int, `k:true` is bool, otherwise string (`k:user-42`). To match a numeric- or boolean-looking STRING, JSON-quote it: `user.id:\"12345\"` (URL-encoded `%2212345%22`). Split is on the first `:` only, so values may contain colons (`session.id:sess:abc:123`, ISO timestamps). Repeat the param to AND filters. List-valued attributes (e.g. `tag.tags`) cannot be matched here. Returns 422 on malformed input (missing colon, empty key/value, or list/dict/null value)."
+                },
+                {
+                  "disabled": false,
+                  "key": "attribute",
+                  "value": "<string>",
+                  "description": "Filter spans by `key:value`. Key is a dot-path (e.g. `user.id`, `metadata.tier`). Value is JSON-parsed: `k:12345` is int, `k:true` is bool, otherwise string (`k:user-42`). To match a numeric- or boolean-looking STRING, JSON-quote it: `user.id:\"12345\"` (URL-encoded `%2212345%22`). Split is on the first `:` only, so values may contain colons (`session.id:sess:abc:123`, ISO timestamps). Repeat the param to AND filters. List-valued attributes (e.g. `tag.tags`) cannot be matched here. Returns 422 on malformed input (missing colon, empty key/value, or list/dict/null value)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_identifier",
+                  "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8dcaa23c-f7ab-405e-adfc-8d9c843b80c9",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "spans",
+                    "otlpv1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"attributes\": [\n        {\n          \"key\": \"string\",\n          \"value\": {\n            \"array_value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"bool_value\": false,\n            \"bytes_value\": \"=\",\n            \"double_value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"int_value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"kvlist_value\": null,\n            \"string_value\": \"string\"\n          }\n        },\n        {\n          \"key\": \"string\",\n          \"value\": {\n            \"array_value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"bool_value\": false,\n            \"bytes_value\": \"za==\",\n            \"double_value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"int_value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"kvlist_value\": null,\n            \"string_value\": \"string\"\n          }\n        }\n      ],\n      \"dropped_attributes_count\": 607155257,\n      \"dropped_events_count\": 2059806188,\n      \"dropped_links_count\": 359055987,\n      \"end_time_unix_nano\": 1166991580352512,\n      \"events\": [\n        {\n          \"attributes\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"dropped_attributes_count\": 3321261722,\n          \"name\": \"string\",\n          \"time_unix_nano\": 2058815021615702000\n        },\n        {\n          \"attributes\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"dropped_attributes_count\": 1893515416,\n          \"name\": \"string\",\n          \"time_unix_nano\": 11813216021435340000\n        }\n      ],\n      \"flags\": 2069182411,\n      \"kind\": \"SPAN_KIND_PRODUCER\",\n      \"links\": null,\n      \"name\": \"string\",\n      \"parent_span_id\": \"0wJCDqpy8==\",\n      \"span_id\": \"NaPw7b=\",\n      \"start_time_unix_nano\": 601083868626925600,\n      \"status\": {\n        \"code\": 2115100795,\n        \"message\": \"string\"\n      },\n      \"trace_id\": \"sNetNB=\",\n      \"trace_state\": \"string\"\n    },\n    {\n      \"attributes\": [\n        {\n          \"key\": \"string\",\n          \"value\": {\n            \"array_value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"bool_value\": true,\n            \"bytes_value\": \"j==\",\n            \"double_value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"int_value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"kvlist_value\": null,\n            \"string_value\": \"string\"\n          }\n        },\n        {\n          \"key\": \"string\",\n          \"value\": {\n            \"array_value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"bool_value\": true,\n            \"bytes_value\": \"dBAYNvP\",\n            \"double_value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"int_value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"kvlist_value\": null,\n            \"string_value\": \"string\"\n          }\n        }\n      ],\n      \"dropped_attributes_count\": 2609685771,\n      \"dropped_events_count\": 639525415,\n      \"dropped_links_count\": 2354962460,\n      \"end_time_unix_nano\": 13418667660128290000,\n      \"events\": [\n        {\n          \"attributes\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"dropped_attributes_count\": 3050288707,\n          \"name\": \"string\",\n          \"time_unix_nano\": 5300004140230074000\n        },\n        {\n          \"attributes\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"dropped_attributes_count\": 337399274,\n          \"name\": \"string\",\n          \"time_unix_nano\": 17299124665914671000\n        }\n      ],\n      \"flags\": 192117960,\n      \"kind\": \"SPAN_KIND_UNSPECIFIED\",\n      \"links\": null,\n      \"name\": \"string\",\n      \"parent_span_id\": \"gxRWLq=\",\n      \"span_id\": \"DOuPqahS==\",\n      \"start_time_unix_nano\": 13669974476397263000,\n      \"status\": {\n        \"code\": -35031686,\n        \"message\": \"string\"\n      },\n      \"trace_id\": \"ASDYlA8==\",\n      \"trace_state\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f255ae0c-1278-4f1b-ad0e-e361a3c451e1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "spans",
+                    "otlpv1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f6f94c58-03f0-44de-9197-4025cebf691f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "spans",
+                    "otlpv1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2641fd5e-f3cc-40c4-b9f1-6941899e4650",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "spans",
+                    "otlpv1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89c0d305-5c14-41bd-af1c-20d03b0ee79d",
+          "name": "List spans with simple filters (no DSL)",
+          "request": {
+            "name": "List spans with simple filters (no DSL)",
+            "description": {
+              "content": "Return spans within a project filtered by time range. Supports cursor-based pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":project_identifier",
+                "spans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor (Span Global ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of spans to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<dateTime>",
+                  "description": "Inclusive lower bound time"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<dateTime>",
+                  "description": "Exclusive upper bound time"
+                },
+                {
+                  "disabled": false,
+                  "key": "trace_id",
+                  "value": "<string>",
+                  "description": "Filter by one or more trace IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "trace_id",
+                  "value": "<string>",
+                  "description": "Filter by one or more trace IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "parent_id",
+                  "value": "<string>",
+                  "description": "Filter by parent span ID. Use \"null\" to get root spans only."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter by span name(s)"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter by span name(s)"
+                },
+                {
+                  "disabled": false,
+                  "key": "span_kind",
+                  "value": "<string>",
+                  "description": "Filter by span kind(s). Values: LLM, CHAIN, TOOL, RETRIEVER, EMBEDDING, AGENT, RERANKER, GUARDRAIL, EVALUATOR, UNKNOWN"
+                },
+                {
+                  "disabled": false,
+                  "key": "span_kind",
+                  "value": "<string>",
+                  "description": "Filter by span kind(s). Values: LLM, CHAIN, TOOL, RETRIEVER, EMBEDDING, AGENT, RERANKER, GUARDRAIL, EVALUATOR, UNKNOWN"
+                },
+                {
+                  "disabled": false,
+                  "key": "status_code",
+                  "value": "<string>",
+                  "description": "Filter by status code(s). Values: OK, ERROR, UNSET"
+                },
+                {
+                  "disabled": false,
+                  "key": "status_code",
+                  "value": "<string>",
+                  "description": "Filter by status code(s). Values: OK, ERROR, UNSET"
+                },
+                {
+                  "disabled": false,
+                  "key": "attribute",
+                  "value": "<string>",
+                  "description": "Filter spans by `key:value`. Key is a dot-path (e.g. `user.id`, `metadata.tier`). Value is JSON-parsed: `k:12345` is int, `k:true` is bool, otherwise string (`k:user-42`). To match a numeric- or boolean-looking STRING, JSON-quote it: `user.id:\"12345\"` (URL-encoded `%2212345%22`). Split is on the first `:` only, so values may contain colons (`session.id:sess:abc:123`, ISO timestamps). Repeat the param to AND filters. List-valued attributes (e.g. `tag.tags`) cannot be matched here. Returns 422 on malformed input (missing colon, empty key/value, or list/dict/null value)."
+                },
+                {
+                  "disabled": false,
+                  "key": "attribute",
+                  "value": "<string>",
+                  "description": "Filter spans by `key:value`. Key is a dot-path (e.g. `user.id`, `metadata.tier`). Value is JSON-parsed: `k:12345` is int, `k:true` is bool, otherwise string (`k:user-42`). To match a numeric- or boolean-looking STRING, JSON-quote it: `user.id:\"12345\"` (URL-encoded `%2212345%22`). Split is on the first `:` only, so values may contain colons (`session.id:sess:abc:123`, ISO timestamps). Repeat the param to AND filters. List-valued attributes (e.g. `tag.tags`) cannot be matched here. Returns 422 on malformed input (missing colon, empty key/value, or list/dict/null value)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_identifier",
+                  "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc28f007-a8a0-419f-ae0d-ac85ee20ac05",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "spans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "span_kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "span_kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"string\",\n      \"context\": {\n        \"trace_id\": \"string\",\n        \"span_id\": \"string\"\n      },\n      \"span_kind\": \"string\",\n      \"start_time\": \"2007-12-24T04:31:06.255Z\",\n      \"end_time\": \"1987-10-21T20:41:06.355Z\",\n      \"status_code\": \"string\",\n      \"id\": \"\",\n      \"parent_id\": \"string\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": \"string\"\n      },\n      \"events\": [\n        {\n          \"name\": \"string\",\n          \"timestamp\": \"1961-01-14T11:28:58.187Z\",\n          \"attributes\": {\n            \"key_0\": true\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"timestamp\": \"1965-04-24T17:43:39.200Z\",\n          \"attributes\": {\n            \"key_0\": \"string\",\n            \"key_1\": true\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"context\": {\n        \"trace_id\": \"string\",\n        \"span_id\": \"string\"\n      },\n      \"span_kind\": \"string\",\n      \"start_time\": \"2019-10-20T01:21:33.554Z\",\n      \"end_time\": \"1959-06-04T15:33:22.006Z\",\n      \"status_code\": \"string\",\n      \"id\": \"\",\n      \"parent_id\": \"string\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": 2076\n      },\n      \"events\": [\n        {\n          \"name\": \"string\",\n          \"timestamp\": \"1980-03-16T04:15:44.389Z\",\n          \"attributes\": {\n            \"key_0\": true,\n            \"key_1\": false\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"timestamp\": \"1960-08-03T09:06:35.569Z\",\n          \"attributes\": {\n            \"key_0\": \"string\",\n            \"key_1\": true,\n            \"key_2\": 3736.561584064161\n          }\n        }\n      ]\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e9d5941-5f67-426f-8239-4d7d18aad8a7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "spans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "span_kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "span_kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7a722e54-717c-44b2-babf-41317a74a04d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "spans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "span_kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "span_kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "34f44d5c-c515-4470-a48e-ffb9290d7be7",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "spans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "span_kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "span_kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a70f0fdd-5492-411d-bc78-bb152577ba97",
+          "name": "Create spans",
+          "request": {
+            "name": "Create spans",
+            "description": {
+              "content": "Submit spans to be inserted into a project. If any spans are invalid or duplicates, no spans will be inserted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":project_identifier",
+                "spans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_identifier",
+                  "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": {\n        \"trace_id\": \"<string>\",\n        \"span_id\": \"<string>\"\n      },\n      \"span_kind\": \"<string>\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"status_code\": \"<string>\",\n      \"id\": \"\",\n      \"parent_id\": \"<string>\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": true,\n        \"key_1\": \"string\",\n        \"key_2\": false\n      },\n      \"events\": [\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": 7780.443764521623,\n            \"key_1\": \"string\",\n            \"key_2\": 1246.1141415406973\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": \"string\"\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": {\n        \"trace_id\": \"<string>\",\n        \"span_id\": \"<string>\"\n      },\n      \"span_kind\": \"<string>\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"status_code\": \"<string>\",\n      \"id\": \"\",\n      \"parent_id\": \"<string>\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"events\": [\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": 5033,\n            \"key_1\": \"string\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": 1662.862960754332\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f295a943-e711-4cdf-ae13-0492acb0d71f",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "spans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": {\n        \"trace_id\": \"<string>\",\n        \"span_id\": \"<string>\"\n      },\n      \"span_kind\": \"<string>\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"status_code\": \"<string>\",\n      \"id\": \"\",\n      \"parent_id\": \"<string>\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": 3123.83487590276,\n        \"key_1\": \"string\"\n      },\n      \"events\": [\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": \"string\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": 6681,\n            \"key_1\": 2184.8219080066388\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": {\n        \"trace_id\": \"<string>\",\n        \"span_id\": \"<string>\"\n      },\n      \"span_kind\": \"<string>\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"status_code\": \"<string>\",\n      \"id\": \"\",\n      \"parent_id\": \"<string>\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": 3305\n      },\n      \"events\": [\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": 9856,\n            \"key_1\": \"string\",\n            \"key_2\": 607,\n            \"key_3\": true\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": \"string\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_received\": 9974,\n  \"total_queued\": 9725\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cce3abf6-300b-40b9-8487-7787ac693f93",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "spans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": {\n        \"trace_id\": \"<string>\",\n        \"span_id\": \"<string>\"\n      },\n      \"span_kind\": \"<string>\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"status_code\": \"<string>\",\n      \"id\": \"\",\n      \"parent_id\": \"<string>\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": 3123.83487590276,\n        \"key_1\": \"string\"\n      },\n      \"events\": [\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": \"string\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": 6681,\n            \"key_1\": 2184.8219080066388\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": {\n        \"trace_id\": \"<string>\",\n        \"span_id\": \"<string>\"\n      },\n      \"span_kind\": \"<string>\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"status_code\": \"<string>\",\n      \"id\": \"\",\n      \"parent_id\": \"<string>\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": 3305\n      },\n      \"events\": [\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": 9856,\n            \"key_1\": \"string\",\n            \"key_2\": 607,\n            \"key_3\": true\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": \"string\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ac0f9fc8-7750-4aef-914c-a33e479ee2e3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "spans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": {\n        \"trace_id\": \"<string>\",\n        \"span_id\": \"<string>\"\n      },\n      \"span_kind\": \"<string>\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"status_code\": \"<string>\",\n      \"id\": \"\",\n      \"parent_id\": \"<string>\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": 3123.83487590276,\n        \"key_1\": \"string\"\n      },\n      \"events\": [\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": \"string\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": 6681,\n            \"key_1\": 2184.8219080066388\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": {\n        \"trace_id\": \"<string>\",\n        \"span_id\": \"<string>\"\n      },\n      \"span_kind\": \"<string>\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"status_code\": \"<string>\",\n      \"id\": \"\",\n      \"parent_id\": \"<string>\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": 3305\n      },\n      \"events\": [\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": 9856,\n            \"key_1\": \"string\",\n            \"key_2\": 607,\n            \"key_3\": true\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": \"string\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d4ab4ba6-30f8-4673-8085-6dfee121daf5",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "spans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": {\n        \"trace_id\": \"<string>\",\n        \"span_id\": \"<string>\"\n      },\n      \"span_kind\": \"<string>\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"status_code\": \"<string>\",\n      \"id\": \"\",\n      \"parent_id\": \"<string>\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": 3123.83487590276,\n        \"key_1\": \"string\"\n      },\n      \"events\": [\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": \"string\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": 6681,\n            \"key_1\": 2184.8219080066388\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": {\n        \"trace_id\": \"<string>\",\n        \"span_id\": \"<string>\"\n      },\n      \"span_kind\": \"<string>\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"status_code\": \"<string>\",\n      \"id\": \"\",\n      \"parent_id\": \"<string>\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": 3305\n      },\n      \"events\": [\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": 9856,\n            \"key_1\": \"string\",\n            \"key_2\": 607,\n            \"key_3\": true\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": \"string\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "89d1ae81-18ee-4881-920b-a679ec48b93e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "spans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": {\n        \"trace_id\": \"<string>\",\n        \"span_id\": \"<string>\"\n      },\n      \"span_kind\": \"<string>\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"status_code\": \"<string>\",\n      \"id\": \"\",\n      \"parent_id\": \"<string>\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": 3123.83487590276,\n        \"key_1\": \"string\"\n      },\n      \"events\": [\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": \"string\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": 6681,\n            \"key_1\": 2184.8219080066388\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": {\n        \"trace_id\": \"<string>\",\n        \"span_id\": \"<string>\"\n      },\n      \"span_kind\": \"<string>\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"status_code\": \"<string>\",\n      \"id\": \"\",\n      \"parent_id\": \"<string>\",\n      \"status_message\": \"\",\n      \"attributes\": {\n        \"key_0\": 3305\n      },\n      \"events\": [\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": 9856,\n            \"key_1\": \"string\",\n            \"key_2\": 607,\n            \"key_3\": true\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"timestamp\": \"<dateTime>\",\n          \"attributes\": {\n            \"key_0\": \"string\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "144f1dec-b61d-45de-9c2f-5aabf4dd9cd9",
+          "name": "Create span annotations",
+          "request": {
+            "name": "Create span annotations",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "span_annotations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sync",
+                  "value": "false",
+                  "description": "If true, fulfill request synchronously."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 2399.5239271937953\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "65368769-f25f-4e70-ada5-42358b17dd7c",
+              "name": "Span annotations inserted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "span_annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 9862,\n        \"key_1\": 8711\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 5445.567335490899\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\"\n    },\n    {\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1e10663-e48b-4a0c-b11a-e6bf969a1e8f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "span_annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 9862,\n        \"key_1\": 8711\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 5445.567335490899\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "be51136c-b5b0-4091-9c27-08eabe8e7465",
+              "name": "Span not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "span_annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 9862,\n        \"key_1\": 8711\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 5445.567335490899\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "85e1f5c7-b498-4832-a568-6599593b8fad",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "span_annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 9862,\n        \"key_1\": 8711\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 5445.567335490899\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c641e78a-528a-49e6-86fa-b417c9e1f6cf",
+          "name": "Create a span note",
+          "request": {
+            "name": "Create a span note",
+            "description": {
+              "content": "Add a note annotation to a span. By default each call appends a new note with an auto-generated UUIDv4 identifier, so multiple notes accumulate on the same span. Callers may supply a non-empty `identifier` to upsert on (span_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note, matching the semantics of structured annotations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "span_notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"span_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"identifier\": \"\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4150c64d-dea3-454e-80e2-9321b1e1b0a0",
+              "name": "Span note created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "span_notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"span_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"identifier\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7ee8409-251e-4f7a-80ff-a2781b2eaf2a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "span_notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"span_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"identifier\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3cf0453-1dd7-4702-a453-ed9b5294dc5f",
+              "name": "Span not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "span_notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"span_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"identifier\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a0ec364c-5b82-47ab-80bf-741c5179430f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "span_notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"span_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"identifier\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31998719-8c82-4f39-b23e-92dfcbbaf3de",
+          "name": "Delete a span by span_identifier",
+          "request": {
+            "name": "Delete a span by span_identifier",
+            "description": {
+              "content": "Delete a single span by identifier.\n\n        **Important**: This operation deletes ONLY the specified span itself and does NOT\n        delete its descendants/children. All child spans will remain in the trace and\n        become orphaned (their parent_id will point to a non-existent span).\n\n        Behavior:\n        - Deletes only the target span (preserves all descendant spans)\n        - If this was the last span in the trace, the trace record is also deleted\n        - If the deleted span had a parent, its cumulative metrics (error count, token counts)\n          are subtracted from all ancestor spans in the chain\n\n        **Note**: This operation is irreversible and may create orphaned spans.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "spans",
+                ":span_identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "span_identifier",
+                  "description": "(Required) The span identifier: either a relay GlobalID or OpenTelemetry span_id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f35d7db-1833-4c1d-9403-379cfcccfbf2",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "spans",
+                    ":span_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "span_identifier",
+                      "description": "(Required) The span identifier: either a relay GlobalID or OpenTelemetry span_id"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "12e57fbe-d985-4e3a-8fef-30d314b29378",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "spans",
+                    ":span_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "span_identifier",
+                      "description": "(Required) The span identifier: either a relay GlobalID or OpenTelemetry span_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1c9aee9a-db6f-47b8-98f9-3975f4e53913",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "spans",
+                    ":span_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "span_identifier",
+                      "description": "(Required) The span identifier: either a relay GlobalID or OpenTelemetry span_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bfe4f483-4036-45dd-9eb4-beea00a6a435",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "spans",
+                    ":span_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "span_identifier",
+                      "description": "(Required) The span identifier: either a relay GlobalID or OpenTelemetry span_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "741f2689-f800-46aa-8c27-aca234a1820e",
+          "name": "Annotate Span Documents",
+          "request": {
+            "name": "Annotate Span Documents",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "document_annotations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sync",
+                  "value": "false",
+                  "description": "If set to true, the annotations are inserted synchronously."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"document_position\": \"<integer>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 1115,\n        \"key_1\": 9785.14652775909\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"document_position\": \"<integer>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": false,\n        \"key_1\": 3055.936705979608\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "503d6132-3ebd-42ad-8202-6a1f1d4546bc",
+              "name": "Span document annotation inserted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "document_annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"document_position\": \"<integer>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 4594.389714604934\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"document_position\": \"<integer>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 7216.604147890372\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\"\n    },\n    {\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9f0353a-c8c1-49cf-982d-c4805c05af00",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "document_annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"document_position\": \"<integer>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 4594.389714604934\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"document_position\": \"<integer>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 7216.604147890372\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "33b87ca1-e61d-418c-999d-b42d48cefc2c",
+              "name": "Span not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "document_annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"document_position\": \"<integer>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 4594.389714604934\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"document_position\": \"<integer>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 7216.604147890372\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "12342c4b-91e5-4af4-9d01-3d3943963be1",
+              "name": "Invalid request - non-empty identifier not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "document_annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"document_position\": \"<integer>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 4594.389714604934\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"document_position\": \"<integer>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 7216.604147890372\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "dc677e32-c26f-4732-866d-b96d6593d14a",
+    "name": "Arize-Phoenix REST annotation_configs spans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Schema for Arize-Phoenix REST API",
+      "type": "text/plain"
+    }
+  }
+}

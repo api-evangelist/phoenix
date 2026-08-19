@@ -1,0 +1,1155 @@
+{
+  "item": [
+    {
+      "id": "090c7882-6ad8-4ab7-92ea-f785d3c0706d",
+      "name": "traces",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c04504ba-d27a-4af2-9a83-af5719110ec1",
+          "name": "List traces for a project",
+          "request": {
+            "name": "List traces for a project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":project_identifier",
+                "traces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<dateTime>",
+                  "description": "Inclusive lower bound on trace start time (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<dateTime>",
+                  "description": "Exclusive upper bound on trace start time (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "start_time",
+                  "description": "Sort field"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "desc",
+                  "description": "Sort direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of traces to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor (Trace GlobalID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_spans",
+                  "value": "false",
+                  "description": "If true, include full span details for each trace. This significantly increases response size and query latency, especially with large page sizes. Prefer fetching spans lazily for individual traces when possible."
+                },
+                {
+                  "disabled": false,
+                  "key": "session_identifier",
+                  "value": "<string>",
+                  "description": "List of session identifiers to filter traces by. Each value can be either a session_id string or a session GlobalID. Only traces belonging to the specified sessions will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "session_identifier",
+                  "value": "<string>",
+                  "description": "List of session identifiers to filter traces by. Each value can be either a session_id string or a session GlobalID. Only traces belonging to the specified sessions will be returned."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_identifier",
+                  "description": "(Required) The project identifier: either project ID or project name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c51490ec-4eed-4795-a710-8ddcc3acff0d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "start_time"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_spans",
+                      "value": "false"
+                    },
+                    {
+                      "key": "session_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session_identifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"trace_id\": \"string\",\n      \"project_id\": \"string\",\n      \"start_time\": \"1966-08-18T00:12:43.881Z\",\n      \"end_time\": \"1981-05-15T14:37:35.443Z\",\n      \"token_count_prompt\": 0,\n      \"token_count_completion\": 0,\n      \"token_count_total\": 0,\n      \"spans\": [\n        {\n          \"id\": \"string\",\n          \"span_id\": \"string\",\n          \"parent_id\": \"string\",\n          \"name\": \"string\",\n          \"span_kind\": \"string\",\n          \"status_code\": \"string\",\n          \"start_time\": \"1981-11-20T15:42:03.450Z\",\n          \"end_time\": \"1996-11-10T16:06:37.834Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"span_id\": \"string\",\n          \"parent_id\": \"string\",\n          \"name\": \"string\",\n          \"span_kind\": \"string\",\n          \"status_code\": \"string\",\n          \"start_time\": \"1992-11-11T12:04:32.310Z\",\n          \"end_time\": \"2023-02-20T02:50:15.768Z\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"trace_id\": \"string\",\n      \"project_id\": \"string\",\n      \"start_time\": \"1966-01-26T06:03:31.091Z\",\n      \"end_time\": \"2009-06-05T21:31:28.371Z\",\n      \"token_count_prompt\": 0,\n      \"token_count_completion\": 0,\n      \"token_count_total\": 0,\n      \"spans\": [\n        {\n          \"id\": \"string\",\n          \"span_id\": \"string\",\n          \"parent_id\": \"string\",\n          \"name\": \"string\",\n          \"span_kind\": \"string\",\n          \"status_code\": \"string\",\n          \"start_time\": \"1992-01-22T01:20:44.380Z\",\n          \"end_time\": \"1992-04-21T21:13:24.207Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"span_id\": \"string\",\n          \"parent_id\": \"string\",\n          \"name\": \"string\",\n          \"span_kind\": \"string\",\n          \"status_code\": \"string\",\n          \"start_time\": \"1964-09-05T02:55:42.956Z\",\n          \"end_time\": \"2015-09-10T12:02:39.550Z\"\n        }\n      ]\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e89c9fdf-5abe-427b-b6e3-ffc66584a31b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "start_time"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_spans",
+                      "value": "false"
+                    },
+                    {
+                      "key": "session_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session_identifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "56a13930-5908-407a-bdea-b9f823edddf3",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "start_time"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_spans",
+                      "value": "false"
+                    },
+                    {
+                      "key": "session_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session_identifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "caa3eeb1-a20b-42d3-9387-555669d49122",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":project_identifier",
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "start_time"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_spans",
+                      "value": "false"
+                    },
+                    {
+                      "key": "session_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session_identifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_identifier",
+                      "description": "(Required) The project identifier: either project ID or project name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "231a68f1-caab-4b86-936a-da3d72abf87c",
+          "name": "Create trace annotations",
+          "request": {
+            "name": "Create trace annotations",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "trace_annotations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sync",
+                  "value": "false",
+                  "description": "If true, fulfill request synchronously."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"trace_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 7871,\n        \"key_1\": \"string\"\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"trace_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": true\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d5f23aa6-74f8-45be-b8d0-54362752c05e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "trace_annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"trace_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 9256.978618961515,\n        \"key_1\": \"string\",\n        \"key_2\": 2646\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"trace_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": 4455\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\"\n    },\n    {\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3ad3a9d-1491-41a3-8a16-d93601706dea",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "trace_annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"trace_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 9256.978618961515,\n        \"key_1\": \"string\",\n        \"key_2\": 2646\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"trace_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": 4455\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "da6c5f5e-acde-40a7-9a1b-cf7ab2bab2b3",
+              "name": "Trace not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "trace_annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"trace_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 9256.978618961515,\n        \"key_1\": \"string\",\n        \"key_2\": 2646\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"trace_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": 4455\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "361e42d2-cb42-4321-a34b-bf38f401289d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "trace_annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"trace_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 9256.978618961515,\n        \"key_1\": \"string\",\n        \"key_2\": 2646\n      },\n      \"identifier\": \"\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"annotator_kind\": \"<string>\",\n      \"trace_id\": \"<string>\",\n      \"result\": {\n        \"label\": \"<string>\",\n        \"score\": \"<number>\",\n        \"explanation\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": 4455\n      },\n      \"identifier\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "678d811e-8dc2-45fd-8ca1-ec403a5a964f",
+          "name": "Create a trace note",
+          "request": {
+            "name": "Create a trace note",
+            "description": {
+              "content": "Add a note annotation to a trace. By default each call appends a new note with an auto-generated UUIDv4 identifier, so multiple notes accumulate on the same trace. Callers may supply a non-empty `identifier` to upsert on (trace_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note, matching the semantics of structured annotations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "trace_notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"trace_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"identifier\": \"\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b85705c6-2eac-49d3-b645-b41bffa78141",
+              "name": "Trace note created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "trace_notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"trace_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"identifier\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ede05a6a-5e17-46e0-b27b-12db6325b253",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "trace_notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"trace_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"identifier\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "edcb63cd-55be-4dc0-bfbd-a732d2cfb361",
+              "name": "Trace not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "trace_notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"trace_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"identifier\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "532f3bb4-d68a-4dc0-92af-5a7b6a81d548",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "trace_notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"trace_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"identifier\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3aee7b8-715e-413a-ba44-08eb9ae7fa50",
+          "name": "Delete a trace by identifier",
+          "request": {
+            "name": "Delete a trace by identifier",
+            "description": {
+              "content": "Delete an entire trace by its identifier. The identifier can be either:\n1. A Relay node ID (base64-encoded)\n2. An OpenTelemetry trace_id (hex string)\n\nThis will permanently remove all spans in the trace and their associated data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "traces",
+                ":trace_identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trace_identifier",
+                  "description": "(Required) The trace identifier: either a relay GlobalID or OpenTelemetry trace_id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0308e1ad-6cac-420e-93bb-ab519571dbec",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "traces",
+                    ":trace_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_identifier",
+                      "description": "(Required) The trace identifier: either a relay GlobalID or OpenTelemetry trace_id"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a392769b-a7a8-492f-aa0f-ee91d9efa1af",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "traces",
+                    ":trace_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_identifier",
+                      "description": "(Required) The trace identifier: either a relay GlobalID or OpenTelemetry trace_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f9187602-c119-4180-9d04-92949668da74",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "traces",
+                    ":trace_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_identifier",
+                      "description": "(Required) The trace identifier: either a relay GlobalID or OpenTelemetry trace_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1ea13702-437d-45d0-92b3-ef1fe039be2e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "traces",
+                    ":trace_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_identifier",
+                      "description": "(Required) The trace identifier: either a relay GlobalID or OpenTelemetry trace_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c041294a-1d1e-4245-aaef-9ec5fc66575c",
+    "name": "Arize-Phoenix REST annotation_configs traces API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Schema for Arize-Phoenix REST API",
+      "type": "text/plain"
+    }
+  }
+}

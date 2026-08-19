@@ -1,0 +1,250 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arize-Phoenix REST annotation_configs prompts API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "prompts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all prompts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/prompts",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination (base64-encoded prompt ID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The max number of prompts to return at a time."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of all prompts in the system. A prompt can have multiple versions."
+        },
+        {
+          "info": {
+            "name": "Create a new prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/prompts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new prompt and its initial version. A prompt can have multiple versions."
+        },
+        {
+          "info": {
+            "name": "List prompt versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/prompts/:prompt_identifier/versions",
+            "params": [
+              {
+                "name": "prompt_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the prompt, i.e. name or ID."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination (base64-encoded promptVersion ID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The max number of prompt versions to return at a time."
+              }
+            ]
+          },
+          "docs": "Retrieve all versions of a specific prompt with pagination support. Each prompt can have multiple versions with different configurations."
+        },
+        {
+          "info": {
+            "name": "Get prompt version by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/prompt_versions/:prompt_version_id",
+            "params": [
+              {
+                "name": "prompt_version_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the prompt version."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific prompt version using its unique identifier. A prompt version contains the actual template and configuration."
+        },
+        {
+          "info": {
+            "name": "Get prompt version by tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/prompts/:prompt_identifier/tags/:tag_name",
+            "params": [
+              {
+                "name": "prompt_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the prompt, i.e. name or ID."
+              },
+              {
+                "name": "tag_name",
+                "value": "",
+                "type": "path",
+                "description": "The tag of the prompt version"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific prompt version using its tag name. Tags are used to identify specific versions of a prompt."
+        },
+        {
+          "info": {
+            "name": "Get latest prompt version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/prompts/:prompt_identifier/latest",
+            "params": [
+              {
+                "name": "prompt_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the prompt, i.e. name or ID."
+              }
+            ]
+          },
+          "docs": "Retrieve the most recent version of a specific prompt."
+        },
+        {
+          "info": {
+            "name": "List prompt version tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/prompt_versions/:prompt_version_id/tags",
+            "params": [
+              {
+                "name": "prompt_version_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the prompt version."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination (base64-encoded promptVersionTag ID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The max number of tags to return at a time."
+              }
+            ]
+          },
+          "docs": "Retrieve all tags associated with a specific prompt version. Tags are used to identify and categorize different versions of a prompt."
+        },
+        {
+          "info": {
+            "name": "Add tag to prompt version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/prompt_versions/:prompt_version_id/tags",
+            "params": [
+              {
+                "name": "prompt_version_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the prompt version."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new tag to a specific prompt version. Tags help identify and categorize different versions of a prompt."
+        },
+        {
+          "info": {
+            "name": "Delete a tag from a prompt version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/prompt_versions/:prompt_version_id/tags/:tag_name",
+            "params": [
+              {
+                "name": "prompt_version_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the prompt version."
+              },
+              {
+                "name": "tag_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tag to delete."
+              }
+            ]
+          },
+          "docs": "Delete a tag from a specific prompt version by tag name. The tag is resolved within the scope of the prompt linked to the version."
+        },
+        {
+          "info": {
+            "name": "Delete a prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/prompts/:prompt_identifier",
+            "params": [
+              {
+                "name": "prompt_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the prompt, i.e. name or ID."
+              }
+            ]
+          },
+          "docs": "Delete a prompt and all its versions, tags, and labels by identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

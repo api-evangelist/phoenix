@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arize-Phoenix REST annotation_configs projects API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination (project ID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The max number of projects to return at a time."
+              },
+              {
+                "name": "include_experiment_projects",
+                "value": "",
+                "type": "query",
+                "description": "Include experiment projects in the response. Experiment projects are created from running experiments."
+              },
+              {
+                "name": "include_dataset_evaluator_projects",
+                "value": "",
+                "type": "query",
+                "description": "Include dataset evaluator projects in the response. Dataset evaluator projects are created when running experiments with persisted evaluators."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of all projects in the system."
+        },
+        {
+          "info": {
+            "name": "Create a new project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/projects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new project with the specified configuration."
+        },
+        {
+          "info": {
+            "name": "Get project by ID or name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/:project_identifier",
+            "params": [
+              {
+                "name": "project_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific project using its unique identifier: either project ID or project name. Note: When using a project name as the identifier, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+        },
+        {
+          "info": {
+            "name": "Update a project by ID or name",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/projects/:project_identifier",
+            "params": [
+              {
+                "name": "project_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing project with new configuration. Project names cannot be changed. The project identifier is either project ID or project name. Note: When using a project name as the identifier, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+        },
+        {
+          "info": {
+            "name": "Delete a project by ID or name",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/projects/:project_identifier",
+            "params": [
+              {
+                "name": "project_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The project identifier: either project ID or project name. If using a project name, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+              }
+            ]
+          },
+          "docs": "Delete an existing project and all its associated data. The project identifier is either project ID or project name. The default project cannot be deleted. Note: When using a project name as the identifier, it cannot contain slash (/), question mark (?), or pound sign (#) characters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

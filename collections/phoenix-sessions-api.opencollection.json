@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arize-Phoenix REST annotation_configs sessions API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get session by ID or session_id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/sessions/:session_identifier",
+            "params": [
+              {
+                "name": "session_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The session identifier: either a GlobalID or user-provided session_id string."
+              }
+            ]
+          },
+          "docs": "Get session by ID or session_id"
+        },
+        {
+          "info": {
+            "name": "Delete a session by identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/sessions/:session_identifier",
+            "params": [
+              {
+                "name": "session_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The session identifier: either a GlobalID or user-provided session_id string."
+              }
+            ]
+          },
+          "docs": "Delete a session by its identifier. The identifier can be either:\n1. A global ID (base64-encoded)\n2. A user-provided session_id string\n\nThis will permanently remove the session and all associated traces, spans, and annotations via cascade delete."
+        },
+        {
+          "info": {
+            "name": "Bulk delete sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/sessions/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete multiple sessions by their identifiers (GlobalIDs or session_id strings). All identifiers in a single request must be the same type. Non-existent IDs are silently skipped. All associated traces, spans, and annotations are cascade deleted."
+        },
+        {
+          "info": {
+            "name": "List sessions for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/:project_identifier/sessions",
+            "params": [
+              {
+                "name": "project_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The project identifier: either project ID or project name."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination (session ID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The max number of sessions to return at a time."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order by ID: 'asc' (ascending) or 'desc' (descending)."
+              }
+            ]
+          },
+          "docs": "List sessions for a project"
+        },
+        {
+          "info": {
+            "name": "Create session annotations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/session_annotations",
+            "params": [
+              {
+                "name": "sync",
+                "value": "",
+                "type": "query",
+                "description": "If true, fulfill request synchronously."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create session annotations"
+        },
+        {
+          "info": {
+            "name": "Create a session note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/session_notes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a note annotation to a session. By default each call appends a new note with an auto-generated UUIDv4 identifier, so multiple notes accumulate on the same session. Callers may supply a non-empty `identifier` to upsert on (session_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note, matching the semantics of structured annotations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
