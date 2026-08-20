@@ -36,6 +36,17 @@ tags:
   - Tracing
   - LLMOps
   - AI Monitoring
+  - Open-Source
+  - Prompt Engineering
+  - Datasets
+  - Experiments
+tags_raw:
+  - LLM Observability
+  - AI Evaluation
+  - OpenTelemetry
+  - Tracing
+  - LLMOps
+  - AI Monitoring
   - Open Source
   - Prompt Engineering
   - Datasets
@@ -46,7 +57,8 @@ apis:
   description: The annotation_configs API from Arize Phoenix — 3 operation(s) for annotation_configs.
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
-  tags:
+  tags: []
+  tags_raw:
   - annotation_configs
   properties:
   - type: OpenAPI
@@ -77,6 +89,8 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
+  - Annotations
+  tags_raw:
   - annotations
   properties:
   - type: OpenAPI
@@ -138,6 +152,8 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -168,6 +184,8 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
+  - Chat
+  tags_raw:
   - chat
   properties:
   - type: OpenAPI
@@ -198,6 +216,8 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
+  - Datasets
+  tags_raw:
   - datasets
   properties:
   - type: OpenAPI
@@ -228,6 +248,8 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
+  - Experiments
+  tags_raw:
   - experiments
   properties:
   - type: OpenAPI
@@ -288,6 +310,8 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
+  - Authentication
+  tags_raw:
   - Oauth2
   properties:
   - type: OpenAPI
@@ -318,6 +342,8 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
+  - Project
+  tags_raw:
   - projects
   properties:
   - type: OpenAPI
@@ -348,6 +374,8 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
+  - Prompts
+  tags_raw:
   - prompts
   properties:
   - type: OpenAPI
@@ -408,6 +436,8 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
+  - Secrets
+  tags_raw:
   - secrets
   properties:
   - type: OpenAPI
@@ -438,6 +468,8 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
+  - Sessions
+  tags_raw:
   - sessions
   properties:
   - type: OpenAPI
@@ -468,6 +500,8 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
+  - Spans
+  tags_raw:
   - spans
   properties:
   - type: OpenAPI
@@ -498,6 +532,8 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
+  - Traces
+  tags_raw:
   - traces
   properties:
   - type: OpenAPI
@@ -528,6 +564,8 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
