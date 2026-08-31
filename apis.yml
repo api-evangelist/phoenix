@@ -512,7 +512,7 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
-  - Spans
+  - spans
   tags_raw:
   - spans
   properties:
@@ -544,7 +544,7 @@ apis:
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
   tags:
-  - Traces
+  - traces
   tags_raw:
   - traces
   properties:
