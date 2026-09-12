@@ -41,6 +41,25 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "phoenix-annotation-configs-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-annotations-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-arize-phoenix-version-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-auth-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-chat-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-datasets-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-experiments-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-healthz-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-oauth2-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-projects-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-prompts-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-readyz-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-secrets-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-sessions-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-spans-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-traces-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "phoenix-users-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

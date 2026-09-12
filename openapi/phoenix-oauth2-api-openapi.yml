@@ -1,8 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Arize-Phoenix REST annotation_configs Oauth2 API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
+servers:
+- url: https://app.phoenix.arize.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
 - name: Oauth2
 paths:
@@ -23,8 +26,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Returnurl
       responses:
         '200':
@@ -56,8 +60,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Returnurl
       responses:
         '200':
@@ -96,22 +101,25 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Code
       - name: error
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Error
       - name: error_description
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Error Description
       - name: phoenix-oauth2-state
         in: cookie
@@ -129,8 +137,9 @@ paths:
         in: cookie
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Phoenix-Oauth2-Code-Verifier
       responses:
         '200':
@@ -148,6 +157,15 @@ paths:
       - Oauth2
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -174,12 +192,3 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError

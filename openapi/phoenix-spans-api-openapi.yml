@@ -1,8 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs spans API
+  title: Arize-Phoenix REST annotation_configs Spans API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
+servers:
+- url: https://app.phoenix.arize.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
 - name: spans
 paths:
@@ -26,8 +29,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Pagination cursor (Span Global ID)
           title: Cursor
         description: Pagination cursor (Span Global ID)
@@ -46,9 +50,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Inclusive lower bound time
           title: Start Time
         description: Inclusive lower bound time
@@ -56,9 +61,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Exclusive upper bound time
           title: End Time
         description: Exclusive upper bound time
@@ -66,10 +72,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Filter by one or more trace IDs
           title: Trace Id
         description: Filter by one or more trace IDs
@@ -77,8 +84,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Filter by parent span ID. Use "null" to get root spans only.
           title: Parent Id
         description: Filter by parent span ID. Use "null" to get root spans only.
@@ -86,10 +94,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Filter by span name(s)
           title: Name
         description: Filter by span name(s)
@@ -97,10 +106,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: 'Filter by status code(s). Values: OK, ERROR, UNSET'
           title: Status Code
         description: 'Filter by status code(s). Values: OK, ERROR, UNSET'
@@ -108,10 +118,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: 'Filter spans by `key:value`. Key is a dot-path (e.g. `user.id`, `metadata.tier`). Value is JSON-parsed: `k:12345` is int, `k:true` is bool, otherwise string (`k:user-42`). To match a numeric- or boolean-looking STRING, JSON-quote it: `user.id:"12345"` (URL-encoded `%2212345%22`). Split is on the first `:` only, so values may contain colons (`session.id:sess:abc:123`, ISO timestamps). Repeat the param to AND filters. List-valued attributes (e.g. `tag.tags`) cannot be matched here. Returns 422 on malformed input (missing colon, empty key/value, or list/dict/null value).'
           title: Attribute
         description: 'Filter spans by `key:value`. Key is a dot-path (e.g. `user.id`, `metadata.tier`). Value is JSON-parsed: `k:12345` is int, `k:true` is bool, otherwise string (`k:user-42`). To match a numeric- or boolean-looking STRING, JSON-quote it: `user.id:"12345"` (URL-encoded `%2212345%22`). Split is on the first `:` only, so values may contain colons (`session.id:sess:abc:123`, ISO timestamps). Repeat the param to AND filters. List-valued attributes (e.g. `tag.tags`) cannot be matched here. Returns 422 on malformed input (missing colon, empty key/value, or list/dict/null value).'
@@ -160,8 +171,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Pagination cursor (Span Global ID)
           title: Cursor
         description: Pagination cursor (Span Global ID)
@@ -180,9 +192,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Inclusive lower bound time
           title: Start Time
         description: Inclusive lower bound time
@@ -190,9 +203,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Exclusive upper bound time
           title: End Time
         description: Exclusive upper bound time
@@ -200,10 +214,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Filter by one or more trace IDs
           title: Trace Id
         description: Filter by one or more trace IDs
@@ -211,8 +226,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Filter by parent span ID. Use "null" to get root spans only.
           title: Parent Id
         description: Filter by parent span ID. Use "null" to get root spans only.
@@ -220,10 +236,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Filter by span name(s)
           title: Name
         description: Filter by span name(s)
@@ -231,10 +248,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: 'Filter by span kind(s). Values: LLM, CHAIN, TOOL, RETRIEVER, EMBEDDING, AGENT, RERANKER, GUARDRAIL, EVALUATOR, UNKNOWN'
           title: Span Kind
         description: 'Filter by span kind(s). Values: LLM, CHAIN, TOOL, RETRIEVER, EMBEDDING, AGENT, RERANKER, GUARDRAIL, EVALUATOR, UNKNOWN'
@@ -242,10 +260,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: 'Filter by status code(s). Values: OK, ERROR, UNSET'
           title: Status Code
         description: 'Filter by status code(s). Values: OK, ERROR, UNSET'
@@ -253,10 +272,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: 'Filter spans by `key:value`. Key is a dot-path (e.g. `user.id`, `metadata.tier`). Value is JSON-parsed: `k:12345` is int, `k:true` is bool, otherwise string (`k:user-42`). To match a numeric- or boolean-looking STRING, JSON-quote it: `user.id:"12345"` (URL-encoded `%2212345%22`). Split is on the first `:` only, so values may contain colons (`session.id:sess:abc:123`, ISO timestamps). Repeat the param to AND filters. List-valued attributes (e.g. `tag.tags`) cannot be matched here. Returns 422 on malformed input (missing colon, empty key/value, or list/dict/null value).'
           title: Attribute
         description: 'Filter spans by `key:value`. Key is a dot-path (e.g. `user.id`, `metadata.tier`). Value is JSON-parsed: `k:12345` is int, `k:true` is bool, otherwise string (`k:user-42`). To match a numeric- or boolean-looking STRING, JSON-quote it: `user.id:"12345"` (URL-encoded `%2212345%22`). Split is on the first `:` only, so values may contain colons (`session.id:sess:abc:123`, ISO timestamps). Repeat the param to AND filters. List-valued attributes (e.g. `tag.tags`) cannot be matched here. Returns 422 on malformed input (missing colon, empty key/value, or list/dict/null value).'
@@ -508,59 +528,6 @@ paths:
           description: Invalid request - non-empty identifier not supported
 components:
   schemas:
-    OtlpEvent:
-      properties:
-        attributes:
-          items:
-            $ref: '#/components/schemas/OtlpKeyValue'
-          type: array
-          nullable: true
-          title: Attributes
-          description: attributes is a collection of attribute key/value pairs on the event. Attribute keys MUST be unique (it is not allowed to have more than one attribute with the same key).
-        dropped_attributes_count:
-          type: integer
-          maximum: 4294967295.0
-          minimum: 0.0
-          nullable: true
-          title: Dropped Attributes Count
-          description: dropped_attributes_count is the number of dropped attributes. If the value is 0, then no attributes were dropped.
-        name:
-          type: string
-          nullable: true
-          title: Name
-          description: name of the event. This field is semantically required to be set to non-empty string.
-        time_unix_nano:
-          anyOf:
-          - type: integer
-            exclusiveMaximum: 1.8446744073709552e+19
-            minimum: 0.0
-          - type: string
-            pattern: ^[0-9]+$
-          - type: 'null'
-          title: Time Unix Nano
-          description: time_unix_nano is the time the event occurred. Value is UNIX Epoch time in nanoseconds since 00:00:00 UTC on 1 January 1970.
-      additionalProperties: false
-      type: object
-      title: OtlpEvent
-    AnnotationResult:
-      properties:
-        label:
-          type: string
-          nullable: true
-          title: Label
-          description: The label assigned by the annotation
-        score:
-          type: number
-          nullable: true
-          title: Score
-          description: The score assigned by the annotation
-        explanation:
-          type: string
-          nullable: true
-          title: Explanation
-          description: Explanation of the annotation result
-      type: object
-      title: AnnotationResult
     InsertedSpanDocumentAnnotation:
       properties:
         id:
@@ -571,6 +538,319 @@ components:
       required:
       - id
       title: InsertedSpanDocumentAnnotation
+    OtlpKind:
+      type: string
+      enum:
+      - SPAN_KIND_UNSPECIFIED
+      - SPAN_KIND_INTERNAL
+      - SPAN_KIND_SERVER
+      - SPAN_KIND_CLIENT
+      - SPAN_KIND_PRODUCER
+      - SPAN_KIND_CONSUMER
+      title: OtlpKind
+    AnnotateSpansResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/InsertedSpanAnnotation'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AnnotateSpansResponseBody
+    OtlpAnyValue:
+      properties:
+        array_value:
+          $ref: '#/components/schemas/OtlpArrayValue'
+        bool_value:
+          type:
+          - boolean
+          - 'null'
+          title: Bool Value
+        bytes_value:
+          type:
+          - string
+          - 'null'
+          pattern: ^[A-Za-z0-9+/]*={0,2}$
+          title: Bytes Value
+        double_value:
+          anyOf:
+          - type: number
+          - $ref: '#/components/schemas/OtlpDoubleValue'
+          - type: string
+          - type: 'null'
+          title: Double Value
+        int_value:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 9.223372036854776e+18
+            minimum: -9.223372036854776e+18
+          - type: string
+            pattern: ^-?[0-9]+$
+          - type: 'null'
+          title: Int Value
+        kvlist_value:
+          type: 'null'
+          title: Kvlist Value
+        string_value:
+          type:
+          - string
+          - 'null'
+          title: String Value
+      additionalProperties: false
+      type: object
+      title: OtlpAnyValue
+    OtlpKeyValue:
+      properties:
+        key:
+          type:
+          - string
+          - 'null'
+          title: Key
+        value:
+          $ref: '#/components/schemas/OtlpAnyValue'
+      additionalProperties: false
+      type: object
+      title: OtlpKeyValue
+    OtlpSpan:
+      properties:
+        attributes:
+          items:
+            $ref: '#/components/schemas/OtlpKeyValue'
+          type:
+          - array
+          - 'null'
+          title: Attributes
+          description: "attributes is a collection of key/value pairs. Note, global attributes like server name can be set using the resource API. Examples of attributes:\n\n    \"/http/user_agent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36\"\n    \"/http/server_latency\": 300\n    \"example.com/myattribute\": true\n    \"example.com/score\": 10.239\n\nThe OpenTelemetry API specification further restricts the allowed value types:\nhttps://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/common/README.md#attribute\nAttribute keys MUST be unique (it is not allowed to have more than one attribute with the same key)."
+        dropped_attributes_count:
+          type:
+          - integer
+          - 'null'
+          maximum: 4294967295.0
+          minimum: 0.0
+          title: Dropped Attributes Count
+          description: dropped_attributes_count is the number of attributes that were discarded. Attributes can be discarded because their keys are too long or because there are too many attributes. If this value is 0, then no attributes were dropped.
+        dropped_events_count:
+          type:
+          - integer
+          - 'null'
+          maximum: 4294967295.0
+          minimum: 0.0
+          title: Dropped Events Count
+          description: dropped_events_count is the number of dropped events. If the value is 0, then no events were dropped.
+        dropped_links_count:
+          type:
+          - integer
+          - 'null'
+          maximum: 4294967295.0
+          minimum: 0.0
+          title: Dropped Links Count
+          description: dropped_links_count is the number of dropped links after the maximum size was enforced. If this value is 0, then no links were dropped.
+        end_time_unix_nano:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1.8446744073709552e+19
+            minimum: 0.0
+          - type: string
+            pattern: ^[0-9]+$
+          - type: 'null'
+          title: End Time Unix Nano
+          description: 'end_time_unix_nano is the end time of the span. On the client side, this is the time kept by the local machine where the span execution ends. On the server side, this is the time when the server application handler stops running.
+
+            Value is UNIX Epoch time in nanoseconds since 00:00:00 UTC on 1 January 1970.
+
+
+            This field is semantically required and it is expected that end_time >= start_time.'
+        events:
+          items:
+            $ref: '#/components/schemas/OtlpEvent'
+          type:
+          - array
+          - 'null'
+          title: Events
+          description: events is a collection of Event items. A span with no events is valid.
+        flags:
+          type:
+          - integer
+          - 'null'
+          maximum: 4294967295.0
+          minimum: 0.0
+          title: Flags
+          description: 'Flags, a bit field.
+
+
+            Bits 0-7 (8 least significant bits) are the trace flags as defined in W3C Trace Context specification. To read the 8-bit W3C trace flag, use `flags & SPAN_FLAGS_TRACE_FLAGS_MASK`.
+
+
+            See https://www.w3.org/TR/trace-context-2/#trace-flags for the flag definitions.
+
+
+            Bits 8 and 9 represent the 3 states of whether a span''s parent is remote. The states are (unknown, is not remote, is remote).
+
+            To read whether the value is known, use `(flags & SPAN_FLAGS_CONTEXT_HAS_IS_REMOTE_MASK) != 0`.
+
+            To read whether the span is remote, use `(flags & SPAN_FLAGS_CONTEXT_IS_REMOTE_MASK) != 0`.
+
+
+            When creating span messages, if the message is logically forwarded from another source with an equivalent flags fields (i.e., usually another OTLP span message), the field SHOULD be copied as-is. If creating from a source that does not have an equivalent flags field (such as a runtime representation of an OpenTelemetry span), the high 22 bits MUST be set to zero.
+
+            Readers MUST NOT assume that bits 10-31 (22 most significant bits) will be zero.
+
+
+            [Optional].'
+        kind:
+          anyOf:
+          - $ref: '#/components/schemas/OtlpKind'
+          - type: integer
+            maximum: 2147483647.0
+            minimum: -2147483648.0
+          - type: 'null'
+          title: Kind
+          description: Distinguishes between spans generated in a particular context. For example, two spans with the same name may be distinguished using `CLIENT` (caller) and `SERVER` (callee) to identify queueing latency associated with the span.
+          default: SPAN_KIND_INTERNAL
+        links:
+          type: 'null'
+          title: Links
+        name:
+          type:
+          - string
+          - 'null'
+          title: Name
+          description: 'A description of the span''s operation.
+
+
+            For example, the name can be a qualified method name or a file name and a line number where the operation is called. A best practice is to use the same display name at the same call point in an application. This makes it easier to correlate spans in different traces.
+
+
+            This field is semantically required to be set to non-empty string. Empty value is equivalent to an unknown span name.
+
+
+            This field is required.'
+        parent_span_id:
+          type:
+          - string
+          - 'null'
+          pattern: ^[A-Za-z0-9+/]*={0,2}$
+          title: Parent Span Id
+          description: The `span_id` of this span's parent span. If this is a root span, then this field must be empty. The ID is an 8-byte array.
+        span_id:
+          type:
+          - string
+          - 'null'
+          pattern: ^[A-Za-z0-9+/]*={0,2}$
+          title: Span Id
+          description: 'A unique identifier for a span within a trace, assigned when the span is created. The ID is an 8-byte array. An ID with all zeroes OR of length other than 8 bytes is considered invalid (empty string in OTLP/JSON is zero-length and thus is also invalid).
+
+
+            This field is required.'
+        start_time_unix_nano:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1.8446744073709552e+19
+            minimum: 0.0
+          - type: string
+            pattern: ^[0-9]+$
+          - type: 'null'
+          title: Start Time Unix Nano
+          description: 'start_time_unix_nano is the start time of the span. On the client side, this is the time kept by the local machine where the span execution starts. On the server side, this is the time when the server''s application handler starts running.
+
+            Value is UNIX Epoch time in nanoseconds since 00:00:00 UTC on 1 January 1970.
+
+
+            This field is semantically required and it is expected that end_time >= start_time.'
+        status:
+          $ref: '#/components/schemas/OtlpStatus'
+          description: An optional final status for this span. Semantically when Status isn't set, it means span's status code is unset, i.e. assume STATUS_CODE_UNSET (code = 0).
+        trace_id:
+          type:
+          - string
+          - 'null'
+          pattern: ^[A-Za-z0-9+/]*={0,2}$
+          title: Trace Id
+          description: 'A unique identifier for a trace. All spans from the same trace share the same `trace_id`. The ID is a 16-byte array. An ID with all zeroes OR of length other than 16 bytes is considered invalid (empty string in OTLP/JSON is zero-length and thus is also invalid).
+
+
+            This field is required.'
+        trace_state:
+          type:
+          - string
+          - 'null'
+          title: Trace State
+          description: 'trace_state conveys information about request position in multiple distributed tracing graphs. It is a trace_state in w3c-trace-context format: https://www.w3.org/TR/trace-context/#tracestate-header
+
+            See also https://github.com/w3c/distributed-tracing for more details about this field.'
+      additionalProperties: false
+      type: object
+      title: OtlpSpan
+    AnnotateSpanDocumentsRequestBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SpanDocumentAnnotationData'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AnnotateSpanDocumentsRequestBody
+    SpanAnnotationData:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: The name of the annotation
+        annotator_kind:
+          type: string
+          enum:
+          - LLM
+          - CODE
+          - HUMAN
+          title: Annotator Kind
+          description: The kind of annotator used for the annotation
+        result:
+          $ref: '#/components/schemas/AnnotationResult'
+          description: The result of the annotation
+        metadata:
+          additionalProperties: true
+          type:
+          - object
+          - 'null'
+          title: Metadata
+          description: Metadata for the annotation
+        identifier:
+          type: string
+          title: Identifier
+          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
+          default: ''
+        span_id:
+          type: string
+          title: Span Id
+          description: OpenTelemetry Span ID (hex format w/o 0x prefix)
+      type: object
+      required:
+      - name
+      - annotator_kind
+      - span_id
+      title: SpanAnnotationData
+    OtlpSpansResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/OtlpSpan'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: OtlpSpansResponseBody
+      description: Paginated response where each span follows OTLP JSON structure.
     SpanContext:
       properties:
         trace_id:
@@ -589,37 +869,82 @@ components:
       examples:
       - span_id: 1a2b3c4d5e6f7a8b
         trace_id: a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4
-    HTTPValidationError:
+    SpanEvent:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        name:
+          type: string
+          title: Name
+          description: Name of the event
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+          description: When the event occurred (must be timezone-aware)
+        attributes:
+          additionalProperties: true
+          type: object
+          title: Attributes
+          description: Event attributes
       type: object
-      title: HTTPValidationError
-    AnnotateSpansResponseBody:
+      required:
+      - name
+      - timestamp
+      title: SpanEvent
+      examples:
+      - attributes:
+          exception.message: Connection refused
+        name: exception
+        timestamp: '2024-01-01T12:00:00Z'
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    OtlpArrayValue:
+      properties:
+        values:
+          items:
+            $ref: '#/components/schemas/OtlpAnyValue'
+          type:
+          - array
+          - 'null'
+          title: Values
+          description: Array of values. The array may be empty (contain 0 elements).
+      additionalProperties: false
+      type: object
+      title: OtlpArrayValue
+    AnnotateSpansRequestBody:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/InsertedSpanAnnotation'
+            $ref: '#/components/schemas/SpanAnnotationData'
           type: array
           title: Data
       type: object
       required:
       - data
-      title: AnnotateSpansResponseBody
-    AnnotateSpanDocumentsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/InsertedSpanDocumentAnnotation'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AnnotateSpanDocumentsResponseBody
+      title: AnnotateSpansRequestBody
     Span:
       properties:
         id:
@@ -639,8 +964,9 @@ components:
           title: Span Kind
           description: Type of work that the span encapsulates
         parent_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Parent Id
           description: OpenTelemetry span ID of the parent span
         start_time:
@@ -697,376 +1023,14 @@ components:
         start_time: '2024-01-01T12:00:00Z'
         status_code: OK
         status_message: ''
-    OtlpAnyValue:
-      properties:
-        array_value:
-          $ref: '#/components/schemas/OtlpArrayValue'
-          nullable: true
-        bool_value:
-          type: boolean
-          nullable: true
-          title: Bool Value
-        bytes_value:
-          type: string
-          pattern: ^[A-Za-z0-9+/]*={0,2}$
-          nullable: true
-          title: Bytes Value
-        double_value:
-          anyOf:
-          - type: number
-          - $ref: '#/components/schemas/OtlpDoubleValue'
-          - type: string
-          - type: 'null'
-          title: Double Value
-        int_value:
-          anyOf:
-          - type: integer
-            exclusiveMaximum: 9.223372036854776e+18
-            minimum: -9.223372036854776e+18
-          - type: string
-            pattern: ^-?[0-9]+$
-          - type: 'null'
-          title: Int Value
-        kvlist_value:
-          type: 'null'
-          title: Kvlist Value
-        string_value:
-          type: string
-          nullable: true
-          title: String Value
-      additionalProperties: false
-      type: object
-      title: OtlpAnyValue
-    SpansResponseBody:
+    CreateSpanNoteRequestBody:
       properties:
         data:
-          items:
-            $ref: '#/components/schemas/Span'
-          type: array
-          title: Data
-        next_cursor:
-          type: string
-          nullable: true
-          title: Next Cursor
+          $ref: '#/components/schemas/SpanNoteData'
       type: object
       required:
       - data
-      - next_cursor
-      title: SpansResponseBody
-    OtlpKeyValue:
-      properties:
-        key:
-          type: string
-          nullable: true
-          title: Key
-        value:
-          $ref: '#/components/schemas/OtlpAnyValue'
-          nullable: true
-      additionalProperties: false
-      type: object
-      title: OtlpKeyValue
-    OtlpSpan:
-      properties:
-        attributes:
-          items:
-            $ref: '#/components/schemas/OtlpKeyValue'
-          type: array
-          nullable: true
-          title: Attributes
-          description: "attributes is a collection of key/value pairs. Note, global attributes like server name can be set using the resource API. Examples of attributes:\n\n    \"/http/user_agent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36\"\n    \"/http/server_latency\": 300\n    \"example.com/myattribute\": true\n    \"example.com/score\": 10.239\n\nThe OpenTelemetry API specification further restricts the allowed value types:\nhttps://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/common/README.md#attribute\nAttribute keys MUST be unique (it is not allowed to have more than one attribute with the same key)."
-        dropped_attributes_count:
-          type: integer
-          maximum: 4294967295.0
-          minimum: 0.0
-          nullable: true
-          title: Dropped Attributes Count
-          description: dropped_attributes_count is the number of attributes that were discarded. Attributes can be discarded because their keys are too long or because there are too many attributes. If this value is 0, then no attributes were dropped.
-        dropped_events_count:
-          type: integer
-          maximum: 4294967295.0
-          minimum: 0.0
-          nullable: true
-          title: Dropped Events Count
-          description: dropped_events_count is the number of dropped events. If the value is 0, then no events were dropped.
-        dropped_links_count:
-          type: integer
-          maximum: 4294967295.0
-          minimum: 0.0
-          nullable: true
-          title: Dropped Links Count
-          description: dropped_links_count is the number of dropped links after the maximum size was enforced. If this value is 0, then no links were dropped.
-        end_time_unix_nano:
-          anyOf:
-          - type: integer
-            exclusiveMaximum: 1.8446744073709552e+19
-            minimum: 0.0
-          - type: string
-            pattern: ^[0-9]+$
-          - type: 'null'
-          title: End Time Unix Nano
-          description: 'end_time_unix_nano is the end time of the span. On the client side, this is the time kept by the local machine where the span execution ends. On the server side, this is the time when the server application handler stops running.
-
-            Value is UNIX Epoch time in nanoseconds since 00:00:00 UTC on 1 January 1970.
-
-
-            This field is semantically required and it is expected that end_time >= start_time.'
-        events:
-          items:
-            $ref: '#/components/schemas/OtlpEvent'
-          type: array
-          nullable: true
-          title: Events
-          description: events is a collection of Event items. A span with no events is valid.
-        flags:
-          type: integer
-          maximum: 4294967295.0
-          minimum: 0.0
-          nullable: true
-          title: Flags
-          description: 'Flags, a bit field.
-
-
-            Bits 0-7 (8 least significant bits) are the trace flags as defined in W3C Trace Context specification. To read the 8-bit W3C trace flag, use `flags & SPAN_FLAGS_TRACE_FLAGS_MASK`.
-
-
-            See https://www.w3.org/TR/trace-context-2/#trace-flags for the flag definitions.
-
-
-            Bits 8 and 9 represent the 3 states of whether a span''s parent is remote. The states are (unknown, is not remote, is remote).
-
-            To read whether the value is known, use `(flags & SPAN_FLAGS_CONTEXT_HAS_IS_REMOTE_MASK) != 0`.
-
-            To read whether the span is remote, use `(flags & SPAN_FLAGS_CONTEXT_IS_REMOTE_MASK) != 0`.
-
-
-            When creating span messages, if the message is logically forwarded from another source with an equivalent flags fields (i.e., usually another OTLP span message), the field SHOULD be copied as-is. If creating from a source that does not have an equivalent flags field (such as a runtime representation of an OpenTelemetry span), the high 22 bits MUST be set to zero.
-
-            Readers MUST NOT assume that bits 10-31 (22 most significant bits) will be zero.
-
-
-            [Optional].'
-        kind:
-          anyOf:
-          - $ref: '#/components/schemas/OtlpKind'
-          - type: integer
-            maximum: 2147483647.0
-            minimum: -2147483648.0
-          - type: 'null'
-          title: Kind
-          description: Distinguishes between spans generated in a particular context. For example, two spans with the same name may be distinguished using `CLIENT` (caller) and `SERVER` (callee) to identify queueing latency associated with the span.
-          default: SPAN_KIND_INTERNAL
-        links:
-          type: 'null'
-          title: Links
-        name:
-          type: string
-          nullable: true
-          title: Name
-          description: 'A description of the span''s operation.
-
-
-            For example, the name can be a qualified method name or a file name and a line number where the operation is called. A best practice is to use the same display name at the same call point in an application. This makes it easier to correlate spans in different traces.
-
-
-            This field is semantically required to be set to non-empty string. Empty value is equivalent to an unknown span name.
-
-
-            This field is required.'
-        parent_span_id:
-          type: string
-          pattern: ^[A-Za-z0-9+/]*={0,2}$
-          nullable: true
-          title: Parent Span Id
-          description: The `span_id` of this span's parent span. If this is a root span, then this field must be empty. The ID is an 8-byte array.
-        span_id:
-          type: string
-          pattern: ^[A-Za-z0-9+/]*={0,2}$
-          nullable: true
-          title: Span Id
-          description: 'A unique identifier for a span within a trace, assigned when the span is created. The ID is an 8-byte array. An ID with all zeroes OR of length other than 8 bytes is considered invalid (empty string in OTLP/JSON is zero-length and thus is also invalid).
-
-
-            This field is required.'
-        start_time_unix_nano:
-          anyOf:
-          - type: integer
-            exclusiveMaximum: 1.8446744073709552e+19
-            minimum: 0.0
-          - type: string
-            pattern: ^[0-9]+$
-          - type: 'null'
-          title: Start Time Unix Nano
-          description: 'start_time_unix_nano is the start time of the span. On the client side, this is the time kept by the local machine where the span execution starts. On the server side, this is the time when the server''s application handler starts running.
-
-            Value is UNIX Epoch time in nanoseconds since 00:00:00 UTC on 1 January 1970.
-
-
-            This field is semantically required and it is expected that end_time >= start_time.'
-        status:
-          $ref: '#/components/schemas/OtlpStatus'
-          nullable: true
-          description: An optional final status for this span. Semantically when Status isn't set, it means span's status code is unset, i.e. assume STATUS_CODE_UNSET (code = 0).
-        trace_id:
-          type: string
-          pattern: ^[A-Za-z0-9+/]*={0,2}$
-          nullable: true
-          title: Trace Id
-          description: 'A unique identifier for a trace. All spans from the same trace share the same `trace_id`. The ID is a 16-byte array. An ID with all zeroes OR of length other than 16 bytes is considered invalid (empty string in OTLP/JSON is zero-length and thus is also invalid).
-
-
-            This field is required.'
-        trace_state:
-          type: string
-          nullable: true
-          title: Trace State
-          description: 'trace_state conveys information about request position in multiple distributed tracing graphs. It is a trace_state in w3c-trace-context format: https://www.w3.org/TR/trace-context/#tracestate-header
-
-            See also https://github.com/w3c/distributed-tracing for more details about this field.'
-      additionalProperties: false
-      type: object
-      title: OtlpSpan
-    OtlpSpansResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/OtlpSpan'
-          type: array
-          title: Data
-        next_cursor:
-          type: string
-          nullable: true
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: OtlpSpansResponseBody
-      description: Paginated response where each span follows OTLP JSON structure.
-    CreateSpansResponseBody:
-      properties:
-        total_received:
-          type: integer
-          title: Total Received
-          description: Total number of spans received
-        total_queued:
-          type: integer
-          title: Total Queued
-          description: Number of spans successfully queued for insertion
-      type: object
-      required:
-      - total_received
-      - total_queued
-      title: CreateSpansResponseBody
-    SpanAnnotationData:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: The name of the annotation
-        annotator_kind:
-          type: string
-          enum:
-          - LLM
-          - CODE
-          - HUMAN
-          title: Annotator Kind
-          description: The kind of annotator used for the annotation
-        result:
-          $ref: '#/components/schemas/AnnotationResult'
-          nullable: true
-          description: The result of the annotation
-        metadata:
-          additionalProperties: true
-          type: object
-          nullable: true
-          title: Metadata
-          description: Metadata for the annotation
-        identifier:
-          type: string
-          title: Identifier
-          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
-          default: ''
-        span_id:
-          type: string
-          title: Span Id
-          description: OpenTelemetry Span ID (hex format w/o 0x prefix)
-      type: object
-      required:
-      - name
-      - annotator_kind
-      - span_id
-      title: SpanAnnotationData
-    CreateSpanNoteResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/InsertedSpanAnnotation'
-      type: object
-      required:
-      - data
-      title: CreateSpanNoteResponseBody
-    SpanEvent:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Name of the event
-        timestamp:
-          type: string
-          format: date-time
-          title: Timestamp
-          description: When the event occurred (must be timezone-aware)
-        attributes:
-          additionalProperties: true
-          type: object
-          title: Attributes
-          description: Event attributes
-      type: object
-      required:
-      - name
-      - timestamp
-      title: SpanEvent
-      examples:
-      - attributes:
-          exception.message: Connection refused
-        name: exception
-        timestamp: '2024-01-01T12:00:00Z'
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    CreateSpansRequestBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Span'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: CreateSpansRequestBody
+      title: CreateSpanNoteRequestBody
     SpanNoteData:
       properties:
         span_id:
@@ -1089,6 +1053,70 @@ components:
       - span_id
       - note
       title: SpanNoteData
+    InsertedSpanAnnotation:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the inserted span annotation
+      type: object
+      required:
+      - id
+      title: InsertedSpanAnnotation
+    SpansResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Span'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: SpansResponseBody
+    OtlpDoubleValue:
+      type: string
+      enum:
+      - Infinity
+      - -Infinity
+      - NaN
+      title: OtlpDoubleValue
+    AnnotateSpanDocumentsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/InsertedSpanDocumentAnnotation'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AnnotateSpanDocumentsResponseBody
+    OtlpStatus:
+      properties:
+        code:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647.0
+          minimum: -2147483648.0
+          title: Code
+          description: The status code.
+        message:
+          type:
+          - string
+          - 'null'
+          title: Message
+          description: A developer-facing human readable error message.
+      additionalProperties: false
+      type: object
+      title: OtlpStatus
     SpanDocumentAnnotationData:
       properties:
         name:
@@ -1105,12 +1133,12 @@ components:
           description: The kind of annotator used for the annotation
         result:
           $ref: '#/components/schemas/AnnotationResult'
-          nullable: true
           description: The result of the annotation
         metadata:
           additionalProperties: true
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           title: Metadata
           description: Metadata for the annotation
         identifier:
@@ -1133,89 +1161,105 @@ components:
       - span_id
       - document_position
       title: SpanDocumentAnnotationData
-    OtlpStatus:
+    CreateSpanNoteResponseBody:
       properties:
-        code:
+        data:
+          $ref: '#/components/schemas/InsertedSpanAnnotation'
+      type: object
+      required:
+      - data
+      title: CreateSpanNoteResponseBody
+    CreateSpansRequestBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Span'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: CreateSpansRequestBody
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    AnnotationResult:
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
+          title: Label
+          description: The label assigned by the annotation
+        score:
+          type:
+          - number
+          - 'null'
+          title: Score
+          description: The score assigned by the annotation
+        explanation:
+          type:
+          - string
+          - 'null'
+          title: Explanation
+          description: Explanation of the annotation result
+      type: object
+      title: AnnotationResult
+    OtlpEvent:
+      properties:
+        attributes:
+          items:
+            $ref: '#/components/schemas/OtlpKeyValue'
+          type:
+          - array
+          - 'null'
+          title: Attributes
+          description: attributes is a collection of attribute key/value pairs on the event. Attribute keys MUST be unique (it is not allowed to have more than one attribute with the same key).
+        dropped_attributes_count:
+          type:
+          - integer
+          - 'null'
+          maximum: 4294967295.0
+          minimum: 0.0
+          title: Dropped Attributes Count
+          description: dropped_attributes_count is the number of dropped attributes. If the value is 0, then no attributes were dropped.
+        name:
+          type:
+          - string
+          - 'null'
+          title: Name
+          description: name of the event. This field is semantically required to be set to non-empty string.
+        time_unix_nano:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1.8446744073709552e+19
+            minimum: 0.0
+          - type: string
+            pattern: ^[0-9]+$
+          - type: 'null'
+          title: Time Unix Nano
+          description: time_unix_nano is the time the event occurred. Value is UNIX Epoch time in nanoseconds since 00:00:00 UTC on 1 January 1970.
+      additionalProperties: false
+      type: object
+      title: OtlpEvent
+    CreateSpansResponseBody:
+      properties:
+        total_received:
           type: integer
-          maximum: 2147483647.0
-          minimum: -2147483648.0
-          nullable: true
-          title: Code
-          description: The status code.
-        message:
-          type: string
-          nullable: true
-          title: Message
-          description: A developer-facing human readable error message.
-      additionalProperties: false
-      type: object
-      title: OtlpStatus
-    AnnotateSpansRequestBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SpanAnnotationData'
-          type: array
-          title: Data
+          title: Total Received
+          description: Total number of spans received
+        total_queued:
+          type: integer
+          title: Total Queued
+          description: Number of spans successfully queued for insertion
       type: object
       required:
-      - data
-      title: AnnotateSpansRequestBody
-    InsertedSpanAnnotation:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The ID of the inserted span annotation
-      type: object
-      required:
-      - id
-      title: InsertedSpanAnnotation
-    OtlpKind:
-      type: string
-      enum:
-      - SPAN_KIND_UNSPECIFIED
-      - SPAN_KIND_INTERNAL
-      - SPAN_KIND_SERVER
-      - SPAN_KIND_CLIENT
-      - SPAN_KIND_PRODUCER
-      - SPAN_KIND_CONSUMER
-      title: OtlpKind
-    OtlpArrayValue:
-      properties:
-        values:
-          items:
-            $ref: '#/components/schemas/OtlpAnyValue'
-          type: array
-          nullable: true
-          title: Values
-          description: Array of values. The array may be empty (contain 0 elements).
-      additionalProperties: false
-      type: object
-      title: OtlpArrayValue
-    AnnotateSpanDocumentsRequestBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SpanDocumentAnnotationData'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AnnotateSpanDocumentsRequestBody
-    CreateSpanNoteRequestBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/SpanNoteData'
-      type: object
-      required:
-      - data
-      title: CreateSpanNoteRequestBody
-    OtlpDoubleValue:
-      type: string
-      enum:
-      - Infinity
-      - -Infinity
-      - NaN
-      title: OtlpDoubleValue
+      - total_received
+      - total_queued
+      title: CreateSpansResponseBody

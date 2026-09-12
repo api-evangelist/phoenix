@@ -1,8 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs projects API
+  title: Arize-Phoenix REST annotation_configs Projects API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
+servers:
+- url: https://app.phoenix.arize.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
 - name: projects
 paths:
@@ -18,8 +21,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Cursor for pagination (project ID)
           title: Cursor
         description: Cursor for pagination (project ID)
@@ -226,6 +230,33 @@ paths:
           description: Unprocessable Entity
 components:
   schemas:
+    GetProjectResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/Project'
+      type: object
+      required:
+      - data
+      title: GetProjectResponseBody
+    Project:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+        id:
+          type: string
+          title: Id
+      type: object
+      required:
+      - name
+      - id
+      title: Project
     CreateProjectRequestBody:
       properties:
         name:
@@ -233,8 +264,9 @@ components:
           minLength: 1
           title: Name
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Description
       type: object
       required:
@@ -248,14 +280,15 @@ components:
       required:
       - data
       title: CreateProjectResponseBody
-    UpdateProjectResponseBody:
+    UpdateProjectRequestBody:
       properties:
-        data:
-          $ref: '#/components/schemas/Project'
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
       type: object
-      required:
-      - data
-      title: UpdateProjectResponseBody
+      title: UpdateProjectRequestBody
     GetProjectsResponseBody:
       properties:
         data:
@@ -264,45 +297,20 @@ components:
           type: array
           title: Data
         next_cursor:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Next Cursor
       type: object
       required:
       - data
       - next_cursor
       title: GetProjectsResponseBody
-    Project:
-      properties:
-        name:
-          type: string
-          minLength: 1
-          title: Name
-        description:
-          type: string
-          nullable: true
-          title: Description
-        id:
-          type: string
-          title: Id
-      type: object
-      required:
-      - name
-      - id
-      title: Project
-    UpdateProjectRequestBody:
-      properties:
-        description:
-          type: string
-          nullable: true
-          title: Description
-      type: object
-      title: UpdateProjectRequestBody
-    GetProjectResponseBody:
+    UpdateProjectResponseBody:
       properties:
         data:
           $ref: '#/components/schemas/Project'
       type: object
       required:
       - data
-      title: GetProjectResponseBody
+      title: UpdateProjectResponseBody

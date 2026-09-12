@@ -1,8 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs datasets API
+  title: Arize-Phoenix REST annotation_configs Datasets API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
+servers:
+- url: https://app.phoenix.arize.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
 - name: datasets
 paths:
@@ -17,8 +20,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Cursor for pagination
           title: Cursor
         description: Cursor for pagination
@@ -26,8 +30,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: An optional dataset name to filter by
           title: Name
         description: An optional dataset name to filter by
@@ -154,8 +159,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Cursor for pagination
           title: Cursor
         description: Cursor for pagination
@@ -211,7 +217,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UploadDatasetResponseBody'
-                nullable: true
                 title: Response Uploaddataset
         '403':
           content:
@@ -363,8 +368,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The ID of the dataset version (if omitted, returns data from the latest version)
           title: Version Id
         description: The ID of the dataset version (if omitted, returns data from the latest version)
@@ -372,10 +378,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: List of dataset split identifiers (GlobalIDs or names) to filter by
           title: Split
         description: List of dataset split identifiers (GlobalIDs or names) to filter by
@@ -423,8 +430,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The ID of the dataset version (if omitted, returns data from the latest version)
           title: Version Id
         description: The ID of the dataset version (if omitted, returns data from the latest version)
@@ -467,8 +475,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The ID of the dataset version (if omitted, returns data from the latest version)
           title: Version Id
         description: The ID of the dataset version (if omitted, returns data from the latest version)
@@ -510,8 +519,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The ID of the dataset version (if omitted, returns data from the latest version)
           title: Version Id
         description: The ID of the dataset version (if omitted, returns data from the latest version)
@@ -553,8 +563,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The ID of the dataset version (if omitted, returns data from the latest version)
           title: Version Id
         description: The ID of the dataset version (if omitted, returns data from the latest version)
@@ -587,46 +598,6 @@ components:
       required:
       - data
       title: ListDatasetExamplesResponseBody
-    GetDatasetResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/DatasetWithExampleCount'
-      type: object
-      required:
-      - data
-      title: GetDatasetResponseBody
-    UploadDatasetResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/UploadDatasetData'
-      type: object
-      required:
-      - data
-      title: UploadDatasetResponseBody
-    ListDatasetExamplesData:
-      properties:
-        dataset_id:
-          type: string
-          title: Dataset Id
-        version_id:
-          type: string
-          title: Version Id
-        filtered_splits:
-          items:
-            type: string
-          type: array
-          title: Filtered Splits
-        examples:
-          items:
-            $ref: '#/components/schemas/DatasetExample'
-          type: array
-          title: Examples
-      type: object
-      required:
-      - dataset_id
-      - version_id
-      - examples
-      title: ListDatasetExamplesData
     DatasetWithExampleCount:
       properties:
         id:
@@ -636,8 +607,9 @@ components:
           type: string
           title: Name
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Description
         metadata:
           additionalProperties: true
@@ -664,6 +636,56 @@ components:
       - updated_at
       - example_count
       title: DatasetWithExampleCount
+    DatasetVersion:
+      properties:
+        version_id:
+          type: string
+          title: Version Id
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+        metadata:
+          additionalProperties: true
+          type: object
+          title: Metadata
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+      type: object
+      required:
+      - version_id
+      - description
+      - metadata
+      - created_at
+      title: DatasetVersion
+    UploadDatasetData:
+      properties:
+        dataset_id:
+          type: string
+          title: Dataset Id
+        version_id:
+          type: string
+          title: Version Id
+        num_created_examples:
+          type: integer
+          title: Num Created Examples
+        num_updated_examples:
+          type: integer
+          title: Num Updated Examples
+        num_deleted_examples:
+          type: integer
+          title: Num Deleted Examples
+      type: object
+      required:
+      - dataset_id
+      - version_id
+      - num_created_examples
+      - num_updated_examples
+      - num_deleted_examples
+      title: UploadDatasetData
     HTTPValidationError:
       properties:
         detail:
@@ -673,6 +695,30 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ListDatasetExamplesData:
+      properties:
+        dataset_id:
+          type: string
+          title: Dataset Id
+        version_id:
+          type: string
+          title: Version Id
+        filtered_splits:
+          items:
+            type: string
+          type: array
+          title: Filtered Splits
+        examples:
+          items:
+            $ref: '#/components/schemas/DatasetExample'
+          type: array
+          title: Examples
+      type: object
+      required:
+      - dataset_id
+      - version_id
+      - examples
+      title: ListDatasetExamplesData
     ValidationError:
       properties:
         loc:
@@ -699,100 +745,6 @@ components:
       - msg
       - type
       title: ValidationError
-    Dataset:
-      properties:
-        id:
-          type: string
-          title: Id
-        name:
-          type: string
-          title: Name
-        description:
-          type: string
-          nullable: true
-          title: Description
-        metadata:
-          additionalProperties: true
-          type: object
-          title: Metadata
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-        example_count:
-          type: integer
-          title: Example Count
-      type: object
-      required:
-      - id
-      - name
-      - description
-      - metadata
-      - created_at
-      - updated_at
-      - example_count
-      title: Dataset
-    UploadDatasetData:
-      properties:
-        dataset_id:
-          type: string
-          title: Dataset Id
-        version_id:
-          type: string
-          title: Version Id
-        num_created_examples:
-          type: integer
-          title: Num Created Examples
-        num_updated_examples:
-          type: integer
-          title: Num Updated Examples
-        num_deleted_examples:
-          type: integer
-          title: Num Deleted Examples
-      type: object
-      required:
-      - dataset_id
-      - version_id
-      - num_created_examples
-      - num_updated_examples
-      - num_deleted_examples
-      title: UploadDatasetData
-    ListDatasetsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Dataset'
-          type: array
-          title: Data
-        next_cursor:
-          type: string
-          nullable: true
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: ListDatasetsResponseBody
-    ListDatasetVersionsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/DatasetVersion'
-          type: array
-          title: Data
-        next_cursor:
-          type: string
-          nullable: true
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: ListDatasetVersionsResponseBody
     DatasetExample:
       properties:
         id:
@@ -826,14 +778,43 @@ components:
       - metadata
       - updated_at
       title: DatasetExample
-    DatasetVersion:
+    UploadDatasetResponseBody:
       properties:
-        version_id:
+        data:
+          $ref: '#/components/schemas/UploadDatasetData'
+      type: object
+      required:
+      - data
+      title: UploadDatasetResponseBody
+    ListDatasetsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Dataset'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: ListDatasetsResponseBody
+    Dataset:
+      properties:
+        id:
           type: string
-          title: Version Id
+          title: Id
+        name:
+          type: string
+          title: Name
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Description
         metadata:
           additionalProperties: true
@@ -843,10 +824,45 @@ components:
           type: string
           format: date-time
           title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        example_count:
+          type: integer
+          title: Example Count
       type: object
       required:
-      - version_id
+      - id
+      - name
       - description
       - metadata
       - created_at
-      title: DatasetVersion
+      - updated_at
+      - example_count
+      title: Dataset
+    ListDatasetVersionsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DatasetVersion'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: ListDatasetVersionsResponseBody
+    GetDatasetResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/DatasetWithExampleCount'
+      type: object
+      required:
+      - data
+      title: GetDatasetResponseBody

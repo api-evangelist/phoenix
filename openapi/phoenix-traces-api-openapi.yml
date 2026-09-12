@@ -1,8 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs traces API
+  title: Arize-Phoenix REST annotation_configs Traces API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
+servers:
+- url: https://app.phoenix.arize.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
 - name: traces
 paths:
@@ -25,9 +28,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Inclusive lower bound on trace start time (ISO 8601)
           title: Start Time
         description: Inclusive lower bound on trace start time (ISO 8601)
@@ -35,9 +39,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Exclusive upper bound on trace start time (ISO 8601)
           title: End Time
         description: Exclusive upper bound on trace start time (ISO 8601)
@@ -80,8 +85,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Pagination cursor (Trace GlobalID)
           title: Cursor
         description: Pagination cursor (Trace GlobalID)
@@ -98,10 +104,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: List of session identifiers to filter traces by. Each value can be either a session_id string or a session GlobalID. Only traces belonging to the specified sessions will be returned.
           title: Session Identifier
         description: List of session identifiers to filter traces by. Each value can be either a session_id string or a session GlobalID. Only traces belonging to the specified sessions will be returned.
@@ -261,14 +268,14 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    CreateTraceNoteRequestBody:
+    CreateTraceNoteResponseBody:
       properties:
         data:
-          $ref: '#/components/schemas/TraceNoteData'
+          $ref: '#/components/schemas/InsertedTraceAnnotation'
       type: object
       required:
       - data
-      title: CreateTraceNoteRequestBody
+      title: CreateTraceNoteResponseBody
     TraceSpanData:
       properties:
         id:
@@ -278,8 +285,9 @@ components:
           type: string
           title: Span Id
         parent_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Parent Id
         name:
           type: string
@@ -309,14 +317,38 @@ components:
       - start_time
       - end_time
       title: TraceSpanData
-    CreateTraceNoteResponseBody:
+    InsertedTraceAnnotation:
       properties:
-        data:
-          $ref: '#/components/schemas/InsertedTraceAnnotation'
+        id:
+          type: string
+          title: Id
+          description: The ID of the inserted trace annotation
       type: object
       required:
-      - data
-      title: CreateTraceNoteResponseBody
+      - id
+      title: InsertedTraceAnnotation
+    TraceNoteData:
+      properties:
+        trace_id:
+          type: string
+          minLength: 1
+          title: Trace Id
+          description: OpenTelemetry Trace ID (hex format w/o 0x prefix)
+        note:
+          type: string
+          minLength: 1
+          title: Note
+          description: The note text to add to the trace
+        identifier:
+          type: string
+          title: Identifier
+          description: Optional caller-supplied identifier. When non-empty, the note is upserted on (trace_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note. When omitted or empty, the server stamps a unique 'px-trace-note:<uuid>' identifier so each call appends a new note.
+          default: ''
+      type: object
+      required:
+      - trace_id
+      - note
+      title: TraceNoteData
     AnnotateTracesResponseBody:
       properties:
         data:
@@ -328,25 +360,113 @@ components:
       required:
       - data
       title: AnnotateTracesResponseBody
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    GetTracesResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TraceData'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: GetTracesResponseBody
     AnnotationResult:
       properties:
         label:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Label
           description: The label assigned by the annotation
         score:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           title: Score
           description: The score assigned by the annotation
         explanation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Explanation
           description: Explanation of the annotation result
       type: object
       title: AnnotationResult
+    TraceAnnotationData:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: The name of the annotation
+        annotator_kind:
+          type: string
+          enum:
+          - LLM
+          - CODE
+          - HUMAN
+          title: Annotator Kind
+          description: The kind of annotator used for the annotation
+        result:
+          $ref: '#/components/schemas/AnnotationResult'
+          description: The result of the annotation
+        metadata:
+          additionalProperties: true
+          type:
+          - object
+          - 'null'
+          title: Metadata
+          description: Metadata for the annotation
+        identifier:
+          type: string
+          title: Identifier
+          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
+          default: ''
+        trace_id:
+          type: string
+          title: Trace Id
+          description: OpenTelemetry Trace ID (hex format w/o 0x prefix)
+      type: object
+      required:
+      - name
+      - annotator_kind
+      - trace_id
+      title: TraceAnnotationData
+    AnnotateTracesRequestBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TraceAnnotationData'
+          type: array
+          title: Data
+          description: The trace annotations to be upserted
+      type: object
+      required:
+      - data
+      title: AnnotateTracesRequestBody
+    CreateTraceNoteRequestBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/TraceNoteData'
+      type: object
+      required:
+      - data
+      title: CreateTraceNoteRequestBody
     ValidationError:
       properties:
         loc:
@@ -373,50 +493,6 @@ components:
       - msg
       - type
       title: ValidationError
-    TraceNoteData:
-      properties:
-        trace_id:
-          type: string
-          minLength: 1
-          title: Trace Id
-          description: OpenTelemetry Trace ID (hex format w/o 0x prefix)
-        note:
-          type: string
-          minLength: 1
-          title: Note
-          description: The note text to add to the trace
-        identifier:
-          type: string
-          title: Identifier
-          description: Optional caller-supplied identifier. When non-empty, the note is upserted on (trace_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note. When omitted or empty, the server stamps a unique 'px-trace-note:<uuid>' identifier so each call appends a new note.
-          default: ''
-      type: object
-      required:
-      - trace_id
-      - note
-      title: TraceNoteData
-    InsertedTraceAnnotation:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The ID of the inserted trace annotation
-      type: object
-      required:
-      - id
-      title: InsertedTraceAnnotation
-    AnnotateTracesRequestBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/TraceAnnotationData'
-          type: array
-          title: Data
-          description: The trace annotations to be upserted
-      type: object
-      required:
-      - data
-      title: AnnotateTracesRequestBody
     TraceData:
       properties:
         id:
@@ -454,8 +530,9 @@ components:
         spans:
           items:
             $ref: '#/components/schemas/TraceSpanData'
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           title: Spans
       type: object
       required:
@@ -465,67 +542,3 @@ components:
       - start_time
       - end_time
       title: TraceData
-    TraceAnnotationData:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: The name of the annotation
-        annotator_kind:
-          type: string
-          enum:
-          - LLM
-          - CODE
-          - HUMAN
-          title: Annotator Kind
-          description: The kind of annotator used for the annotation
-        result:
-          $ref: '#/components/schemas/AnnotationResult'
-          nullable: true
-          description: The result of the annotation
-        metadata:
-          additionalProperties: true
-          type: object
-          nullable: true
-          title: Metadata
-          description: Metadata for the annotation
-        identifier:
-          type: string
-          title: Identifier
-          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
-          default: ''
-        trace_id:
-          type: string
-          title: Trace Id
-          description: OpenTelemetry Trace ID (hex format w/o 0x prefix)
-      type: object
-      required:
-      - name
-      - annotator_kind
-      - trace_id
-      title: TraceAnnotationData
-    GetTracesResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/TraceData'
-          type: array
-          title: Data
-        next_cursor:
-          type: string
-          nullable: true
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: GetTracesResponseBody
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError

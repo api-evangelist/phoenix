@@ -1,8 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs annotations API
+  title: Arize-Phoenix REST annotation_configs Annotations API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
+servers:
+- url: https://app.phoenix.arize.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
 - name: annotations
 paths:
@@ -26,10 +29,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Optional list of span ids to fetch annotations for. If omitted, `identifier` must be supplied.
           title: Span Ids
         description: Optional list of span ids to fetch annotations for. If omitted, `identifier` must be supplied.
@@ -37,11 +41,12 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             minLength: 1
-          nullable: true
           description: Optional list of annotation identifiers to filter by. Each value must be non-empty. If omitted, `span_ids` must be supplied. When combined with `span_ids`, results are the AND-intersection of both filters.
           title: Identifier
         description: Optional list of annotation identifiers to filter by. Each value must be non-empty. If omitted, `span_ids` must be supplied. When combined with `span_ids`, results are the AND-intersection of both filters.
@@ -49,10 +54,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Optional list of annotation names to include. If provided, only annotations with these names will be returned (allowlist). When omitted, the response includes every matching row regardless of name (no annotation names are excluded by default).
           title: Include Annotation Names
         description: Optional list of annotation names to include. If provided, only annotations with these names will be returned (allowlist). When omitted, the response includes every matching row regardless of name (no annotation names are excluded by default).
@@ -60,10 +66,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Optional list of annotation names to exclude from results.
           title: Exclude Annotation Names
         description: Optional list of annotation names to exclude from results.
@@ -71,8 +78,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: A cursor for pagination
           title: Cursor
         description: A cursor for pagination
@@ -131,9 +139,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           minLength: 1
-          nullable: true
           description: Optional annotation name. When provided, must be non-empty and narrows the delete to annotations of that name.
           title: Name
         description: Optional annotation name. When provided, must be non-empty and narrows the delete to annotations of that name.
@@ -141,9 +150,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           minLength: 1
-          nullable: true
           description: Optional annotation identifier. When provided, must be non-empty and narrows the delete to annotations with that identifier.
           title: Identifier
         description: Optional annotation identifier. When provided, must be non-empty and narrows the delete to annotations with that identifier.
@@ -155,8 +165,9 @@ paths:
           - LLM
           - CODE
           - HUMAN
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Optional annotator kind. When provided, narrows the delete to annotations produced by this annotator kind.
           title: Annotator Kind
         description: Optional annotator kind. When provided, narrows the delete to annotations produced by this annotator kind.
@@ -164,9 +175,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Optional inclusive lower bound on `created_at` (>=). Naive datetimes are interpreted as UTC.
           title: Start Time
         description: Optional inclusive lower bound on `created_at` (>=). Naive datetimes are interpreted as UTC.
@@ -174,9 +186,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Optional exclusive upper bound on `created_at` (<). Naive datetimes are interpreted as UTC.
           title: End Time
         description: Optional exclusive upper bound on `created_at` (<). Naive datetimes are interpreted as UTC.
@@ -230,10 +243,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Optional list of trace ids to fetch annotations for. If omitted, `identifier` must be supplied.
           title: Trace Ids
         description: Optional list of trace ids to fetch annotations for. If omitted, `identifier` must be supplied.
@@ -241,11 +255,12 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             minLength: 1
-          nullable: true
           description: Optional list of annotation identifiers to filter by. Each value must be non-empty. If omitted, `trace_ids` must be supplied. When combined with `trace_ids`, results are the AND-intersection of both filters.
           title: Identifier
         description: Optional list of annotation identifiers to filter by. Each value must be non-empty. If omitted, `trace_ids` must be supplied. When combined with `trace_ids`, results are the AND-intersection of both filters.
@@ -253,10 +268,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Optional list of annotation names to include. If provided, only annotations with these names will be returned (allowlist). When omitted, the response includes every matching row regardless of name (no annotation names are excluded by default).
           title: Include Annotation Names
         description: Optional list of annotation names to include. If provided, only annotations with these names will be returned (allowlist). When omitted, the response includes every matching row regardless of name (no annotation names are excluded by default).
@@ -264,10 +280,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Optional list of annotation names to exclude from results.
           title: Exclude Annotation Names
         description: Optional list of annotation names to exclude from results.
@@ -275,8 +292,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: A cursor for pagination
           title: Cursor
         description: A cursor for pagination
@@ -335,9 +353,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           minLength: 1
-          nullable: true
           description: Optional annotation name. When provided, must be non-empty and narrows the delete to annotations of that name.
           title: Name
         description: Optional annotation name. When provided, must be non-empty and narrows the delete to annotations of that name.
@@ -345,9 +364,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           minLength: 1
-          nullable: true
           description: Optional annotation identifier. When provided, must be non-empty and narrows the delete to annotations with that identifier.
           title: Identifier
         description: Optional annotation identifier. When provided, must be non-empty and narrows the delete to annotations with that identifier.
@@ -359,8 +379,9 @@ paths:
           - LLM
           - CODE
           - HUMAN
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Optional annotator kind. When provided, narrows the delete to annotations produced by this annotator kind.
           title: Annotator Kind
         description: Optional annotator kind. When provided, narrows the delete to annotations produced by this annotator kind.
@@ -368,9 +389,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Optional inclusive lower bound on `created_at` (>=). Naive datetimes are interpreted as UTC.
           title: Start Time
         description: Optional inclusive lower bound on `created_at` (>=). Naive datetimes are interpreted as UTC.
@@ -378,9 +400,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Optional exclusive upper bound on `created_at` (<). Naive datetimes are interpreted as UTC.
           title: End Time
         description: Optional exclusive upper bound on `created_at` (<). Naive datetimes are interpreted as UTC.
@@ -434,10 +457,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Optional list of session ids to fetch annotations for. If omitted, `identifier` must be supplied.
           title: Session Ids
         description: Optional list of session ids to fetch annotations for. If omitted, `identifier` must be supplied.
@@ -445,11 +469,12 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             minLength: 1
-          nullable: true
           description: Optional list of annotation identifiers to filter by. Each value must be non-empty. If omitted, `session_ids` must be supplied. When combined with `session_ids`, results are the AND-intersection of both filters.
           title: Identifier
         description: Optional list of annotation identifiers to filter by. Each value must be non-empty. If omitted, `session_ids` must be supplied. When combined with `session_ids`, results are the AND-intersection of both filters.
@@ -457,10 +482,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Optional list of annotation names to include. If provided, only annotations with these names will be returned (allowlist). When omitted, the response includes every matching row regardless of name (no annotation names are excluded by default).
           title: Include Annotation Names
         description: Optional list of annotation names to include. If provided, only annotations with these names will be returned (allowlist). When omitted, the response includes every matching row regardless of name (no annotation names are excluded by default).
@@ -468,10 +494,11 @@ paths:
         in: query
         required: false
         schema:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Optional list of annotation names to exclude from results.
           title: Exclude Annotation Names
         description: Optional list of annotation names to exclude from results.
@@ -479,8 +506,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: A cursor for pagination
           title: Cursor
         description: A cursor for pagination
@@ -539,9 +567,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           minLength: 1
-          nullable: true
           description: Optional annotation name. When provided, must be non-empty and narrows the delete to annotations of that name.
           title: Name
         description: Optional annotation name. When provided, must be non-empty and narrows the delete to annotations of that name.
@@ -549,9 +578,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           minLength: 1
-          nullable: true
           description: Optional annotation identifier. When provided, must be non-empty and narrows the delete to annotations with that identifier.
           title: Identifier
         description: Optional annotation identifier. When provided, must be non-empty and narrows the delete to annotations with that identifier.
@@ -563,8 +593,9 @@ paths:
           - LLM
           - CODE
           - HUMAN
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Optional annotator kind. When provided, narrows the delete to annotations produced by this annotator kind.
           title: Annotator Kind
         description: Optional annotator kind. When provided, narrows the delete to annotations produced by this annotator kind.
@@ -572,9 +603,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Optional inclusive lower bound on `created_at` (>=). Naive datetimes are interpreted as UTC.
           title: Start Time
         description: Optional inclusive lower bound on `created_at` (>=). Naive datetimes are interpreted as UTC.
@@ -582,9 +614,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Optional exclusive upper bound on `created_at` (<). Naive datetimes are interpreted as UTC.
           title: End Time
         description: Optional exclusive upper bound on `created_at` (<). Naive datetimes are interpreted as UTC.
@@ -620,6 +653,62 @@ paths:
           description: Invalid parameters
 components:
   schemas:
+    SpanAnnotationsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SpanAnnotation'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: SpanAnnotationsResponseBody
+    TraceAnnotationsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TraceAnnotation'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: TraceAnnotationsResponseBody
+    AnnotationResult:
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
+          title: Label
+          description: The label assigned by the annotation
+        score:
+          type:
+          - number
+          - 'null'
+          title: Score
+          description: The score assigned by the annotation
+        explanation:
+          type:
+          - string
+          - 'null'
+          title: Explanation
+          description: Explanation of the annotation result
+      type: object
+      title: AnnotationResult
     SpanAnnotation:
       properties:
         id:
@@ -640,8 +729,9 @@ components:
           - APP
           title: Source
         user_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: User Id
         name:
           type: string
@@ -657,12 +747,12 @@ components:
           description: The kind of annotator used for the annotation
         result:
           $ref: '#/components/schemas/AnnotationResult'
-          nullable: true
           description: The result of the annotation
         metadata:
           additionalProperties: true
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           title: Metadata
           description: Metadata for the annotation
         identifier:
@@ -705,8 +795,9 @@ components:
           - APP
           title: Source
         user_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: User Id
         name:
           type: string
@@ -722,12 +813,12 @@ components:
           description: The kind of annotator used for the annotation
         result:
           $ref: '#/components/schemas/AnnotationResult'
-          nullable: true
           description: The result of the annotation
         metadata:
           additionalProperties: true
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           title: Metadata
           description: Metadata for the annotation
         identifier:
@@ -750,73 +841,6 @@ components:
       - annotator_kind
       - trace_id
       title: TraceAnnotation
-    AnnotationResult:
-      properties:
-        label:
-          type: string
-          nullable: true
-          title: Label
-          description: The label assigned by the annotation
-        score:
-          type: number
-          nullable: true
-          title: Score
-          description: The score assigned by the annotation
-        explanation:
-          type: string
-          nullable: true
-          title: Explanation
-          description: Explanation of the annotation result
-      type: object
-      title: AnnotationResult
-    SessionAnnotationsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SessionAnnotation'
-          type: array
-          title: Data
-        next_cursor:
-          type: string
-          nullable: true
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: SessionAnnotationsResponseBody
-    SpanAnnotationsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SpanAnnotation'
-          type: array
-          title: Data
-        next_cursor:
-          type: string
-          nullable: true
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: SpanAnnotationsResponseBody
-    TraceAnnotationsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/TraceAnnotation'
-          type: array
-          title: Data
-        next_cursor:
-          type: string
-          nullable: true
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: TraceAnnotationsResponseBody
     SessionAnnotation:
       properties:
         id:
@@ -837,8 +861,9 @@ components:
           - APP
           title: Source
         user_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: User Id
         name:
           type: string
@@ -854,12 +879,12 @@ components:
           description: The kind of annotator used for the annotation
         result:
           $ref: '#/components/schemas/AnnotationResult'
-          nullable: true
           description: The result of the annotation
         metadata:
           additionalProperties: true
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           title: Metadata
           description: Metadata for the annotation
         identifier:
@@ -882,3 +907,20 @@ components:
       - annotator_kind
       - session_id
       title: SessionAnnotation
+    SessionAnnotationsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SessionAnnotation'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: SessionAnnotationsResponseBody

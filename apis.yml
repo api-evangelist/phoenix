@@ -630,3 +630,5 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-parent: arize-ai
+x-relationship: product

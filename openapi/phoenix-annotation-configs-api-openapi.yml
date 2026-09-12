@@ -1,8 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs API
+  title: Arize-Phoenix REST Annotation Configs API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
+servers:
+- url: https://app.phoenix.arize.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
 - name: annotation_configs
 paths:
@@ -18,8 +21,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Cursor for pagination (base64-encoded annotation config ID)
           title: Cursor
         description: Cursor for pagination (base64-encoded annotation config ID)
@@ -191,149 +195,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ContinuousAnnotationConfigData:
-      properties:
-        name:
-          type: string
-          title: Name
-        type:
-          type: string
-          const: CONTINUOUS
-          title: Type
-        description:
-          type: string
-          nullable: true
-          title: Description
-        optimization_direction:
-          $ref: '#/components/schemas/OptimizationDirection'
-        lower_bound:
-          type: number
-          nullable: true
-          title: Lower Bound
-        upper_bound:
-          type: number
-          nullable: true
-          title: Upper Bound
-      type: object
-      required:
-      - name
-      - type
-      - optimization_direction
-      title: ContinuousAnnotationConfigData
-    CreateAnnotationConfigData:
-      oneOf:
-      - $ref: '#/components/schemas/CategoricalAnnotationConfigData'
-      - $ref: '#/components/schemas/ContinuousAnnotationConfigData'
-      - $ref: '#/components/schemas/FreeformAnnotationConfigData'
-      title: CreateAnnotationConfigData
-      discriminator:
-        propertyName: type
-        mapping:
-          CATEGORICAL: '#/components/schemas/CategoricalAnnotationConfigData'
-          CONTINUOUS: '#/components/schemas/ContinuousAnnotationConfigData'
-          FREEFORM: '#/components/schemas/FreeformAnnotationConfigData'
-    OptimizationDirection:
-      type: string
-      enum:
-      - MINIMIZE
-      - MAXIMIZE
-      - NONE
-      title: OptimizationDirection
-    ContinuousAnnotationConfig:
-      properties:
-        name:
-          type: string
-          title: Name
-        type:
-          type: string
-          const: CONTINUOUS
-          title: Type
-        description:
-          type: string
-          nullable: true
-          title: Description
-        optimization_direction:
-          $ref: '#/components/schemas/OptimizationDirection'
-        lower_bound:
-          type: number
-          nullable: true
-          title: Lower Bound
-        upper_bound:
-          type: number
-          nullable: true
-          title: Upper Bound
-        id:
-          type: string
-          title: Id
-      type: object
-      required:
-      - name
-      - type
-      - optimization_direction
-      - id
-      title: ContinuousAnnotationConfig
-    GetAnnotationConfigsResponseBody:
-      properties:
-        data:
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/CategoricalAnnotationConfig'
-            - $ref: '#/components/schemas/ContinuousAnnotationConfig'
-            - $ref: '#/components/schemas/FreeformAnnotationConfig'
-            discriminator:
-              propertyName: type
-              mapping:
-                CATEGORICAL: '#/components/schemas/CategoricalAnnotationConfig'
-                CONTINUOUS: '#/components/schemas/ContinuousAnnotationConfig'
-                FREEFORM: '#/components/schemas/FreeformAnnotationConfig'
-          type: array
-          title: Data
-        next_cursor:
-          type: string
-          nullable: true
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: GetAnnotationConfigsResponseBody
-    FreeformAnnotationConfig:
-      properties:
-        name:
-          type: string
-          title: Name
-        type:
-          type: string
-          const: FREEFORM
-          title: Type
-        description:
-          type: string
-          nullable: true
-          title: Description
-        optimization_direction:
-          $ref: '#/components/schemas/OptimizationDirection'
-          nullable: true
-        threshold:
-          type: number
-          nullable: true
-          title: Threshold
-        lower_bound:
-          type: number
-          nullable: true
-          title: Lower Bound
-        upper_bound:
-          type: number
-          nullable: true
-          title: Upper Bound
-        id:
-          type: string
-          title: Id
-      type: object
-      required:
-      - name
-      - type
-      - id
-      title: FreeformAnnotationConfig
     UpdateAnnotationConfigResponseBody:
       properties:
         data:
@@ -370,6 +231,95 @@ components:
       required:
       - data
       title: DeleteAnnotationConfigResponseBody
+    CreateAnnotationConfigData:
+      oneOf:
+      - $ref: '#/components/schemas/CategoricalAnnotationConfigData'
+      - $ref: '#/components/schemas/ContinuousAnnotationConfigData'
+      - $ref: '#/components/schemas/FreeformAnnotationConfigData'
+      title: CreateAnnotationConfigData
+      discriminator:
+        propertyName: type
+        mapping:
+          CATEGORICAL: '#/components/schemas/CategoricalAnnotationConfigData'
+          CONTINUOUS: '#/components/schemas/ContinuousAnnotationConfigData'
+          FREEFORM: '#/components/schemas/FreeformAnnotationConfigData'
+    CreateAnnotationConfigResponseBody:
+      properties:
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/CategoricalAnnotationConfig'
+          - $ref: '#/components/schemas/ContinuousAnnotationConfig'
+          - $ref: '#/components/schemas/FreeformAnnotationConfig'
+          title: Data
+          discriminator:
+            propertyName: type
+            mapping:
+              CATEGORICAL: '#/components/schemas/CategoricalAnnotationConfig'
+              CONTINUOUS: '#/components/schemas/ContinuousAnnotationConfig'
+              FREEFORM: '#/components/schemas/FreeformAnnotationConfig'
+      type: object
+      required:
+      - data
+      title: CreateAnnotationConfigResponseBody
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    FreeformAnnotationConfigData:
+      properties:
+        name:
+          type: string
+          title: Name
+        type:
+          type: string
+          const: FREEFORM
+          title: Type
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+        optimization_direction:
+          $ref: '#/components/schemas/OptimizationDirection'
+        threshold:
+          type:
+          - number
+          - 'null'
+          title: Threshold
+        lower_bound:
+          type:
+          - number
+          - 'null'
+          title: Lower Bound
+        upper_bound:
+          type:
+          - number
+          - 'null'
+          title: Upper Bound
+      type: object
+      required:
+      - name
+      - type
+      title: FreeformAnnotationConfigData
+    CategoricalAnnotationValue:
+      properties:
+        label:
+          type: string
+          title: Label
+        score:
+          type:
+          - number
+          - 'null'
+          title: Score
+      type: object
+      required:
+      - label
+      title: CategoricalAnnotationValue
     ValidationError:
       properties:
         loc:
@@ -396,64 +346,6 @@ components:
       - msg
       - type
       title: ValidationError
-    CategoricalAnnotationValue:
-      properties:
-        label:
-          type: string
-          title: Label
-        score:
-          type: number
-          nullable: true
-          title: Score
-      type: object
-      required:
-      - label
-      title: CategoricalAnnotationValue
-    GetAnnotationConfigResponseBody:
-      properties:
-        data:
-          oneOf:
-          - $ref: '#/components/schemas/CategoricalAnnotationConfig'
-          - $ref: '#/components/schemas/ContinuousAnnotationConfig'
-          - $ref: '#/components/schemas/FreeformAnnotationConfig'
-          title: Data
-          discriminator:
-            propertyName: type
-            mapping:
-              CATEGORICAL: '#/components/schemas/CategoricalAnnotationConfig'
-              CONTINUOUS: '#/components/schemas/ContinuousAnnotationConfig'
-              FREEFORM: '#/components/schemas/FreeformAnnotationConfig'
-      type: object
-      required:
-      - data
-      title: GetAnnotationConfigResponseBody
-    CategoricalAnnotationConfigData:
-      properties:
-        name:
-          type: string
-          title: Name
-        type:
-          type: string
-          const: CATEGORICAL
-          title: Type
-        description:
-          type: string
-          nullable: true
-          title: Description
-        optimization_direction:
-          $ref: '#/components/schemas/OptimizationDirection'
-        values:
-          items:
-            $ref: '#/components/schemas/CategoricalAnnotationValue'
-          type: array
-          title: Values
-      type: object
-      required:
-      - name
-      - type
-      - optimization_direction
-      - values
-      title: CategoricalAnnotationConfigData
     CategoricalAnnotationConfig:
       properties:
         name:
@@ -464,8 +356,9 @@ components:
           const: CATEGORICAL
           title: Type
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Description
         optimization_direction:
           $ref: '#/components/schemas/OptimizationDirection'
@@ -485,7 +378,107 @@ components:
       - values
       - id
       title: CategoricalAnnotationConfig
-    CreateAnnotationConfigResponseBody:
+    CategoricalAnnotationConfigData:
+      properties:
+        name:
+          type: string
+          title: Name
+        type:
+          type: string
+          const: CATEGORICAL
+          title: Type
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+        optimization_direction:
+          $ref: '#/components/schemas/OptimizationDirection'
+        values:
+          items:
+            $ref: '#/components/schemas/CategoricalAnnotationValue'
+          type: array
+          title: Values
+      type: object
+      required:
+      - name
+      - type
+      - optimization_direction
+      - values
+      title: CategoricalAnnotationConfigData
+    ContinuousAnnotationConfigData:
+      properties:
+        name:
+          type: string
+          title: Name
+        type:
+          type: string
+          const: CONTINUOUS
+          title: Type
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+        optimization_direction:
+          $ref: '#/components/schemas/OptimizationDirection'
+        lower_bound:
+          type:
+          - number
+          - 'null'
+          title: Lower Bound
+        upper_bound:
+          type:
+          - number
+          - 'null'
+          title: Upper Bound
+      type: object
+      required:
+      - name
+      - type
+      - optimization_direction
+      title: ContinuousAnnotationConfigData
+    FreeformAnnotationConfig:
+      properties:
+        name:
+          type: string
+          title: Name
+        type:
+          type: string
+          const: FREEFORM
+          title: Type
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+        optimization_direction:
+          $ref: '#/components/schemas/OptimizationDirection'
+        threshold:
+          type:
+          - number
+          - 'null'
+          title: Threshold
+        lower_bound:
+          type:
+          - number
+          - 'null'
+          title: Lower Bound
+        upper_bound:
+          type:
+          - number
+          - 'null'
+          title: Upper Bound
+        id:
+          type: string
+          title: Id
+      type: object
+      required:
+      - name
+      - type
+      - id
+      title: FreeformAnnotationConfig
+    GetAnnotationConfigResponseBody:
       properties:
         data:
           oneOf:
@@ -502,46 +495,73 @@ components:
       type: object
       required:
       - data
-      title: CreateAnnotationConfigResponseBody
-    FreeformAnnotationConfigData:
+      title: GetAnnotationConfigResponseBody
+    GetAnnotationConfigsResponseBody:
+      properties:
+        data:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/CategoricalAnnotationConfig'
+            - $ref: '#/components/schemas/ContinuousAnnotationConfig'
+            - $ref: '#/components/schemas/FreeformAnnotationConfig'
+            discriminator:
+              propertyName: type
+              mapping:
+                CATEGORICAL: '#/components/schemas/CategoricalAnnotationConfig'
+                CONTINUOUS: '#/components/schemas/ContinuousAnnotationConfig'
+                FREEFORM: '#/components/schemas/FreeformAnnotationConfig'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: GetAnnotationConfigsResponseBody
+    ContinuousAnnotationConfig:
       properties:
         name:
           type: string
           title: Name
         type:
           type: string
-          const: FREEFORM
+          const: CONTINUOUS
           title: Type
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Description
         optimization_direction:
           $ref: '#/components/schemas/OptimizationDirection'
-          nullable: true
-        threshold:
-          type: number
-          nullable: true
-          title: Threshold
         lower_bound:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           title: Lower Bound
         upper_bound:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           title: Upper Bound
+        id:
+          type: string
+          title: Id
       type: object
       required:
       - name
       - type
-      title: FreeformAnnotationConfigData
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      - optimization_direction
+      - id
+      title: ContinuousAnnotationConfig
+    OptimizationDirection:
+      type: string
+      enum:
+      - MINIMIZE
+      - MAXIMIZE
+      - NONE
+      title: OptimizationDirection
