@@ -316,38 +316,6 @@ apis:
     url: https://pypi.org/project/arize-phoenix-client/
   - type: TypeScriptSDK
     url: https://www.npmjs.com/package/@arizeai/phoenix-client
-- aid: phoenix:phoenix-oauth2-api
-  name: Arize Phoenix Oauth2 API
-  description: The Oauth2 API from Arize Phoenix — 2 operation(s) for oauth2.
-  humanURL: https://arize.com/docs/phoenix
-  baseURL: https://app.phoenix.arize.com
-  tags:
-  - Authentication
-  tags_raw:
-  - Oauth2
-  properties:
-  - type: OpenAPI
-    url: openapi/phoenix-oauth2-api-openapi.yml
-  - type: Documentation
-    url: https://arize.com/docs/phoenix
-  - type: JSONSchema
-    url: json-schema/phoenix-span.json
-  - type: JSONSchema
-    url: json-schema/phoenix-dataset.json
-  - type: JSONSchema
-    url: json-schema/phoenix-experiment.json
-  - type: JSONSchema
-    url: json-schema/phoenix-annotationresult.json
-  - type: JSONSchema
-    url: json-schema/phoenix-project.json
-  - type: Vocabulary
-    url: vocabulary/phoenix-vocabulary.yml
-  - type: JSONLDContext
-    url: json-ld/phoenix-context.jsonld
-  - type: PythonSDK
-    url: https://pypi.org/project/arize-phoenix-client/
-  - type: TypeScriptSDK
-    url: https://www.npmjs.com/package/@arizeai/phoenix-client
 - aid: phoenix:phoenix-projects-api
   name: Arize Phoenix projects API
   description: The projects API from Arize Phoenix — 2 operation(s) for projects.
@@ -582,6 +550,36 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/phoenix-users-api-openapi.yml
+  - type: Documentation
+    url: https://arize.com/docs/phoenix
+  - type: JSONSchema
+    url: json-schema/phoenix-span.json
+  - type: JSONSchema
+    url: json-schema/phoenix-dataset.json
+  - type: JSONSchema
+    url: json-schema/phoenix-experiment.json
+  - type: JSONSchema
+    url: json-schema/phoenix-annotationresult.json
+  - type: JSONSchema
+    url: json-schema/phoenix-project.json
+  - type: Vocabulary
+    url: vocabulary/phoenix-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/phoenix-context.jsonld
+  - type: PythonSDK
+    url: https://pypi.org/project/arize-phoenix-client/
+  - type: TypeScriptSDK
+    url: https://www.npmjs.com/package/@arizeai/phoenix-client
+- aid: phoenix:phoenix-oauth2-api
+  name: Arize Phoenix Oauth2 API
+  description: The Oauth2 API from Arize Phoenix — 2 operation(s) for oauth2.
+  humanURL: https://arize.com/docs/phoenix
+  baseURL: https://app.phoenix.arize.com
+  tags:
+  - Oauth2
+  properties:
+  - type: OpenAPI
+    url: openapi/phoenix-oauth2-api-openapi.yml
   - type: Documentation
     url: https://arize.com/docs/phoenix
   - type: JSONSchema
