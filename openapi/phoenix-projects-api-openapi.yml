@@ -1,18 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs Projects API
+  title: Arize-Phoenix REST Projects API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
-servers:
-- url: https://app.phoenix.arize.com
-  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
-- name: projects
+- name: Projects
 paths:
   /v1/projects:
     get:
       tags:
-      - projects
+      - Projects
       summary: List all projects
       description: Retrieve a paginated list of all projects in the system.
       operationId: getProjects
@@ -76,7 +73,7 @@ paths:
           description: Unprocessable Entity
     post:
       tags:
-      - projects
+      - Projects
       summary: Create a new project
       description: Create a new project with the specified configuration.
       operationId: createProject
@@ -108,7 +105,7 @@ paths:
   /v1/projects/{project_identifier}:
     get:
       tags:
-      - projects
+      - Projects
       summary: Get project by ID or name
       description: 'Retrieve a specific project using its unique identifier: either project ID or project name. Note: When using a project name as the identifier, it cannot contain slash (/), question mark (?), or pound sign (#) characters.'
       operationId: getProject
@@ -148,7 +145,7 @@ paths:
           description: Unprocessable Entity
     put:
       tags:
-      - projects
+      - Projects
       summary: Update a project by ID or name
       description: 'Update an existing project with new configuration. Project names cannot be changed. The project identifier is either project ID or project name. Note: When using a project name as the identifier, it cannot contain slash (/), question mark (?), or pound sign (#) characters.'
       operationId: updateProject
@@ -194,7 +191,7 @@ paths:
           description: Unprocessable Entity
     delete:
       tags:
-      - projects
+      - Projects
       summary: Delete a project by ID or name
       description: 'Delete an existing project and all its associated data. The project identifier is either project ID or project name. The default project cannot be deleted. Note: When using a project name as the identifier, it cannot contain slash (/), question mark (?), or pound sign (#) characters.'
       operationId: deleteProject
@@ -230,48 +227,6 @@ paths:
           description: Unprocessable Entity
 components:
   schemas:
-    GetProjectResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/Project'
-      type: object
-      required:
-      - data
-      title: GetProjectResponseBody
-    Project:
-      properties:
-        name:
-          type: string
-          minLength: 1
-          title: Name
-        description:
-          type:
-          - string
-          - 'null'
-          title: Description
-        id:
-          type: string
-          title: Id
-      type: object
-      required:
-      - name
-      - id
-      title: Project
-    CreateProjectRequestBody:
-      properties:
-        name:
-          type: string
-          minLength: 1
-          title: Name
-        description:
-          type:
-          - string
-          - 'null'
-          title: Description
-      type: object
-      required:
-      - name
-      title: CreateProjectRequestBody
     CreateProjectResponseBody:
       properties:
         data:
@@ -280,15 +235,6 @@ components:
       required:
       - data
       title: CreateProjectResponseBody
-    UpdateProjectRequestBody:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-          title: Description
-      type: object
-      title: UpdateProjectRequestBody
     GetProjectsResponseBody:
       properties:
         data:
@@ -314,3 +260,54 @@ components:
       required:
       - data
       title: UpdateProjectResponseBody
+    Project:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+        id:
+          type: string
+          title: Id
+      type: object
+      required:
+      - name
+      - id
+      title: Project
+    GetProjectResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/Project'
+      type: object
+      required:
+      - data
+      title: GetProjectResponseBody
+    CreateProjectRequestBody:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+      type: object
+      required:
+      - name
+      title: CreateProjectRequestBody
+    UpdateProjectRequestBody:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+      type: object
+      title: UpdateProjectRequestBody

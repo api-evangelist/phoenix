@@ -1,18 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs Spans API
+  title: Arize-Phoenix REST Spans API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
-servers:
-- url: https://app.phoenix.arize.com
-  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
-- name: spans
+- name: Spans
 paths:
   /v1/projects/{project_identifier}/spans/otlpv1:
     get:
       tags:
-      - spans
+      - Spans
       summary: Search spans with simple filters (no DSL)
       description: Return spans within a project filtered by time range. Supports cursor-based pagination.
       operationId: spanSearch
@@ -154,7 +151,7 @@ paths:
   /v1/projects/{project_identifier}/spans:
     get:
       tags:
-      - spans
+      - Spans
       summary: List spans with simple filters (no DSL)
       description: Return spans within a project filtered by time range. Supports cursor-based pagination.
       operationId: getSpans
@@ -307,7 +304,7 @@ paths:
           description: Unprocessable Entity
     post:
       tags:
-      - spans
+      - Spans
       summary: Create spans
       description: Submit spans to be inserted into a project. If any spans are invalid or duplicates, no spans will be inserted.
       operationId: createSpans
@@ -360,7 +357,7 @@ paths:
   /v1/span_annotations:
     post:
       tags:
-      - spans
+      - Spans
       summary: Create span annotations
       operationId: annotateSpans
       parameters:
@@ -407,7 +404,7 @@ paths:
   /v1/span_notes:
     post:
       tags:
-      - spans
+      - Spans
       summary: Create a span note
       description: Add a note annotation to a span. By default each call appends a new note with an auto-generated UUIDv4 identifier, so multiple notes accumulate on the same span. Callers may supply a non-empty `identifier` to upsert on (span_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note, matching the semantics of structured annotations.
       operationId: createSpanNote
@@ -445,9 +442,30 @@ paths:
   /v1/spans/{span_identifier}:
     delete:
       tags:
-      - spans
+      - Spans
       summary: Delete a span by span_identifier
-      description: "Delete a single span by identifier.\n\n        **Important**: This operation deletes ONLY the specified span itself and does NOT\n        delete its descendants/children. All child spans will remain in the trace and\n        become orphaned (their parent_id will point to a non-existent span).\n\n        Behavior:\n        - Deletes only the target span (preserves all descendant spans)\n        - If this was the last span in the trace, the trace record is also deleted\n        - If the deleted span had a parent, its cumulative metrics (error count, token counts)\n          are subtracted from all ancestor spans in the chain\n\n        **Note**: This operation is irreversible and may create orphaned spans."
+      description: 'Delete a single span by identifier.
+
+
+        **Important**: This operation deletes ONLY the specified span itself and does NOT
+
+        delete its descendants/children. All child spans will remain in the trace and
+
+        become orphaned (their parent_id will point to a non-existent span).
+
+
+        Behavior:
+
+        - Deletes only the target span (preserves all descendant spans)
+
+        - If this was the last span in the trace, the trace record is also deleted
+
+        - If the deleted span had a parent, its cumulative metrics (error count, token counts)
+
+        are subtracted from all ancestor spans in the chain
+
+
+        **Note**: This operation is irreversible and may create orphaned spans.'
       operationId: deleteSpan
       parameters:
       - name: span_identifier
@@ -482,7 +500,7 @@ paths:
   /v1/document_annotations:
     post:
       tags:
-      - spans
+      - Spans
       summary: Annotate Span Documents
       operationId: annotateSpanDocuments
       parameters:
@@ -528,37 +546,33 @@ paths:
           description: Invalid request - non-empty identifier not supported
 components:
   schemas:
-    InsertedSpanDocumentAnnotation:
+    SpanContext:
       properties:
-        id:
+        trace_id:
           type: string
-          title: Id
-          description: The ID of the inserted span document annotation
+          title: Trace Id
+          description: OpenTelemetry trace ID
+        span_id:
+          type: string
+          title: Span Id
+          description: OpenTelemetry span ID
       type: object
       required:
-      - id
-      title: InsertedSpanDocumentAnnotation
-    OtlpKind:
-      type: string
-      enum:
-      - SPAN_KIND_UNSPECIFIED
-      - SPAN_KIND_INTERNAL
-      - SPAN_KIND_SERVER
-      - SPAN_KIND_CLIENT
-      - SPAN_KIND_PRODUCER
-      - SPAN_KIND_CONSUMER
-      title: OtlpKind
-    AnnotateSpansResponseBody:
+      - trace_id
+      - span_id
+      title: SpanContext
+      examples:
+      - span_id: 1a2b3c4d5e6f7a8b
+        trace_id: a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4
+    HTTPValidationError:
       properties:
-        data:
+        detail:
           items:
-            $ref: '#/components/schemas/InsertedSpanAnnotation'
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Data
+          title: Detail
       type: object
-      required:
-      - data
-      title: AnnotateSpansResponseBody
+      title: HTTPValidationError
     OtlpAnyValue:
       properties:
         array_value:
@@ -601,18 +615,17 @@ components:
       additionalProperties: false
       type: object
       title: OtlpAnyValue
-    OtlpKeyValue:
+    AnnotateSpanDocumentsResponseBody:
       properties:
-        key:
-          type:
-          - string
-          - 'null'
-          title: Key
-        value:
-          $ref: '#/components/schemas/OtlpAnyValue'
-      additionalProperties: false
+        data:
+          items:
+            $ref: '#/components/schemas/InsertedSpanDocumentAnnotation'
+          type: array
+          title: Data
       type: object
-      title: OtlpKeyValue
+      required:
+      - data
+      title: AnnotateSpanDocumentsResponseBody
     OtlpSpan:
       properties:
         attributes:
@@ -783,168 +796,39 @@ components:
       additionalProperties: false
       type: object
       title: OtlpSpan
-    AnnotateSpanDocumentsRequestBody:
+    CreateSpansRequestBody:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/SpanDocumentAnnotationData'
+            $ref: '#/components/schemas/Span'
           type: array
           title: Data
       type: object
       required:
       - data
-      title: AnnotateSpanDocumentsRequestBody
-    SpanAnnotationData:
+      title: CreateSpansRequestBody
+    AnnotationResult:
       properties:
-        name:
-          type: string
-          title: Name
-          description: The name of the annotation
-        annotator_kind:
-          type: string
-          enum:
-          - LLM
-          - CODE
-          - HUMAN
-          title: Annotator Kind
-          description: The kind of annotator used for the annotation
-        result:
-          $ref: '#/components/schemas/AnnotationResult'
-          description: The result of the annotation
-        metadata:
-          additionalProperties: true
-          type:
-          - object
-          - 'null'
-          title: Metadata
-          description: Metadata for the annotation
-        identifier:
-          type: string
-          title: Identifier
-          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
-          default: ''
-        span_id:
-          type: string
-          title: Span Id
-          description: OpenTelemetry Span ID (hex format w/o 0x prefix)
-      type: object
-      required:
-      - name
-      - annotator_kind
-      - span_id
-      title: SpanAnnotationData
-    OtlpSpansResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/OtlpSpan'
-          type: array
-          title: Data
-        next_cursor:
+        label:
           type:
           - string
           - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: OtlpSpansResponseBody
-      description: Paginated response where each span follows OTLP JSON structure.
-    SpanContext:
-      properties:
-        trace_id:
-          type: string
-          title: Trace Id
-          description: OpenTelemetry trace ID
-        span_id:
-          type: string
-          title: Span Id
-          description: OpenTelemetry span ID
-      type: object
-      required:
-      - trace_id
-      - span_id
-      title: SpanContext
-      examples:
-      - span_id: 1a2b3c4d5e6f7a8b
-        trace_id: a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4
-    SpanEvent:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Name of the event
-        timestamp:
-          type: string
-          format: date-time
-          title: Timestamp
-          description: When the event occurred (must be timezone-aware)
-        attributes:
-          additionalProperties: true
-          type: object
-          title: Attributes
-          description: Event attributes
-      type: object
-      required:
-      - name
-      - timestamp
-      title: SpanEvent
-      examples:
-      - attributes:
-          exception.message: Connection refused
-        name: exception
-        timestamp: '2024-01-01T12:00:00Z'
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    OtlpArrayValue:
-      properties:
-        values:
-          items:
-            $ref: '#/components/schemas/OtlpAnyValue'
+          title: Label
+          description: The label assigned by the annotation
+        score:
           type:
-          - array
+          - number
           - 'null'
-          title: Values
-          description: Array of values. The array may be empty (contain 0 elements).
-      additionalProperties: false
+          title: Score
+          description: The score assigned by the annotation
+        explanation:
+          type:
+          - string
+          - 'null'
+          title: Explanation
+          description: Explanation of the annotation result
       type: object
-      title: OtlpArrayValue
-    AnnotateSpansRequestBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SpanAnnotationData'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AnnotateSpansRequestBody
+      title: AnnotationResult
     Span:
       properties:
         id:
@@ -1023,6 +907,45 @@ components:
         start_time: '2024-01-01T12:00:00Z'
         status_code: OK
         status_message: ''
+    SpanAnnotationData:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: The name of the annotation
+        annotator_kind:
+          type: string
+          enum:
+          - LLM
+          - CODE
+          - HUMAN
+          title: Annotator Kind
+          description: The kind of annotator used for the annotation
+        result:
+          $ref: '#/components/schemas/AnnotationResult'
+          description: The result of the annotation
+        metadata:
+          additionalProperties: true
+          type:
+          - object
+          - 'null'
+          title: Metadata
+          description: Metadata for the annotation
+        identifier:
+          type: string
+          title: Identifier
+          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
+          default: ''
+        span_id:
+          type: string
+          title: Span Id
+          description: OpenTelemetry Span ID (hex format w/o 0x prefix)
+      type: object
+      required:
+      - name
+      - annotator_kind
+      - span_id
+      title: SpanAnnotationData
     CreateSpanNoteRequestBody:
       properties:
         data:
@@ -1031,73 +954,6 @@ components:
       required:
       - data
       title: CreateSpanNoteRequestBody
-    SpanNoteData:
-      properties:
-        span_id:
-          type: string
-          minLength: 1
-          title: Span Id
-          description: OpenTelemetry Span ID (hex format w/o 0x prefix)
-        note:
-          type: string
-          minLength: 1
-          title: Note
-          description: The note text to add to the span
-        identifier:
-          type: string
-          title: Identifier
-          description: Optional caller-supplied identifier. When non-empty, the note is upserted on (span_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note. When omitted or empty, the server stamps a unique 'px-span-note:<uuid>' identifier so each call appends a new note.
-          default: ''
-      type: object
-      required:
-      - span_id
-      - note
-      title: SpanNoteData
-    InsertedSpanAnnotation:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The ID of the inserted span annotation
-      type: object
-      required:
-      - id
-      title: InsertedSpanAnnotation
-    SpansResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Span'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: SpansResponseBody
-    OtlpDoubleValue:
-      type: string
-      enum:
-      - Infinity
-      - -Infinity
-      - NaN
-      title: OtlpDoubleValue
-    AnnotateSpanDocumentsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/InsertedSpanDocumentAnnotation'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AnnotateSpanDocumentsResponseBody
     OtlpStatus:
       properties:
         code:
@@ -1117,6 +973,159 @@ components:
       additionalProperties: false
       type: object
       title: OtlpStatus
+    SpansResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Span'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: SpansResponseBody
+    OtlpKeyValue:
+      properties:
+        key:
+          type:
+          - string
+          - 'null'
+          title: Key
+        value:
+          $ref: '#/components/schemas/OtlpAnyValue'
+      additionalProperties: false
+      type: object
+      title: OtlpKeyValue
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    OtlpKind:
+      type: string
+      enum:
+      - SPAN_KIND_UNSPECIFIED
+      - SPAN_KIND_INTERNAL
+      - SPAN_KIND_SERVER
+      - SPAN_KIND_CLIENT
+      - SPAN_KIND_PRODUCER
+      - SPAN_KIND_CONSUMER
+      title: OtlpKind
+    CreateSpansResponseBody:
+      properties:
+        total_received:
+          type: integer
+          title: Total Received
+          description: Total number of spans received
+        total_queued:
+          type: integer
+          title: Total Queued
+          description: Number of spans successfully queued for insertion
+      type: object
+      required:
+      - total_received
+      - total_queued
+      title: CreateSpansResponseBody
+    InsertedSpanDocumentAnnotation:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the inserted span document annotation
+      type: object
+      required:
+      - id
+      title: InsertedSpanDocumentAnnotation
+    OtlpEvent:
+      properties:
+        attributes:
+          items:
+            $ref: '#/components/schemas/OtlpKeyValue'
+          type:
+          - array
+          - 'null'
+          title: Attributes
+          description: attributes is a collection of attribute key/value pairs on the event. Attribute keys MUST be unique (it is not allowed to have more than one attribute with the same key).
+        dropped_attributes_count:
+          type:
+          - integer
+          - 'null'
+          maximum: 4294967295.0
+          minimum: 0.0
+          title: Dropped Attributes Count
+          description: dropped_attributes_count is the number of dropped attributes. If the value is 0, then no attributes were dropped.
+        name:
+          type:
+          - string
+          - 'null'
+          title: Name
+          description: name of the event. This field is semantically required to be set to non-empty string.
+        time_unix_nano:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1.8446744073709552e+19
+            minimum: 0.0
+          - type: string
+            pattern: ^[0-9]+$
+          - type: 'null'
+          title: Time Unix Nano
+          description: time_unix_nano is the time the event occurred. Value is UNIX Epoch time in nanoseconds since 00:00:00 UTC on 1 January 1970.
+      additionalProperties: false
+      type: object
+      title: OtlpEvent
+    CreateSpanNoteResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/InsertedSpanAnnotation'
+      type: object
+      required:
+      - data
+      title: CreateSpanNoteResponseBody
+    OtlpSpansResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/OtlpSpan'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: OtlpSpansResponseBody
+      description: Paginated response where each span follows OTLP JSON structure.
     SpanDocumentAnnotationData:
       properties:
         name:
@@ -1161,105 +1170,114 @@ components:
       - span_id
       - document_position
       title: SpanDocumentAnnotationData
-    CreateSpanNoteResponseBody:
+    InsertedSpanAnnotation:
       properties:
-        data:
-          $ref: '#/components/schemas/InsertedSpanAnnotation'
+        id:
+          type: string
+          title: Id
+          description: The ID of the inserted span annotation
       type: object
       required:
-      - data
-      title: CreateSpanNoteResponseBody
-    CreateSpansRequestBody:
+      - id
+      title: InsertedSpanAnnotation
+    AnnotateSpanDocumentsRequestBody:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/Span'
+            $ref: '#/components/schemas/SpanDocumentAnnotationData'
           type: array
           title: Data
       type: object
       required:
       - data
-      title: CreateSpansRequestBody
-    HTTPValidationError:
+      title: AnnotateSpanDocumentsRequestBody
+    AnnotateSpansResponseBody:
       properties:
-        detail:
+        data:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/InsertedSpanAnnotation'
           type: array
-          title: Detail
+          title: Data
       type: object
-      title: HTTPValidationError
-    AnnotationResult:
+      required:
+      - data
+      title: AnnotateSpansResponseBody
+    OtlpArrayValue:
       properties:
-        label:
-          type:
-          - string
-          - 'null'
-          title: Label
-          description: The label assigned by the annotation
-        score:
-          type:
-          - number
-          - 'null'
-          title: Score
-          description: The score assigned by the annotation
-        explanation:
-          type:
-          - string
-          - 'null'
-          title: Explanation
-          description: Explanation of the annotation result
-      type: object
-      title: AnnotationResult
-    OtlpEvent:
-      properties:
-        attributes:
+        values:
           items:
-            $ref: '#/components/schemas/OtlpKeyValue'
+            $ref: '#/components/schemas/OtlpAnyValue'
           type:
           - array
           - 'null'
-          title: Attributes
-          description: attributes is a collection of attribute key/value pairs on the event. Attribute keys MUST be unique (it is not allowed to have more than one attribute with the same key).
-        dropped_attributes_count:
-          type:
-          - integer
-          - 'null'
-          maximum: 4294967295.0
-          minimum: 0.0
-          title: Dropped Attributes Count
-          description: dropped_attributes_count is the number of dropped attributes. If the value is 0, then no attributes were dropped.
-        name:
-          type:
-          - string
-          - 'null'
-          title: Name
-          description: name of the event. This field is semantically required to be set to non-empty string.
-        time_unix_nano:
-          anyOf:
-          - type: integer
-            exclusiveMaximum: 1.8446744073709552e+19
-            minimum: 0.0
-          - type: string
-            pattern: ^[0-9]+$
-          - type: 'null'
-          title: Time Unix Nano
-          description: time_unix_nano is the time the event occurred. Value is UNIX Epoch time in nanoseconds since 00:00:00 UTC on 1 January 1970.
+          title: Values
+          description: Array of values. The array may be empty (contain 0 elements).
       additionalProperties: false
       type: object
-      title: OtlpEvent
-    CreateSpansResponseBody:
+      title: OtlpArrayValue
+    SpanNoteData:
       properties:
-        total_received:
-          type: integer
-          title: Total Received
-          description: Total number of spans received
-        total_queued:
-          type: integer
-          title: Total Queued
-          description: Number of spans successfully queued for insertion
+        span_id:
+          type: string
+          minLength: 1
+          title: Span Id
+          description: OpenTelemetry Span ID (hex format w/o 0x prefix)
+        note:
+          type: string
+          minLength: 1
+          title: Note
+          description: The note text to add to the span
+        identifier:
+          type: string
+          title: Identifier
+          description: Optional caller-supplied identifier. When non-empty, the note is upserted on (span_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note. When omitted or empty, the server stamps a unique 'px-span-note:<uuid>' identifier so each call appends a new note.
+          default: ''
       type: object
       required:
-      - total_received
-      - total_queued
-      title: CreateSpansResponseBody
+      - span_id
+      - note
+      title: SpanNoteData
+    OtlpDoubleValue:
+      type: string
+      enum:
+      - Infinity
+      - -Infinity
+      - NaN
+      title: OtlpDoubleValue
+    SpanEvent:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the event
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+          description: When the event occurred (must be timezone-aware)
+        attributes:
+          additionalProperties: true
+          type: object
+          title: Attributes
+          description: Event attributes
+      type: object
+      required:
+      - name
+      - timestamp
+      title: SpanEvent
+      examples:
+      - attributes:
+          exception.message: Connection refused
+        name: exception
+        timestamp: '2024-01-01T12:00:00Z'
+    AnnotateSpansRequestBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SpanAnnotationData'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AnnotateSpansRequestBody

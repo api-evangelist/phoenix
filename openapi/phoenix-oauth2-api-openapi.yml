@@ -1,13 +1,10 @@
 openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs Oauth2 API
+  title: Arize-Phoenix REST Oauth2 API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
-servers:
-- url: https://app.phoenix.arize.com
-  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
-- name: Oauth2
+- name: OAuth2
 paths:
   /oauth2/{idp_name}/login:
     post:
@@ -43,7 +40,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Oauth2
+      - OAuth2
     get:
       summary: Login
       operationId: login_oauth2__idp_name__login_get
@@ -77,7 +74,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Oauth2
+      - OAuth2
   /oauth2/{idp_name}/tokens:
     get:
       summary: Create Tokens
@@ -154,18 +151,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Oauth2
+      - OAuth2
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -192,3 +180,12 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

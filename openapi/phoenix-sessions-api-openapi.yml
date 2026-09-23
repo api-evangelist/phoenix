@@ -1,18 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs Sessions API
+  title: Arize-Phoenix REST Sessions API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
-servers:
-- url: https://app.phoenix.arize.com
-  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
-- name: sessions
+- name: Sessions
 paths:
   /v1/sessions/{session_identifier}:
     get:
       tags:
-      - sessions
+      - Sessions
       summary: Get session by ID or session_id
       operationId: getSession
       parameters:
@@ -51,7 +48,7 @@ paths:
           description: Unprocessable Entity
     delete:
       tags:
-      - sessions
+      - Sessions
       summary: Delete a session by identifier
       description: 'Delete a session by its identifier. The identifier can be either:
 
@@ -95,7 +92,7 @@ paths:
   /v1/sessions/delete:
     post:
       tags:
-      - sessions
+      - Sessions
       summary: Bulk delete sessions
       description: Delete multiple sessions by their identifiers (GlobalIDs or session_id strings). All identifiers in a single request must be the same type. Non-existent IDs are silently skipped. All associated traces, spans, and annotations are cascade deleted.
       operationId: deleteSessions
@@ -123,7 +120,7 @@ paths:
   /v1/projects/{project_identifier}/sessions:
     get:
       tags:
-      - sessions
+      - Sessions
       summary: List sessions for a project
       operationId: listProjectSessions
       parameters:
@@ -195,7 +192,7 @@ paths:
   /v1/session_annotations:
     post:
       tags:
-      - sessions
+      - Sessions
       summary: Create session annotations
       operationId: annotateSessions
       parameters:
@@ -242,7 +239,7 @@ paths:
   /v1/session_notes:
     post:
       tags:
-      - sessions
+      - Sessions
       summary: Create a session note
       description: Add a note annotation to a session. By default each call appends a new note with an auto-generated UUIDv4 identifier, so multiple notes accumulate on the same session. Callers may supply a non-empty `identifier` to upsert on (session_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note, matching the semantics of structured annotations.
       operationId: createSessionNote
@@ -327,6 +324,131 @@ components:
       - end_time
       - traces
       title: SessionData
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    InsertedSessionAnnotation:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the inserted session annotation
+      type: object
+      required:
+      - id
+      title: InsertedSessionAnnotation
+    GetSessionsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SessionData'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: GetSessionsResponseBody
+    SessionNoteData:
+      properties:
+        session_id:
+          type: string
+          minLength: 1
+          title: Session Id
+          description: Session ID
+        note:
+          type: string
+          minLength: 1
+          title: Note
+          description: The note text to add to the session
+        identifier:
+          type: string
+          title: Identifier
+          description: Optional caller-supplied identifier. When non-empty, the note is upserted on (session_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note. When omitted or empty, the server stamps a unique 'px-session-note:<uuid>' identifier so each call appends a new note.
+          default: ''
+      type: object
+      required:
+      - session_id
+      - note
+      title: SessionNoteData
+    CreateSessionNoteResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/InsertedSessionAnnotation'
+      type: object
+      required:
+      - data
+      title: CreateSessionNoteResponseBody
+    DeleteSessionsRequestBody:
+      properties:
+        session_identifiers:
+          items:
+            type: string
+          type: array
+          title: Session Identifiers
+          description: 'List of session identifiers to delete. All identifiers must be the same type: either all GlobalIDs or all user-provided session_id strings.'
+      type: object
+      required:
+      - session_identifiers
+      title: DeleteSessionsRequestBody
+    AnnotationResult:
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
+          title: Label
+          description: The label assigned by the annotation
+        score:
+          type:
+          - number
+          - 'null'
+          title: Score
+          description: The score assigned by the annotation
+        explanation:
+          type:
+          - string
+          - 'null'
+          title: Explanation
+          description: Explanation of the annotation result
+      type: object
+      title: AnnotationResult
+    GetSessionResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/SessionData'
+      type: object
+      required:
+      - data
+      title: GetSessionResponseBody
     CreateSessionNoteRequestBody:
       properties:
         data:
@@ -335,6 +457,51 @@ components:
       required:
       - data
       title: CreateSessionNoteRequestBody
+    AnnotateSessionsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/InsertedSessionAnnotation'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AnnotateSessionsResponseBody
+    AnnotateSessionsRequestBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SessionAnnotationData'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AnnotateSessionsRequestBody
+    SessionTraceData:
+      properties:
+        id:
+          type: string
+          title: Id
+        trace_id:
+          type: string
+          title: Trace Id
+        start_time:
+          type: string
+          format: date-time
+          title: Start Time
+        end_time:
+          type: string
+          format: date-time
+          title: End Time
+      type: object
+      required:
+      - id
+      - trace_id
+      - start_time
+      - end_time
+      title: SessionTraceData
     SessionAnnotationData:
       properties:
         name:
@@ -374,17 +541,6 @@ components:
       - annotator_kind
       - session_id
       title: SessionAnnotationData
-    AnnotateSessionsRequestBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SessionAnnotationData'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AnnotateSessionsRequestBody
     HTTPValidationError:
       properties:
         detail:
@@ -394,162 +550,3 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    InsertedSessionAnnotation:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The ID of the inserted session annotation
-      type: object
-      required:
-      - id
-      title: InsertedSessionAnnotation
-    AnnotationResult:
-      properties:
-        label:
-          type:
-          - string
-          - 'null'
-          title: Label
-          description: The label assigned by the annotation
-        score:
-          type:
-          - number
-          - 'null'
-          title: Score
-          description: The score assigned by the annotation
-        explanation:
-          type:
-          - string
-          - 'null'
-          title: Explanation
-          description: Explanation of the annotation result
-      type: object
-      title: AnnotationResult
-    SessionNoteData:
-      properties:
-        session_id:
-          type: string
-          minLength: 1
-          title: Session Id
-          description: Session ID
-        note:
-          type: string
-          minLength: 1
-          title: Note
-          description: The note text to add to the session
-        identifier:
-          type: string
-          title: Identifier
-          description: Optional caller-supplied identifier. When non-empty, the note is upserted on (session_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note. When omitted or empty, the server stamps a unique 'px-session-note:<uuid>' identifier so each call appends a new note.
-          default: ''
-      type: object
-      required:
-      - session_id
-      - note
-      title: SessionNoteData
-    GetSessionResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/SessionData'
-      type: object
-      required:
-      - data
-      title: GetSessionResponseBody
-    SessionTraceData:
-      properties:
-        id:
-          type: string
-          title: Id
-        trace_id:
-          type: string
-          title: Trace Id
-        start_time:
-          type: string
-          format: date-time
-          title: Start Time
-        end_time:
-          type: string
-          format: date-time
-          title: End Time
-      type: object
-      required:
-      - id
-      - trace_id
-      - start_time
-      - end_time
-      title: SessionTraceData
-    GetSessionsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SessionData'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: GetSessionsResponseBody
-    CreateSessionNoteResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/InsertedSessionAnnotation'
-      type: object
-      required:
-      - data
-      title: CreateSessionNoteResponseBody
-    AnnotateSessionsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/InsertedSessionAnnotation'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AnnotateSessionsResponseBody
-    DeleteSessionsRequestBody:
-      properties:
-        session_identifiers:
-          items:
-            type: string
-          type: array
-          title: Session Identifiers
-          description: 'List of session identifiers to delete. All identifiers must be the same type: either all GlobalIDs or all user-provided session_id strings.'
-      type: object
-      required:
-      - session_identifiers
-      title: DeleteSessionsRequestBody

@@ -1,19 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs Annotations API
+  title: Arize-Phoenix REST Annotations API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
-servers:
-- url: https://app.phoenix.arize.com
-  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
-- name: annotations
+- name: Annotations
 paths:
   /v1/projects/{project_identifier}/span_annotations:
     get:
       tags:
-      - annotations
-      summary: Get span annotations filtered by span_ids and/or identifier.
+      - Annotations
+      summary: Get span annotations filtered by span_ids and/or identifier
       description: Return span annotations for a project, filtered by `span_ids`, `identifier`, or both. At least one of `span_ids` or `identifier` must be supplied. When both are supplied, results are the AND-intersection of the two filters.
       operationId: listSpanAnnotationsBySpanIds
       parameters:
@@ -122,9 +119,52 @@ paths:
           description: Invalid parameters
     delete:
       tags:
-      - annotations
-      summary: Delete span annotations in a project that match the supplied filter.
-      description: "Hard-delete span annotations within the named project that match the\nsupplied filter.\n\n- The request must either supply both `start_time` AND `end_time`\n  to bound the delete to a `[start_time, end_time)` time window,\n  OR set `delete_all=true` to acknowledge an unbounded sweep. A request\n  that satisfies neither is rejected with 422.\n- `name`, `identifier`, and `annotator_kind` are optional narrowing\n  filters; on their own they do NOT authorize the request — they only\n  narrow within an already-authorized request (bounded time range or\n  `delete_all=true`).\n- All supplied filters are combined with AND. `name` and `identifier`,\n  when present, must be non-empty.\n- `start_time` is inclusive (`>=`); `end_time` is exclusive\n  (`<`). When both are supplied, `start_time` must be strictly earlier\n  than `end_time` (else 422). A half-bounded range (only one of\n  the two) does NOT satisfy the gate and is rejected unless\n  `delete_all=true` is also set. Naive datetimes are interpreted as UTC.\n- The endpoint is idempotent: a request that matches no rows still\n  returns 204.\n- When authentication is enabled, non-admin callers can only delete rows\n  they own (`user_id == current_user.id`); admins delete all matching\n  rows."
+      - Annotations
+      summary: Delete span annotations in a project that match the supplied filter
+      description: 'Hard-delete span annotations within the named project that match the
+
+        supplied filter.
+
+
+        - The request must either supply both `start_time` AND `end_time`
+
+        to bound the delete to a `[start_time, end_time)` time window,
+
+        OR set `delete_all=true` to acknowledge an unbounded sweep. A request
+
+        that satisfies neither is rejected with 422.
+
+        - `name`, `identifier`, and `annotator_kind` are optional narrowing
+
+        filters; on their own they do NOT authorize the request — they only
+
+        narrow within an already-authorized request (bounded time range or
+
+        `delete_all=true`).
+
+        - All supplied filters are combined with AND. `name` and `identifier`,
+
+        when present, must be non-empty.
+
+        - `start_time` is inclusive (`>=`); `end_time` is exclusive
+
+        (`<`). When both are supplied, `start_time` must be strictly earlier
+
+        than `end_time` (else 422). A half-bounded range (only one of
+
+        the two) does NOT satisfy the gate and is rejected unless
+
+        `delete_all=true` is also set. Naive datetimes are interpreted as UTC.
+
+        - The endpoint is idempotent: a request that matches no rows still
+
+        returns 204.
+
+        - When authentication is enabled, non-admin callers can only delete rows
+
+        they own (`user_id == current_user.id`); admins delete all matching
+
+        rows.'
       operationId: deleteSpanAnnotations
       parameters:
       - name: project_identifier
@@ -226,8 +266,8 @@ paths:
   /v1/projects/{project_identifier}/trace_annotations:
     get:
       tags:
-      - annotations
-      summary: Get trace annotations filtered by trace_ids and/or identifier.
+      - Annotations
+      summary: Get trace annotations filtered by trace_ids and/or identifier
       description: Return trace annotations for a project, filtered by `trace_ids`, `identifier`, or both. At least one of `trace_ids` or `identifier` must be supplied. When both are supplied, results are the AND-intersection of the two filters.
       operationId: listTraceAnnotationsByTraceIds
       parameters:
@@ -336,9 +376,52 @@ paths:
           description: Invalid parameters
     delete:
       tags:
-      - annotations
-      summary: Delete trace annotations in a project that match the supplied filter.
-      description: "Hard-delete trace annotations within the named project that match the\nsupplied filter.\n\n- The request must either supply both `start_time` AND `end_time`\n  to bound the delete to a `[start_time, end_time)` time window,\n  OR set `delete_all=true` to acknowledge an unbounded sweep. A request\n  that satisfies neither is rejected with 422.\n- `name`, `identifier`, and `annotator_kind` are optional narrowing\n  filters; on their own they do NOT authorize the request — they only\n  narrow within an already-authorized request (bounded time range or\n  `delete_all=true`).\n- All supplied filters are combined with AND. `name` and `identifier`,\n  when present, must be non-empty.\n- `start_time` is inclusive (`>=`); `end_time` is exclusive\n  (`<`). When both are supplied, `start_time` must be strictly earlier\n  than `end_time` (else 422). A half-bounded range (only one of\n  the two) does NOT satisfy the gate and is rejected unless\n  `delete_all=true` is also set. Naive datetimes are interpreted as UTC.\n- The endpoint is idempotent: a request that matches no rows still\n  returns 204.\n- When authentication is enabled, non-admin callers can only delete rows\n  they own (`user_id == current_user.id`); admins delete all matching\n  rows."
+      - Annotations
+      summary: Delete trace annotations in a project that match the supplied filter
+      description: 'Hard-delete trace annotations within the named project that match the
+
+        supplied filter.
+
+
+        - The request must either supply both `start_time` AND `end_time`
+
+        to bound the delete to a `[start_time, end_time)` time window,
+
+        OR set `delete_all=true` to acknowledge an unbounded sweep. A request
+
+        that satisfies neither is rejected with 422.
+
+        - `name`, `identifier`, and `annotator_kind` are optional narrowing
+
+        filters; on their own they do NOT authorize the request — they only
+
+        narrow within an already-authorized request (bounded time range or
+
+        `delete_all=true`).
+
+        - All supplied filters are combined with AND. `name` and `identifier`,
+
+        when present, must be non-empty.
+
+        - `start_time` is inclusive (`>=`); `end_time` is exclusive
+
+        (`<`). When both are supplied, `start_time` must be strictly earlier
+
+        than `end_time` (else 422). A half-bounded range (only one of
+
+        the two) does NOT satisfy the gate and is rejected unless
+
+        `delete_all=true` is also set. Naive datetimes are interpreted as UTC.
+
+        - The endpoint is idempotent: a request that matches no rows still
+
+        returns 204.
+
+        - When authentication is enabled, non-admin callers can only delete rows
+
+        they own (`user_id == current_user.id`); admins delete all matching
+
+        rows.'
       operationId: deleteTraceAnnotations
       parameters:
       - name: project_identifier
@@ -440,8 +523,8 @@ paths:
   /v1/projects/{project_identifier}/session_annotations:
     get:
       tags:
-      - annotations
-      summary: Get session annotations filtered by session_ids and/or identifier.
+      - Annotations
+      summary: Get session annotations filtered by session_ids and/or identifier
       description: Return session annotations for a project, filtered by `session_ids`, `identifier`, or both. At least one of `session_ids` or `identifier` must be supplied. When both are supplied, results are the AND-intersection of the two filters.
       operationId: listSessionAnnotationsBySessionIds
       parameters:
@@ -550,9 +633,52 @@ paths:
           description: Invalid parameters
     delete:
       tags:
-      - annotations
-      summary: Delete session annotations in a project that match the supplied filter.
-      description: "Hard-delete session annotations within the named project that match the\nsupplied filter.\n\n- The request must either supply both `start_time` AND `end_time`\n  to bound the delete to a `[start_time, end_time)` time window,\n  OR set `delete_all=true` to acknowledge an unbounded sweep. A request\n  that satisfies neither is rejected with 422.\n- `name`, `identifier`, and `annotator_kind` are optional narrowing\n  filters; on their own they do NOT authorize the request — they only\n  narrow within an already-authorized request (bounded time range or\n  `delete_all=true`).\n- All supplied filters are combined with AND. `name` and `identifier`,\n  when present, must be non-empty.\n- `start_time` is inclusive (`>=`); `end_time` is exclusive\n  (`<`). When both are supplied, `start_time` must be strictly earlier\n  than `end_time` (else 422). A half-bounded range (only one of\n  the two) does NOT satisfy the gate and is rejected unless\n  `delete_all=true` is also set. Naive datetimes are interpreted as UTC.\n- The endpoint is idempotent: a request that matches no rows still\n  returns 204.\n- When authentication is enabled, non-admin callers can only delete rows\n  they own (`user_id == current_user.id`); admins delete all matching\n  rows."
+      - Annotations
+      summary: Delete session annotations in a project that match the supplied filter
+      description: 'Hard-delete session annotations within the named project that match the
+
+        supplied filter.
+
+
+        - The request must either supply both `start_time` AND `end_time`
+
+        to bound the delete to a `[start_time, end_time)` time window,
+
+        OR set `delete_all=true` to acknowledge an unbounded sweep. A request
+
+        that satisfies neither is rejected with 422.
+
+        - `name`, `identifier`, and `annotator_kind` are optional narrowing
+
+        filters; on their own they do NOT authorize the request — they only
+
+        narrow within an already-authorized request (bounded time range or
+
+        `delete_all=true`).
+
+        - All supplied filters are combined with AND. `name` and `identifier`,
+
+        when present, must be non-empty.
+
+        - `start_time` is inclusive (`>=`); `end_time` is exclusive
+
+        (`<`). When both are supplied, `start_time` must be strictly earlier
+
+        than `end_time` (else 422). A half-bounded range (only one of
+
+        the two) does NOT satisfy the gate and is rejected unless
+
+        `delete_all=true` is also set. Naive datetimes are interpreted as UTC.
+
+        - The endpoint is idempotent: a request that matches no rows still
+
+        returns 204.
+
+        - When authentication is enabled, non-admin callers can only delete rows
+
+        they own (`user_id == current_user.id`); admins delete all matching
+
+        rows.'
       operationId: deleteSessionAnnotations
       parameters:
       - name: project_identifier
@@ -653,6 +779,89 @@ paths:
           description: Invalid parameters
 components:
   schemas:
+    SessionAnnotationsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SessionAnnotation'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: SessionAnnotationsResponseBody
+    TraceAnnotation:
+      properties:
+        id:
+          type: string
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        source:
+          type: string
+          enum:
+          - API
+          - APP
+          title: Source
+        user_id:
+          type:
+          - string
+          - 'null'
+          title: User Id
+        name:
+          type: string
+          title: Name
+          description: The name of the annotation
+        annotator_kind:
+          type: string
+          enum:
+          - LLM
+          - CODE
+          - HUMAN
+          title: Annotator Kind
+          description: The kind of annotator used for the annotation
+        result:
+          $ref: '#/components/schemas/AnnotationResult'
+          description: The result of the annotation
+        metadata:
+          additionalProperties: true
+          type:
+          - object
+          - 'null'
+          title: Metadata
+          description: Metadata for the annotation
+        identifier:
+          type: string
+          title: Identifier
+          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
+          default: ''
+        trace_id:
+          type: string
+          title: Trace Id
+          description: OpenTelemetry Trace ID (hex format w/o 0x prefix)
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      - source
+      - user_id
+      - name
+      - annotator_kind
+      - trace_id
+      title: TraceAnnotation
     SpanAnnotationsResponseBody:
       properties:
         data:
@@ -670,23 +879,6 @@ components:
       - data
       - next_cursor
       title: SpanAnnotationsResponseBody
-    TraceAnnotationsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/TraceAnnotation'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: TraceAnnotationsResponseBody
     AnnotationResult:
       properties:
         label:
@@ -775,72 +967,23 @@ components:
       - annotator_kind
       - span_id
       title: SpanAnnotation
-    TraceAnnotation:
+    TraceAnnotationsResponseBody:
       properties:
-        id:
-          type: string
-          title: Id
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-        source:
-          type: string
-          enum:
-          - API
-          - APP
-          title: Source
-        user_id:
+        data:
+          items:
+            $ref: '#/components/schemas/TraceAnnotation'
+          type: array
+          title: Data
+        next_cursor:
           type:
           - string
           - 'null'
-          title: User Id
-        name:
-          type: string
-          title: Name
-          description: The name of the annotation
-        annotator_kind:
-          type: string
-          enum:
-          - LLM
-          - CODE
-          - HUMAN
-          title: Annotator Kind
-          description: The kind of annotator used for the annotation
-        result:
-          $ref: '#/components/schemas/AnnotationResult'
-          description: The result of the annotation
-        metadata:
-          additionalProperties: true
-          type:
-          - object
-          - 'null'
-          title: Metadata
-          description: Metadata for the annotation
-        identifier:
-          type: string
-          title: Identifier
-          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
-          default: ''
-        trace_id:
-          type: string
-          title: Trace Id
-          description: OpenTelemetry Trace ID (hex format w/o 0x prefix)
+          title: Next Cursor
       type: object
       required:
-      - id
-      - created_at
-      - updated_at
-      - source
-      - user_id
-      - name
-      - annotator_kind
-      - trace_id
-      title: TraceAnnotation
+      - data
+      - next_cursor
+      title: TraceAnnotationsResponseBody
     SessionAnnotation:
       properties:
         id:
@@ -907,20 +1050,3 @@ components:
       - annotator_kind
       - session_id
       title: SessionAnnotation
-    SessionAnnotationsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SessionAnnotation'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: SessionAnnotationsResponseBody

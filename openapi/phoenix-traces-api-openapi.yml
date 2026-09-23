@@ -1,18 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs Traces API
+  title: Arize-Phoenix REST Traces API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
-servers:
-- url: https://app.phoenix.arize.com
-  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
-- name: traces
+- name: Traces
 paths:
   /v1/projects/{project_identifier}/traces:
     get:
       tags:
-      - traces
+      - Traces
       summary: List traces for a project
       operationId: listProjectTraces
       parameters:
@@ -140,7 +137,7 @@ paths:
   /v1/trace_annotations:
     post:
       tags:
-      - traces
+      - Traces
       summary: Create trace annotations
       operationId: annotateTraces
       parameters:
@@ -187,7 +184,7 @@ paths:
   /v1/trace_notes:
     post:
       tags:
-      - traces
+      - Traces
       summary: Create a trace note
       description: Add a note annotation to a trace. By default each call appends a new note with an auto-generated UUIDv4 identifier, so multiple notes accumulate on the same trace. Callers may supply a non-empty `identifier` to upsert on (trace_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note, matching the semantics of structured annotations.
       operationId: createTraceNote
@@ -225,7 +222,7 @@ paths:
   /v1/traces/{trace_identifier}:
     delete:
       tags:
-      - traces
+      - Traces
       summary: Delete a trace by identifier
       description: 'Delete an entire trace by its identifier. The identifier can be either:
 
@@ -268,14 +265,135 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    CreateTraceNoteResponseBody:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    AnnotateTracesResponseBody:
       properties:
         data:
-          $ref: '#/components/schemas/InsertedTraceAnnotation'
+          items:
+            $ref: '#/components/schemas/InsertedTraceAnnotation'
+          type: array
+          title: Data
       type: object
       required:
       - data
-      title: CreateTraceNoteResponseBody
+      title: AnnotateTracesResponseBody
+    InsertedTraceAnnotation:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the inserted trace annotation
+      type: object
+      required:
+      - id
+      title: InsertedTraceAnnotation
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    TraceAnnotationData:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: The name of the annotation
+        annotator_kind:
+          type: string
+          enum:
+          - LLM
+          - CODE
+          - HUMAN
+          title: Annotator Kind
+          description: The kind of annotator used for the annotation
+        result:
+          $ref: '#/components/schemas/AnnotationResult'
+          description: The result of the annotation
+        metadata:
+          additionalProperties: true
+          type:
+          - object
+          - 'null'
+          title: Metadata
+          description: Metadata for the annotation
+        identifier:
+          type: string
+          title: Identifier
+          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
+          default: ''
+        trace_id:
+          type: string
+          title: Trace Id
+          description: OpenTelemetry Trace ID (hex format w/o 0x prefix)
+      type: object
+      required:
+      - name
+      - annotator_kind
+      - trace_id
+      title: TraceAnnotationData
+    AnnotationResult:
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
+          title: Label
+          description: The label assigned by the annotation
+        score:
+          type:
+          - number
+          - 'null'
+          title: Score
+          description: The score assigned by the annotation
+        explanation:
+          type:
+          - string
+          - 'null'
+          title: Explanation
+          description: Explanation of the annotation result
+      type: object
+      title: AnnotationResult
+    AnnotateTracesRequestBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TraceAnnotationData'
+          type: array
+          title: Data
+          description: The trace annotations to be upserted
+      type: object
+      required:
+      - data
+      title: AnnotateTracesRequestBody
     TraceSpanData:
       properties:
         id:
@@ -317,16 +435,22 @@ components:
       - start_time
       - end_time
       title: TraceSpanData
-    InsertedTraceAnnotation:
+    CreateTraceNoteRequestBody:
       properties:
-        id:
-          type: string
-          title: Id
-          description: The ID of the inserted trace annotation
+        data:
+          $ref: '#/components/schemas/TraceNoteData'
       type: object
       required:
-      - id
-      title: InsertedTraceAnnotation
+      - data
+      title: CreateTraceNoteRequestBody
+    CreateTraceNoteResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/InsertedTraceAnnotation'
+      type: object
+      required:
+      - data
+      title: CreateTraceNoteResponseBody
     TraceNoteData:
       properties:
         trace_id:
@@ -349,150 +473,6 @@ components:
       - trace_id
       - note
       title: TraceNoteData
-    AnnotateTracesResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/InsertedTraceAnnotation'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AnnotateTracesResponseBody
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    GetTracesResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/TraceData'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: GetTracesResponseBody
-    AnnotationResult:
-      properties:
-        label:
-          type:
-          - string
-          - 'null'
-          title: Label
-          description: The label assigned by the annotation
-        score:
-          type:
-          - number
-          - 'null'
-          title: Score
-          description: The score assigned by the annotation
-        explanation:
-          type:
-          - string
-          - 'null'
-          title: Explanation
-          description: Explanation of the annotation result
-      type: object
-      title: AnnotationResult
-    TraceAnnotationData:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: The name of the annotation
-        annotator_kind:
-          type: string
-          enum:
-          - LLM
-          - CODE
-          - HUMAN
-          title: Annotator Kind
-          description: The kind of annotator used for the annotation
-        result:
-          $ref: '#/components/schemas/AnnotationResult'
-          description: The result of the annotation
-        metadata:
-          additionalProperties: true
-          type:
-          - object
-          - 'null'
-          title: Metadata
-          description: Metadata for the annotation
-        identifier:
-          type: string
-          title: Identifier
-          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
-          default: ''
-        trace_id:
-          type: string
-          title: Trace Id
-          description: OpenTelemetry Trace ID (hex format w/o 0x prefix)
-      type: object
-      required:
-      - name
-      - annotator_kind
-      - trace_id
-      title: TraceAnnotationData
-    AnnotateTracesRequestBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/TraceAnnotationData'
-          type: array
-          title: Data
-          description: The trace annotations to be upserted
-      type: object
-      required:
-      - data
-      title: AnnotateTracesRequestBody
-    CreateTraceNoteRequestBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/TraceNoteData'
-      type: object
-      required:
-      - data
-      title: CreateTraceNoteRequestBody
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     TraceData:
       properties:
         id:
@@ -542,3 +522,20 @@ components:
       - start_time
       - end_time
       title: TraceData
+    GetTracesResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TraceData'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: GetTracesResponseBody

@@ -1,18 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs Users API
+  title: Arize-Phoenix REST Users API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
-servers:
-- url: https://app.phoenix.arize.com
-  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
-- name: users
+- name: Users
 paths:
   /v1/user:
     get:
       tags:
-      - users
+      - Users
       summary: Get the authenticated user
       description: Returns the profile of the currently authenticated user. When authentication is disabled, returns an anonymous user representation.
       operationId: getViewer
@@ -38,7 +35,7 @@ paths:
   /v1/users:
     get:
       tags:
-      - users
+      - Users
       summary: List all users
       description: Retrieve a paginated list of all users in the system.
       operationId: getUsers
@@ -82,7 +79,7 @@ paths:
           description: Unprocessable Entity
     post:
       tags:
-      - users
+      - Users
       summary: Create a new user
       description: Create a new user with the specified configuration.
       operationId: createUser
@@ -126,7 +123,7 @@ paths:
   /v1/users/{user_id}:
     delete:
       tags:
-      - users
+      - Users
       summary: Delete a user by ID
       description: Delete an existing user by their unique GlobalID.
       operationId: deleteUser
@@ -162,28 +159,100 @@ paths:
           description: Unprocessable Entity
 components:
   schemas:
-    CreateUserRequestBody:
+    LDAPUser:
       properties:
-        user:
+        id:
+          type: string
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        email:
+          type: string
+          title: Email
+        username:
+          type: string
+          title: Username
+        role:
+          type: string
+          enum:
+          - SYSTEM
+          - ADMIN
+          - MEMBER
+          - VIEWER
+          title: Role
+        auth_method:
+          type: string
+          const: LDAP
+          title: Auth Method
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      - email
+      - username
+      - role
+      - auth_method
+      title: LDAPUser
+    OAuth2UserData:
+      properties:
+        email:
+          type: string
+          title: Email
+        username:
+          type: string
+          title: Username
+        role:
+          type: string
+          enum:
+          - SYSTEM
+          - ADMIN
+          - MEMBER
+          - VIEWER
+          title: Role
+        auth_method:
+          type: string
+          const: OAUTH2
+          title: Auth Method
+        oauth2_client_id:
+          type: string
+          title: Oauth2 Client Id
+        oauth2_user_id:
+          type: string
+          title: Oauth2 User Id
+      type: object
+      required:
+      - email
+      - username
+      - role
+      - auth_method
+      title: OAuth2UserData
+    GetViewerResponseBody:
+      properties:
+        data:
           oneOf:
-          - $ref: '#/components/schemas/LocalUserData'
-          - $ref: '#/components/schemas/OAuth2UserData'
-          - $ref: '#/components/schemas/LDAPUserData'
-          title: User
+          - $ref: '#/components/schemas/LocalUser'
+          - $ref: '#/components/schemas/OAuth2User'
+          - $ref: '#/components/schemas/LDAPUser'
+          - $ref: '#/components/schemas/AnonymousUser'
+          title: Data
           discriminator:
             propertyName: auth_method
             mapping:
-              LDAP: '#/components/schemas/LDAPUserData'
-              LOCAL: '#/components/schemas/LocalUserData'
-              OAUTH2: '#/components/schemas/OAuth2UserData'
-        send_welcome_email:
-          type: boolean
-          title: Send Welcome Email
-          default: true
+              ANONYMOUS: '#/components/schemas/AnonymousUser'
+              LDAP: '#/components/schemas/LDAPUser'
+              LOCAL: '#/components/schemas/LocalUser'
+              OAUTH2: '#/components/schemas/OAuth2User'
       type: object
       required:
-      - user
-      title: CreateUserRequestBody
+      - data
+      title: GetViewerResponseBody
     OAuth2User:
       properties:
         id:
@@ -234,185 +303,6 @@ components:
       - role
       - auth_method
       title: OAuth2User
-    LDAPUserData:
-      properties:
-        email:
-          type: string
-          title: Email
-        username:
-          type: string
-          title: Username
-        role:
-          type: string
-          enum:
-          - SYSTEM
-          - ADMIN
-          - MEMBER
-          - VIEWER
-          title: Role
-        auth_method:
-          type: string
-          const: LDAP
-          title: Auth Method
-      type: object
-      required:
-      - email
-      - username
-      - role
-      - auth_method
-      title: LDAPUserData
-    GetViewerResponseBody:
-      properties:
-        data:
-          oneOf:
-          - $ref: '#/components/schemas/LocalUser'
-          - $ref: '#/components/schemas/OAuth2User'
-          - $ref: '#/components/schemas/LDAPUser'
-          - $ref: '#/components/schemas/AnonymousUser'
-          title: Data
-          discriminator:
-            propertyName: auth_method
-            mapping:
-              ANONYMOUS: '#/components/schemas/AnonymousUser'
-              LDAP: '#/components/schemas/LDAPUser'
-              LOCAL: '#/components/schemas/LocalUser'
-              OAUTH2: '#/components/schemas/OAuth2User'
-      type: object
-      required:
-      - data
-      title: GetViewerResponseBody
-    CreateUserResponseBody:
-      properties:
-        data:
-          oneOf:
-          - $ref: '#/components/schemas/LocalUser'
-          - $ref: '#/components/schemas/OAuth2User'
-          - $ref: '#/components/schemas/LDAPUser'
-          title: Data
-          discriminator:
-            propertyName: auth_method
-            mapping:
-              LDAP: '#/components/schemas/LDAPUser'
-              LOCAL: '#/components/schemas/LocalUser'
-              OAUTH2: '#/components/schemas/OAuth2User'
-      type: object
-      required:
-      - data
-      title: CreateUserResponseBody
-    LocalUserData:
-      properties:
-        email:
-          type: string
-          title: Email
-        username:
-          type: string
-          title: Username
-        role:
-          type: string
-          enum:
-          - SYSTEM
-          - ADMIN
-          - MEMBER
-          - VIEWER
-          title: Role
-        auth_method:
-          type: string
-          const: LOCAL
-          title: Auth Method
-        password:
-          type: string
-          title: Password
-      type: object
-      required:
-      - email
-      - username
-      - role
-      - auth_method
-      title: LocalUserData
-    OAuth2UserData:
-      properties:
-        email:
-          type: string
-          title: Email
-        username:
-          type: string
-          title: Username
-        role:
-          type: string
-          enum:
-          - SYSTEM
-          - ADMIN
-          - MEMBER
-          - VIEWER
-          title: Role
-        auth_method:
-          type: string
-          const: OAUTH2
-          title: Auth Method
-        oauth2_client_id:
-          type: string
-          title: Oauth2 Client Id
-        oauth2_user_id:
-          type: string
-          title: Oauth2 User Id
-      type: object
-      required:
-      - email
-      - username
-      - role
-      - auth_method
-      title: OAuth2UserData
-    AnonymousUser:
-      properties:
-        auth_method:
-          type: string
-          const: ANONYMOUS
-          title: Auth Method
-      type: object
-      required:
-      - auth_method
-      title: AnonymousUser
-    LDAPUser:
-      properties:
-        id:
-          type: string
-          title: Id
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-        email:
-          type: string
-          title: Email
-        username:
-          type: string
-          title: Username
-        role:
-          type: string
-          enum:
-          - SYSTEM
-          - ADMIN
-          - MEMBER
-          - VIEWER
-          title: Role
-        auth_method:
-          type: string
-          const: LDAP
-          title: Auth Method
-      type: object
-      required:
-      - id
-      - created_at
-      - updated_at
-      - email
-      - username
-      - role
-      - auth_method
-      title: LDAPUser
     GetUsersResponseBody:
       properties:
         data:
@@ -439,6 +329,56 @@ components:
       - data
       - next_cursor
       title: GetUsersResponseBody
+    CreateUserResponseBody:
+      properties:
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/LocalUser'
+          - $ref: '#/components/schemas/OAuth2User'
+          - $ref: '#/components/schemas/LDAPUser'
+          title: Data
+          discriminator:
+            propertyName: auth_method
+            mapping:
+              LDAP: '#/components/schemas/LDAPUser'
+              LOCAL: '#/components/schemas/LocalUser'
+              OAUTH2: '#/components/schemas/OAuth2User'
+      type: object
+      required:
+      - data
+      title: CreateUserResponseBody
+    CreateUserRequestBody:
+      properties:
+        user:
+          oneOf:
+          - $ref: '#/components/schemas/LocalUserData'
+          - $ref: '#/components/schemas/OAuth2UserData'
+          - $ref: '#/components/schemas/LDAPUserData'
+          title: User
+          discriminator:
+            propertyName: auth_method
+            mapping:
+              LDAP: '#/components/schemas/LDAPUserData'
+              LOCAL: '#/components/schemas/LocalUserData'
+              OAUTH2: '#/components/schemas/OAuth2UserData'
+        send_welcome_email:
+          type: boolean
+          title: Send Welcome Email
+          default: true
+      type: object
+      required:
+      - user
+      title: CreateUserRequestBody
+    AnonymousUser:
+      properties:
+        auth_method:
+          type: string
+          const: ANONYMOUS
+          title: Auth Method
+      type: object
+      required:
+      - auth_method
+      title: AnonymousUser
     LocalUser:
       properties:
         id:
@@ -487,3 +427,60 @@ components:
       - auth_method
       - password_needs_reset
       title: LocalUser
+    LocalUserData:
+      properties:
+        email:
+          type: string
+          title: Email
+        username:
+          type: string
+          title: Username
+        role:
+          type: string
+          enum:
+          - SYSTEM
+          - ADMIN
+          - MEMBER
+          - VIEWER
+          title: Role
+        auth_method:
+          type: string
+          const: LOCAL
+          title: Auth Method
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+      - email
+      - username
+      - role
+      - auth_method
+      title: LocalUserData
+    LDAPUserData:
+      properties:
+        email:
+          type: string
+          title: Email
+        username:
+          type: string
+          title: Username
+        role:
+          type: string
+          enum:
+          - SYSTEM
+          - ADMIN
+          - MEMBER
+          - VIEWER
+          title: Role
+        auth_method:
+          type: string
+          const: LDAP
+          title: Auth Method
+      type: object
+      required:
+      - email
+      - username
+      - role
+      - auth_method
+      title: LDAPUserData

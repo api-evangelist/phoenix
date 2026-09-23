@@ -1,11 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Arize-Phoenix REST annotation_configs Arize Phoenix Version API
+  title: Arize-Phoenix REST Arize Phoenix Version API
   description: Schema for Arize-Phoenix REST API
   version: '1.0'
-servers:
-- url: https://app.phoenix.arize.com
-  description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
 - name: Arize Phoenix Version
 paths:
