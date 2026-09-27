@@ -22,9 +22,7 @@
     "phoenix-traces-api-openapi.yml",
     "phoenix-users-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -59,8 +57,7 @@
     "phoenix-rest-api-openapi.yml: declared missing tag: spans",
     "phoenix-rest-api-openapi.yml: declared missing tag: traces",
     "phoenix-rest-api-openapi.yml: declared missing tag: users",
-    "superseded outputs removed: phoenix-o-auth2-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 17 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "phoenix-annotation-configs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -71,7 +68,7 @@
     "phoenix-datasets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "phoenix-experiments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "phoenix-healthz-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "phoenix-o-auth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "phoenix-oauth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "phoenix-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "phoenix-prompts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "phoenix-readyz-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -626,16 +626,49 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    CreateExperimentRunResponseBodyData:
+    GetIncompleteEvaluationsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/IncompleteExperimentEvaluation'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: GetIncompleteEvaluationsResponseBody
+    CreateExperimentRunResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateExperimentRunResponseBodyData'
+      type: object
+      required:
+      - data
+      title: CreateExperimentRunResponseBody
+    CreateExperimentResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/Experiment'
+      type: object
+      required:
+      - data
+      title: CreateExperimentResponseBody
+    UpsertExperimentEvaluationResponseBodyData:
       properties:
         id:
           type: string
           title: Id
-          description: The ID of the newly created experiment run
+          description: The ID of the upserted experiment evaluation
       type: object
       required:
       - id
-      title: CreateExperimentRunResponseBodyData
+      title: UpsertExperimentEvaluationResponseBodyData
     UpdateExperimentRequestBody:
       properties:
         name:
@@ -660,47 +693,16 @@ components:
       type: object
       title: UpdateExperimentRequestBody
       description: Fields to update on an experiment. Omit a field to leave it unchanged.
-    GetExperimentResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/Experiment'
-      type: object
-      required:
-      - data
-      title: GetExperimentResponseBody
-    DatasetExample:
+    CreateExperimentRunResponseBodyData:
       properties:
         id:
           type: string
           title: Id
-        node_id:
-          type: string
-          title: Node Id
-        input:
-          additionalProperties: true
-          type: object
-          title: Input
-        output:
-          additionalProperties: true
-          type: object
-          title: Output
-        metadata:
-          additionalProperties: true
-          type: object
-          title: Metadata
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
+          description: The ID of the newly created experiment run
       type: object
       required:
       - id
-      - node_id
-      - input
-      - output
-      - metadata
-      - updated_at
-      title: DatasetExample
+      title: CreateExperimentRunResponseBodyData
     HTTPValidationError:
       properties:
         detail:
@@ -710,337 +712,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    IncompleteExperimentRun:
-      properties:
-        dataset_example:
-          $ref: '#/components/schemas/DatasetExample'
-          description: The dataset example
-        repetition_numbers:
-          items:
-            type: integer
-          type: array
-          title: Repetition Numbers
-          description: List of repetition numbers that need to be run
-      type: object
-      required:
-      - dataset_example
-      - repetition_numbers
-      title: IncompleteExperimentRun
-      description: Information about incomplete runs for a dataset example
-    IncompleteExperimentEvaluation:
-      properties:
-        experiment_run:
-          $ref: '#/components/schemas/ExperimentRun'
-          description: The experiment run
-        dataset_example:
-          $ref: '#/components/schemas/DatasetExample'
-          description: The dataset example
-        evaluation_names:
-          items:
-            type: string
-          type: array
-          title: Evaluation Names
-          description: List of evaluation names that are incomplete (either missing or failed)
-      type: object
-      required:
-      - experiment_run
-      - dataset_example
-      - evaluation_names
-      title: IncompleteExperimentEvaluation
-      description: Information about an experiment run with incomplete evaluations
-    CreateExperimentRunRequestBody:
-      properties:
-        dataset_example_id:
-          type: string
-          title: Dataset Example Id
-          description: The ID of the dataset example used in the experiment run
-        output:
-          title: Output
-          description: The output of the experiment task
-        repetition_number:
-          type: integer
-          exclusiveMinimum: 0.0
-          title: Repetition Number
-          description: The repetition number of the experiment run
-        start_time:
-          type: string
-          format: date-time
-          title: Start Time
-          description: The start time of the experiment run
-        end_time:
-          type: string
-          format: date-time
-          title: End Time
-          description: The end time of the experiment run
-        trace_id:
-          type:
-          - string
-          - 'null'
-          title: Trace Id
-          description: The ID of the corresponding trace (if one exists)
-        error:
-          type:
-          - string
-          - 'null'
-          title: Error
-          description: Optional error message if the experiment run encountered an error
-      type: object
-      required:
-      - dataset_example_id
-      - output
-      - repetition_number
-      - start_time
-      - end_time
-      title: CreateExperimentRunRequestBody
-    CreateExperimentResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/Experiment'
-      type: object
-      required:
-      - data
-      title: CreateExperimentResponseBody
-    CreateExperimentRequestBody:
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          title: Name
-          description: Name of the experiment (if omitted, a random name will be generated)
-        description:
-          type:
-          - string
-          - 'null'
-          title: Description
-          description: An optional description of the experiment
-        metadata:
-          additionalProperties: true
-          type:
-          - object
-          - 'null'
-          title: Metadata
-          description: Metadata for the experiment
-        version_id:
-          type:
-          - string
-          - 'null'
-          title: Version Id
-          description: ID of the dataset version over which the experiment will be run (if omitted, the latest version will be used)
-        splits:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-          title: Splits
-          description: List of dataset split identifiers (GlobalIDs or names) to filter by
-        repetitions:
-          type: integer
-          title: Repetitions
-          description: Number of times the experiment should be repeated for each example
-          default: 1
-      type: object
-      title: CreateExperimentRequestBody
-      description: Details of the experiment to be created
-    UpsertExperimentEvaluationResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/UpsertExperimentEvaluationResponseBodyData'
-      type: object
-      required:
-      - data
-      title: UpsertExperimentEvaluationResponseBody
-    ListExperimentRunsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ExperimentRun'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: ListExperimentRunsResponseBody
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    GetIncompleteExperimentRunsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/IncompleteExperimentRun'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: GetIncompleteExperimentRunsResponseBody
-    CreateExperimentRunResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/CreateExperimentRunResponseBodyData'
-      type: object
-      required:
-      - data
-      title: CreateExperimentRunResponseBody
-    ExperimentEvaluationResult:
-      properties:
-        label:
-          type:
-          - string
-          - 'null'
-          title: Label
-          description: The label assigned by the evaluation
-        score:
-          type:
-          - number
-          - 'null'
-          title: Score
-          description: The score assigned by the evaluation
-        explanation:
-          type:
-          - string
-          - 'null'
-          title: Explanation
-          description: Explanation of the evaluation result
-      type: object
-      title: ExperimentEvaluationResult
-    ListExperimentsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Experiment'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: ListExperimentsResponseBody
-    UpdateExperimentResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/Experiment'
-      type: object
-      required:
-      - data
-      title: UpdateExperimentResponseBody
-    UpsertExperimentEvaluationRequestBody:
-      properties:
-        experiment_run_id:
-          type: string
-          title: Experiment Run Id
-          description: The ID of the experiment run being evaluated
-        name:
-          type: string
-          title: Name
-          description: The name of the evaluation
-        annotator_kind:
-          type: string
-          enum:
-          - LLM
-          - CODE
-          - HUMAN
-          title: Annotator Kind
-          description: The kind of annotator used for the evaluation
-        start_time:
-          type: string
-          format: date-time
-          title: Start Time
-          description: The start time of the evaluation in ISO format
-        end_time:
-          type: string
-          format: date-time
-          title: End Time
-          description: The end time of the evaluation in ISO format
-        result:
-          $ref: '#/components/schemas/ExperimentEvaluationResult'
-          description: The result of the evaluation. Either result or error must be provided.
-        error:
-          type:
-          - string
-          - 'null'
-          title: Error
-          description: Error message if the evaluation encountered an error. Either result or error must be provided.
-        metadata:
-          additionalProperties: true
-          type:
-          - object
-          - 'null'
-          title: Metadata
-          description: Metadata for the evaluation
-        trace_id:
-          type:
-          - string
-          - 'null'
-          title: Trace Id
-          description: Optional trace ID for tracking
-      type: object
-      required:
-      - experiment_run_id
-      - name
-      - annotator_kind
-      - start_time
-      - end_time
-      title: UpsertExperimentEvaluationRequestBody
-    GetIncompleteEvaluationsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/IncompleteExperimentEvaluation'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: GetIncompleteEvaluationsResponseBody
     ExperimentRun:
       properties:
         dataset_example_id:
@@ -1095,16 +766,140 @@ components:
       - id
       - experiment_id
       title: ExperimentRun
-    UpsertExperimentEvaluationResponseBodyData:
+    CreateExperimentRunRequestBody:
       properties:
-        id:
+        dataset_example_id:
           type: string
-          title: Id
-          description: The ID of the upserted experiment evaluation
+          title: Dataset Example Id
+          description: The ID of the dataset example used in the experiment run
+        output:
+          title: Output
+          description: The output of the experiment task
+        repetition_number:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Repetition Number
+          description: The repetition number of the experiment run
+        start_time:
+          type: string
+          format: date-time
+          title: Start Time
+          description: The start time of the experiment run
+        end_time:
+          type: string
+          format: date-time
+          title: End Time
+          description: The end time of the experiment run
+        trace_id:
+          type:
+          - string
+          - 'null'
+          title: Trace Id
+          description: The ID of the corresponding trace (if one exists)
+        error:
+          type:
+          - string
+          - 'null'
+          title: Error
+          description: Optional error message if the experiment run encountered an error
       type: object
       required:
-      - id
-      title: UpsertExperimentEvaluationResponseBodyData
+      - dataset_example_id
+      - output
+      - repetition_number
+      - start_time
+      - end_time
+      title: CreateExperimentRunRequestBody
+    ExperimentEvaluationResult:
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
+          title: Label
+          description: The label assigned by the evaluation
+        score:
+          type:
+          - number
+          - 'null'
+          title: Score
+          description: The score assigned by the evaluation
+        explanation:
+          type:
+          - string
+          - 'null'
+          title: Explanation
+          description: Explanation of the evaluation result
+      type: object
+      title: ExperimentEvaluationResult
+    GetExperimentResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/Experiment'
+      type: object
+      required:
+      - data
+      title: GetExperimentResponseBody
+    CreateExperimentRequestBody:
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          title: Name
+          description: Name of the experiment (if omitted, a random name will be generated)
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+          description: An optional description of the experiment
+        metadata:
+          additionalProperties: true
+          type:
+          - object
+          - 'null'
+          title: Metadata
+          description: Metadata for the experiment
+        version_id:
+          type:
+          - string
+          - 'null'
+          title: Version Id
+          description: ID of the dataset version over which the experiment will be run (if omitted, the latest version will be used)
+        splits:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+          title: Splits
+          description: List of dataset split identifiers (GlobalIDs or names) to filter by
+        repetitions:
+          type: integer
+          title: Repetitions
+          description: Number of times the experiment should be repeated for each example
+          default: 1
+      type: object
+      title: CreateExperimentRequestBody
+      description: Details of the experiment to be created
+    IncompleteExperimentRun:
+      properties:
+        dataset_example:
+          $ref: '#/components/schemas/DatasetExample'
+          description: The dataset example
+        repetition_numbers:
+          items:
+            type: integer
+          type: array
+          title: Repetition Numbers
+          description: List of repetition numbers that need to be run
+      type: object
+      required:
+      - dataset_example
+      - repetition_numbers
+      title: IncompleteExperimentRun
+      description: Information about incomplete runs for a dataset example
     Experiment:
       properties:
         id:
@@ -1188,3 +983,208 @@ components:
       - failed_run_count
       - missing_run_count
       title: Experiment
+    UpsertExperimentEvaluationResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/UpsertExperimentEvaluationResponseBodyData'
+      type: object
+      required:
+      - data
+      title: UpsertExperimentEvaluationResponseBody
+    UpsertExperimentEvaluationRequestBody:
+      properties:
+        experiment_run_id:
+          type: string
+          title: Experiment Run Id
+          description: The ID of the experiment run being evaluated
+        name:
+          type: string
+          title: Name
+          description: The name of the evaluation
+        annotator_kind:
+          type: string
+          enum:
+          - LLM
+          - CODE
+          - HUMAN
+          title: Annotator Kind
+          description: The kind of annotator used for the evaluation
+        start_time:
+          type: string
+          format: date-time
+          title: Start Time
+          description: The start time of the evaluation in ISO format
+        end_time:
+          type: string
+          format: date-time
+          title: End Time
+          description: The end time of the evaluation in ISO format
+        result:
+          $ref: '#/components/schemas/ExperimentEvaluationResult'
+          description: The result of the evaluation. Either result or error must be provided.
+        error:
+          type:
+          - string
+          - 'null'
+          title: Error
+          description: Error message if the evaluation encountered an error. Either result or error must be provided.
+        metadata:
+          additionalProperties: true
+          type:
+          - object
+          - 'null'
+          title: Metadata
+          description: Metadata for the evaluation
+        trace_id:
+          type:
+          - string
+          - 'null'
+          title: Trace Id
+          description: Optional trace ID for tracking
+      type: object
+      required:
+      - experiment_run_id
+      - name
+      - annotator_kind
+      - start_time
+      - end_time
+      title: UpsertExperimentEvaluationRequestBody
+    ListExperimentRunsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ExperimentRun'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: ListExperimentRunsResponseBody
+    ListExperimentsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Experiment'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: ListExperimentsResponseBody
+    UpdateExperimentResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/Experiment'
+      type: object
+      required:
+      - data
+      title: UpdateExperimentResponseBody
+    IncompleteExperimentEvaluation:
+      properties:
+        experiment_run:
+          $ref: '#/components/schemas/ExperimentRun'
+          description: The experiment run
+        dataset_example:
+          $ref: '#/components/schemas/DatasetExample'
+          description: The dataset example
+        evaluation_names:
+          items:
+            type: string
+          type: array
+          title: Evaluation Names
+          description: List of evaluation names that are incomplete (either missing or failed)
+      type: object
+      required:
+      - experiment_run
+      - dataset_example
+      - evaluation_names
+      title: IncompleteExperimentEvaluation
+      description: Information about an experiment run with incomplete evaluations
+    DatasetExample:
+      properties:
+        id:
+          type: string
+          title: Id
+        node_id:
+          type: string
+          title: Node Id
+        input:
+          additionalProperties: true
+          type: object
+          title: Input
+        output:
+          additionalProperties: true
+          type: object
+          title: Output
+        metadata:
+          additionalProperties: true
+          type: object
+          title: Metadata
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - node_id
+      - input
+      - output
+      - metadata
+      - updated_at
+      title: DatasetExample
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    GetIncompleteExperimentRunsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/IncompleteExperimentRun'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: GetIncompleteExperimentRunsResponseBody

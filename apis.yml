@@ -48,7 +48,7 @@ tags:
   - Tracing
   - LLMOps
   - AI Monitoring
-  - Open-Source
+  - Open Source
   - Prompt Engineering
   - Datasets
   - Experiments
@@ -63,9 +63,10 @@ tags_raw:
   - Prompt Engineering
   - Datasets
   - Experiments
+  - Open-Source
 apis:
 - aid: phoenix:phoenix-annotation-configs-api
-  name: Arize Phoenix annotation_configs API
+  name: Arize Phoenix Annotation Configs API
   description: The annotation_configs API from Arize Phoenix — 3 operation(s) for annotation_configs.
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
@@ -96,7 +97,7 @@ apis:
   - type: TypeScriptSDK
     url: https://www.npmjs.com/package/@arizeai/phoenix-client
 - aid: phoenix:phoenix-annotations-api
-  name: Arize Phoenix annotations API
+  name: Arize Phoenix Annotations API
   description: The annotations API from Arize Phoenix — 3 operation(s) for annotations.
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
@@ -191,7 +192,7 @@ apis:
   - type: TypeScriptSDK
     url: https://www.npmjs.com/package/@arizeai/phoenix-client
 - aid: phoenix:phoenix-chat-api
-  name: Arize Phoenix chat API
+  name: Arize Phoenix Chat API
   description: The chat API from Arize Phoenix — 2 operation(s) for chat.
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
@@ -223,7 +224,7 @@ apis:
   - type: TypeScriptSDK
     url: https://www.npmjs.com/package/@arizeai/phoenix-client
 - aid: phoenix:phoenix-datasets-api
-  name: Arize Phoenix datasets API
+  name: Arize Phoenix Datasets API
   description: The datasets API from Arize Phoenix — 9 operation(s) for datasets.
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
@@ -255,7 +256,7 @@ apis:
   - type: TypeScriptSDK
     url: https://www.npmjs.com/package/@arizeai/phoenix-client
 - aid: phoenix:phoenix-experiments-api
-  name: Arize Phoenix experiments API
+  name: Arize Phoenix Experiments API
   description: The experiments API from Arize Phoenix — 8 operation(s) for experiments.
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
@@ -317,7 +318,7 @@ apis:
   - type: TypeScriptSDK
     url: https://www.npmjs.com/package/@arizeai/phoenix-client
 - aid: phoenix:phoenix-projects-api
-  name: Arize Phoenix projects API
+  name: Arize Phoenix Projects API
   description: The projects API from Arize Phoenix — 2 operation(s) for projects.
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
@@ -349,7 +350,7 @@ apis:
   - type: TypeScriptSDK
     url: https://www.npmjs.com/package/@arizeai/phoenix-client
 - aid: phoenix:phoenix-prompts-api
-  name: Arize Phoenix prompts API
+  name: Arize Phoenix Prompts API
   description: The prompts API from Arize Phoenix — 8 operation(s) for prompts.
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
@@ -411,7 +412,7 @@ apis:
   - type: TypeScriptSDK
     url: https://www.npmjs.com/package/@arizeai/phoenix-client
 - aid: phoenix:phoenix-secrets-api
-  name: Arize Phoenix secrets API
+  name: Arize Phoenix Secrets API
   description: The secrets API from Arize Phoenix — 1 operation(s) for secrets.
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
@@ -443,7 +444,7 @@ apis:
   - type: TypeScriptSDK
     url: https://www.npmjs.com/package/@arizeai/phoenix-client
 - aid: phoenix:phoenix-sessions-api
-  name: Arize Phoenix sessions API
+  name: Arize Phoenix Sessions API
   description: The sessions API from Arize Phoenix — 5 operation(s) for sessions.
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
@@ -475,7 +476,7 @@ apis:
   - type: TypeScriptSDK
     url: https://www.npmjs.com/package/@arizeai/phoenix-client
 - aid: phoenix:phoenix-spans-api
-  name: Arize Phoenix spans API
+  name: Arize Phoenix Spans API
   description: The spans API from Arize Phoenix — 6 operation(s) for spans.
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
@@ -507,7 +508,7 @@ apis:
   - type: TypeScriptSDK
     url: https://www.npmjs.com/package/@arizeai/phoenix-client
 - aid: phoenix:phoenix-traces-api
-  name: Arize Phoenix traces API
+  name: Arize Phoenix Traces API
   description: The traces API from Arize Phoenix — 4 operation(s) for traces.
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com
@@ -539,7 +540,7 @@ apis:
   - type: TypeScriptSDK
     url: https://www.npmjs.com/package/@arizeai/phoenix-client
 - aid: phoenix:phoenix-users-api
-  name: Arize Phoenix users API
+  name: Arize Phoenix Users API
   description: The users API from Arize Phoenix — 3 operation(s) for users.
   humanURL: https://arize.com/docs/phoenix
   baseURL: https://app.phoenix.arize.com

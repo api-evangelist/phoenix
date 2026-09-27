@@ -779,23 +779,6 @@ paths:
           description: Invalid parameters
 components:
   schemas:
-    SessionAnnotationsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SessionAnnotation'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: SessionAnnotationsResponseBody
     TraceAnnotation:
       properties:
         id:
@@ -862,23 +845,6 @@ components:
       - annotator_kind
       - trace_id
       title: TraceAnnotation
-    SpanAnnotationsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SpanAnnotation'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: SpanAnnotationsResponseBody
     AnnotationResult:
       properties:
         label:
@@ -901,89 +867,6 @@ components:
           description: Explanation of the annotation result
       type: object
       title: AnnotationResult
-    SpanAnnotation:
-      properties:
-        id:
-          type: string
-          title: Id
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-        source:
-          type: string
-          enum:
-          - API
-          - APP
-          title: Source
-        user_id:
-          type:
-          - string
-          - 'null'
-          title: User Id
-        name:
-          type: string
-          title: Name
-          description: The name of the annotation
-        annotator_kind:
-          type: string
-          enum:
-          - LLM
-          - CODE
-          - HUMAN
-          title: Annotator Kind
-          description: The kind of annotator used for the annotation
-        result:
-          $ref: '#/components/schemas/AnnotationResult'
-          description: The result of the annotation
-        metadata:
-          additionalProperties: true
-          type:
-          - object
-          - 'null'
-          title: Metadata
-          description: Metadata for the annotation
-        identifier:
-          type: string
-          title: Identifier
-          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
-          default: ''
-        span_id:
-          type: string
-          title: Span Id
-          description: OpenTelemetry Span ID (hex format w/o 0x prefix)
-      type: object
-      required:
-      - id
-      - created_at
-      - updated_at
-      - source
-      - user_id
-      - name
-      - annotator_kind
-      - span_id
-      title: SpanAnnotation
-    TraceAnnotationsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/TraceAnnotation'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: TraceAnnotationsResponseBody
     SessionAnnotation:
       properties:
         id:
@@ -1050,3 +933,120 @@ components:
       - annotator_kind
       - session_id
       title: SessionAnnotation
+    SpanAnnotationsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SpanAnnotation'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: SpanAnnotationsResponseBody
+    SpanAnnotation:
+      properties:
+        id:
+          type: string
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        source:
+          type: string
+          enum:
+          - API
+          - APP
+          title: Source
+        user_id:
+          type:
+          - string
+          - 'null'
+          title: User Id
+        name:
+          type: string
+          title: Name
+          description: The name of the annotation
+        annotator_kind:
+          type: string
+          enum:
+          - LLM
+          - CODE
+          - HUMAN
+          title: Annotator Kind
+          description: The kind of annotator used for the annotation
+        result:
+          $ref: '#/components/schemas/AnnotationResult'
+          description: The result of the annotation
+        metadata:
+          additionalProperties: true
+          type:
+          - object
+          - 'null'
+          title: Metadata
+          description: Metadata for the annotation
+        identifier:
+          type: string
+          title: Identifier
+          description: The identifier of the annotation. If provided, the annotation will be updated if it already exists.
+          default: ''
+        span_id:
+          type: string
+          title: Span Id
+          description: OpenTelemetry Span ID (hex format w/o 0x prefix)
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      - source
+      - user_id
+      - name
+      - annotator_kind
+      - span_id
+      title: SpanAnnotation
+    SessionAnnotationsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SessionAnnotation'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: SessionAnnotationsResponseBody
+    TraceAnnotationsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TraceAnnotation'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: TraceAnnotationsResponseBody

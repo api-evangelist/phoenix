@@ -235,6 +235,25 @@ components:
       required:
       - data
       title: CreateProjectResponseBody
+    Project:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+        id:
+          type: string
+          title: Id
+      type: object
+      required:
+      - name
+      - id
+      title: Project
     GetProjectsResponseBody:
       properties:
         data:
@@ -260,33 +279,6 @@ components:
       required:
       - data
       title: UpdateProjectResponseBody
-    Project:
-      properties:
-        name:
-          type: string
-          minLength: 1
-          title: Name
-        description:
-          type:
-          - string
-          - 'null'
-          title: Description
-        id:
-          type: string
-          title: Id
-      type: object
-      required:
-      - name
-      - id
-      title: Project
-    GetProjectResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/Project'
-      type: object
-      required:
-      - data
-      title: GetProjectResponseBody
     CreateProjectRequestBody:
       properties:
         name:
@@ -311,3 +303,11 @@ components:
           title: Description
       type: object
       title: UpdateProjectRequestBody
+    GetProjectResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/Project'
+      type: object
+      required:
+      - data
+      title: GetProjectResponseBody
