@@ -227,14 +227,23 @@ paths:
           description: Unprocessable Entity
 components:
   schemas:
-    CreateProjectResponseBody:
+    GetProjectsResponseBody:
       properties:
         data:
-          $ref: '#/components/schemas/Project'
+          items:
+            $ref: '#/components/schemas/Project'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
       type: object
       required:
       - data
-      title: CreateProjectResponseBody
+      - next_cursor
+      title: GetProjectsResponseBody
     Project:
       properties:
         name:
@@ -254,23 +263,6 @@ components:
       - name
       - id
       title: Project
-    GetProjectsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Project'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: GetProjectsResponseBody
     UpdateProjectResponseBody:
       properties:
         data:
@@ -279,6 +271,22 @@ components:
       required:
       - data
       title: UpdateProjectResponseBody
+    GetProjectResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/Project'
+      type: object
+      required:
+      - data
+      title: GetProjectResponseBody
+    CreateProjectResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/Project'
+      type: object
+      required:
+      - data
+      title: CreateProjectResponseBody
     CreateProjectRequestBody:
       properties:
         name:
@@ -303,11 +311,3 @@ components:
           title: Description
       type: object
       title: UpdateProjectRequestBody
-    GetProjectResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/Project'
-      type: object
-      required:
-      - data
-      title: GetProjectResponseBody

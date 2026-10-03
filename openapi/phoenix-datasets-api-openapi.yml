@@ -587,6 +587,40 @@ paths:
           description: Invalid dataset or version ID
 components:
   schemas:
+    ListDatasetVersionsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DatasetVersion'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: ListDatasetVersionsResponseBody
+    ListDatasetsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Dataset'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: ListDatasetsResponseBody
     DatasetWithExampleCount:
       properties:
         id:
@@ -625,6 +659,14 @@ components:
       - updated_at
       - example_count
       title: DatasetWithExampleCount
+    ListDatasetExamplesResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/ListDatasetExamplesData'
+      type: object
+      required:
+      - data
+      title: ListDatasetExamplesResponseBody
     ListDatasetExamplesData:
       properties:
         dataset_id:
@@ -649,56 +691,41 @@ components:
       - version_id
       - examples
       title: ListDatasetExamplesData
-    ListDatasetsResponseBody:
+    HTTPValidationError:
       properties:
-        data:
+        detail:
           items:
-            $ref: '#/components/schemas/Dataset'
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
+          title: Detail
       type: object
-      required:
-      - data
-      - next_cursor
-      title: ListDatasetsResponseBody
-    DatasetExample:
+      title: HTTPValidationError
+    ValidationError:
       properties:
-        id:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-          title: Id
-        node_id:
+          title: Message
+        type:
           type: string
-          title: Node Id
+          title: Error Type
         input:
-          additionalProperties: true
-          type: object
           title: Input
-        output:
-          additionalProperties: true
+        ctx:
           type: object
-          title: Output
-        metadata:
-          additionalProperties: true
-          type: object
-          title: Metadata
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
+          title: Context
       type: object
       required:
-      - id
-      - node_id
-      - input
-      - output
-      - metadata
-      - updated_at
-      title: DatasetExample
+      - loc
+      - msg
+      - type
+      title: ValidationError
     Dataset:
       properties:
         id:
@@ -737,99 +764,6 @@ components:
       - updated_at
       - example_count
       title: Dataset
-    ListDatasetVersionsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/DatasetVersion'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: ListDatasetVersionsResponseBody
-    ListDatasetExamplesResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/ListDatasetExamplesData'
-      type: object
-      required:
-      - data
-      title: ListDatasetExamplesResponseBody
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    UploadDatasetResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/UploadDatasetData'
-      type: object
-      required:
-      - data
-      title: UploadDatasetResponseBody
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    UploadDatasetData:
-      properties:
-        dataset_id:
-          type: string
-          title: Dataset Id
-        version_id:
-          type: string
-          title: Version Id
-        num_created_examples:
-          type: integer
-          title: Num Created Examples
-        num_updated_examples:
-          type: integer
-          title: Num Updated Examples
-        num_deleted_examples:
-          type: integer
-          title: Num Deleted Examples
-      type: object
-      required:
-      - dataset_id
-      - version_id
-      - num_created_examples
-      - num_updated_examples
-      - num_deleted_examples
-      title: UploadDatasetData
     DatasetVersion:
       properties:
         version_id:
@@ -855,6 +789,39 @@ components:
       - metadata
       - created_at
       title: DatasetVersion
+    DatasetExample:
+      properties:
+        id:
+          type: string
+          title: Id
+        node_id:
+          type: string
+          title: Node Id
+        input:
+          additionalProperties: true
+          type: object
+          title: Input
+        output:
+          additionalProperties: true
+          type: object
+          title: Output
+        metadata:
+          additionalProperties: true
+          type: object
+          title: Metadata
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - node_id
+      - input
+      - output
+      - metadata
+      - updated_at
+      title: DatasetExample
     GetDatasetResponseBody:
       properties:
         data:
@@ -863,3 +830,36 @@ components:
       required:
       - data
       title: GetDatasetResponseBody
+    UploadDatasetData:
+      properties:
+        dataset_id:
+          type: string
+          title: Dataset Id
+        version_id:
+          type: string
+          title: Version Id
+        num_created_examples:
+          type: integer
+          title: Num Created Examples
+        num_updated_examples:
+          type: integer
+          title: Num Updated Examples
+        num_deleted_examples:
+          type: integer
+          title: Num Deleted Examples
+      type: object
+      required:
+      - dataset_id
+      - version_id
+      - num_created_examples
+      - num_updated_examples
+      - num_deleted_examples
+      title: UploadDatasetData
+    UploadDatasetResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/UploadDatasetData'
+      type: object
+      required:
+      - data
+      title: UploadDatasetResponseBody
