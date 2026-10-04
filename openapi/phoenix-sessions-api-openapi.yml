@@ -276,6 +276,16 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    InsertedSessionAnnotation:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the inserted session annotation
+      type: object
+      required:
+      - id
+      title: InsertedSessionAnnotation
     SessionData:
       properties:
         id:
@@ -324,17 +334,6 @@ components:
       - end_time
       - traces
       title: SessionData
-    AnnotateSessionsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/InsertedSessionAnnotation'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AnnotateSessionsResponseBody
     CreateSessionNoteResponseBody:
       properties:
         data:
@@ -343,108 +342,6 @@ components:
       required:
       - data
       title: CreateSessionNoteResponseBody
-    GetSessionResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/SessionData'
-      type: object
-      required:
-      - data
-      title: GetSessionResponseBody
-    AnnotationResult:
-      properties:
-        label:
-          type:
-          - string
-          - 'null'
-          title: Label
-          description: The label assigned by the annotation
-        score:
-          type:
-          - number
-          - 'null'
-          title: Score
-          description: The score assigned by the annotation
-        explanation:
-          type:
-          - string
-          - 'null'
-          title: Explanation
-          description: Explanation of the annotation result
-      type: object
-      title: AnnotationResult
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    DeleteSessionsRequestBody:
-      properties:
-        session_identifiers:
-          items:
-            type: string
-          type: array
-          title: Session Identifiers
-          description: 'List of session identifiers to delete. All identifiers must be the same type: either all GlobalIDs or all user-provided session_id strings.'
-      type: object
-      required:
-      - session_identifiers
-      title: DeleteSessionsRequestBody
-    GetSessionsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SessionData'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: GetSessionsResponseBody
-    CreateSessionNoteRequestBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/SessionNoteData'
-      type: object
-      required:
-      - data
-      title: CreateSessionNoteRequestBody
     AnnotateSessionsRequestBody:
       properties:
         data:
@@ -456,38 +353,6 @@ components:
       required:
       - data
       title: AnnotateSessionsRequestBody
-    SessionNoteData:
-      properties:
-        session_id:
-          type: string
-          minLength: 1
-          title: Session Id
-          description: Session ID
-        note:
-          type: string
-          minLength: 1
-          title: Note
-          description: The note text to add to the session
-        identifier:
-          type: string
-          title: Identifier
-          description: Optional caller-supplied identifier. When non-empty, the note is upserted on (session_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note. When omitted or empty, the server stamps a unique 'px-session-note:<uuid>' identifier so each call appends a new note.
-          default: ''
-      type: object
-      required:
-      - session_id
-      - note
-      title: SessionNoteData
-    InsertedSessionAnnotation:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The ID of the inserted session annotation
-      type: object
-      required:
-      - id
-      title: InsertedSessionAnnotation
     SessionAnnotationData:
       properties:
         name:
@@ -527,6 +392,43 @@ components:
       - annotator_kind
       - session_id
       title: SessionAnnotationData
+    GetSessionsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SessionData'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: GetSessionsResponseBody
+    DeleteSessionsRequestBody:
+      properties:
+        session_identifiers:
+          items:
+            type: string
+          type: array
+          title: Session Identifiers
+          description: 'List of session identifiers to delete. All identifiers must be the same type: either all GlobalIDs or all user-provided session_id strings.'
+      type: object
+      required:
+      - session_identifiers
+      title: DeleteSessionsRequestBody
+    GetSessionResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/SessionData'
+      type: object
+      required:
+      - data
+      title: GetSessionResponseBody
     SessionTraceData:
       properties:
         id:
@@ -550,3 +452,101 @@ components:
       - start_time
       - end_time
       title: SessionTraceData
+    AnnotateSessionsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/InsertedSessionAnnotation'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AnnotateSessionsResponseBody
+    SessionNoteData:
+      properties:
+        session_id:
+          type: string
+          minLength: 1
+          title: Session Id
+          description: Session ID
+        note:
+          type: string
+          minLength: 1
+          title: Note
+          description: The note text to add to the session
+        identifier:
+          type: string
+          title: Identifier
+          description: Optional caller-supplied identifier. When non-empty, the note is upserted on (session_id, name='note', identifier) — repeated calls with the same identifier overwrite the existing note. When omitted or empty, the server stamps a unique 'px-session-note:<uuid>' identifier so each call appends a new note.
+          default: ''
+      type: object
+      required:
+      - session_id
+      - note
+      title: SessionNoteData
+    AnnotationResult:
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
+          title: Label
+          description: The label assigned by the annotation
+        score:
+          type:
+          - number
+          - 'null'
+          title: Score
+          description: The score assigned by the annotation
+        explanation:
+          type:
+          - string
+          - 'null'
+          title: Explanation
+          description: Explanation of the annotation result
+      type: object
+      title: AnnotationResult
+    CreateSessionNoteRequestBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/SessionNoteData'
+      type: object
+      required:
+      - data
+      title: CreateSessionNoteRequestBody
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

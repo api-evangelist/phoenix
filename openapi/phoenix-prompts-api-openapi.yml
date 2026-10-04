@@ -463,388 +463,23 @@ paths:
           description: Unprocessable Entity
 components:
   schemas:
-    PromptResponseFormatJSONSchemaDefinition:
-      properties:
-        name:
-          type: string
-          title: Name
-        description:
-          type: string
-          title: Description
-        schema:
-          additionalProperties: true
-          type: object
-          title: Schema
-        strict:
-          type: boolean
-          title: Strict
-      additionalProperties: false
-      type: object
-      required:
-      - name
-      title: PromptResponseFormatJSONSchemaDefinition
-    ToolCallFunction:
+    PromptAnthropicThinkingConfigAdaptive:
       properties:
         type:
           type: string
-          const: function
+          const: adaptive
           title: Type
-        name:
-          type: string
-          title: Name
-        arguments:
-          type: string
-          title: Arguments
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - name
-      - arguments
-      title: ToolCallFunction
-    PromptAzureOpenAIInvocationParametersContent:
-      properties:
-        temperature:
-          type: number
-          title: Temperature
-        max_tokens:
-          type: integer
-          title: Max Tokens
-        max_completion_tokens:
-          type: integer
-          title: Max Completion Tokens
-        frequency_penalty:
-          type: number
-          title: Frequency Penalty
-        presence_penalty:
-          type: number
-          title: Presence Penalty
-        top_p:
-          type: number
-          title: Top P
-        seed:
-          type: integer
-          title: Seed
-        stop:
-          items:
-            type: string
-          type: array
-          title: Stop
-        reasoning_effort:
+        display:
           type: string
           enum:
-          - none
-          - minimal
-          - low
-          - medium
-          - high
-          - xhigh
-          title: Reasoning Effort
-        extra_body:
-          additionalProperties: true
-          type: object
-          title: Extra Body
-      additionalProperties: false
-      type: object
-      title: PromptAzureOpenAIInvocationParametersContent
-    PromptGoogleInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: google
-          title: Type
-        google:
-          $ref: '#/components/schemas/PromptGoogleInvocationParametersContent'
+          - summarized
+          - omitted
+          title: Display
       additionalProperties: false
       type: object
       required:
       - type
-      - google
-      title: PromptGoogleInvocationParameters
-    PromptToolFunction:
-      properties:
-        type:
-          type: string
-          const: function
-          title: Type
-        function:
-          $ref: '#/components/schemas/PromptToolFunctionDefinition'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - function
-      title: PromptToolFunction
-    PromptAwsInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: aws
-          title: Type
-        aws:
-          $ref: '#/components/schemas/PromptAwsInvocationParametersContent'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - aws
-      title: PromptAwsInvocationParameters
-    PromptAzureOpenAIInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: azure_openai
-          title: Type
-        azure_openai:
-          $ref: '#/components/schemas/PromptAzureOpenAIInvocationParametersContent'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - azure_openai
-      title: PromptAzureOpenAIInvocationParameters
-    PromptAwsInvocationParametersContent:
-      properties:
-        max_tokens:
-          type: integer
-          title: Max Tokens
-        temperature:
-          type: number
-          title: Temperature
-        top_p:
-          type: number
-          title: Top P
-        stop_sequences:
-          items:
-            type: string
-          type: array
-          title: Stop Sequences
-      additionalProperties: false
-      type: object
-      title: PromptAwsInvocationParametersContent
-    PromptTemplateFormat:
-      type: string
-      enum:
-      - MUSTACHE
-      - F_STRING
-      - NONE
-      title: PromptTemplateFormat
-    GetPromptVersionTagsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/PromptVersionTag'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: GetPromptVersionTagsResponseBody
-    PromptPerplexityInvocationParametersContent:
-      properties:
-        temperature:
-          type: number
-          title: Temperature
-        max_tokens:
-          type: integer
-          title: Max Tokens
-        max_completion_tokens:
-          type: integer
-          title: Max Completion Tokens
-        frequency_penalty:
-          type: number
-          title: Frequency Penalty
-        presence_penalty:
-          type: number
-          title: Presence Penalty
-        top_p:
-          type: number
-          title: Top P
-        seed:
-          type: integer
-          title: Seed
-        stop:
-          items:
-            type: string
-          type: array
-          title: Stop
-        reasoning_effort:
-          type: string
-          enum:
-          - none
-          - minimal
-          - low
-          - medium
-          - high
-          - xhigh
-          title: Reasoning Effort
-        extra_body:
-          additionalProperties: true
-          type: object
-          title: Extra Body
-      additionalProperties: false
-      type: object
-      title: PromptPerplexityInvocationParametersContent
-    PromptAnthropicOutputConfig:
-      properties:
-        effort:
-          type: string
-          enum:
-          - low
-          - medium
-          - high
-          - xhigh
-          - max
-          title: Effort
-      additionalProperties: false
-      type: object
-      title: PromptAnthropicOutputConfig
-    PromptStringTemplate:
-      properties:
-        type:
-          type: string
-          const: string
-          title: Type
-        template:
-          type: string
-          title: Template
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - template
-      title: PromptStringTemplate
-    PromptGoogleThinkingConfig:
-      properties:
-        thinking_budget:
-          type: integer
-          title: Thinking Budget
-        thinking_level:
-          type: string
-          enum:
-          - minimal
-          - low
-          - medium
-          - high
-          title: Thinking Level
-        include_thoughts:
-          type: boolean
-          title: Include Thoughts
-      additionalProperties: false
-      type: object
-      title: PromptGoogleThinkingConfig
-    CreatePromptResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/PromptVersion'
-      type: object
-      required:
-      - data
-      title: CreatePromptResponseBody
-    PromptMoonshotInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: moonshot
-          title: Type
-        moonshot:
-          $ref: '#/components/schemas/PromptMoonshotInvocationParametersContent'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - moonshot
-      title: PromptMoonshotInvocationParameters
-    PromptFireworksInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: fireworks
-          title: Type
-        fireworks:
-          $ref: '#/components/schemas/PromptFireworksInvocationParametersContent'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - fireworks
-      title: PromptFireworksInvocationParameters
-    PromptOllamaInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: ollama
-          title: Type
-        ollama:
-          $ref: '#/components/schemas/PromptOllamaInvocationParametersContent'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - ollama
-      title: PromptOllamaInvocationParameters
-    PromptTogetherInvocationParametersContent:
-      properties:
-        temperature:
-          type: number
-          title: Temperature
-        max_tokens:
-          type: integer
-          title: Max Tokens
-        max_completion_tokens:
-          type: integer
-          title: Max Completion Tokens
-        frequency_penalty:
-          type: number
-          title: Frequency Penalty
-        presence_penalty:
-          type: number
-          title: Presence Penalty
-        top_p:
-          type: number
-          title: Top P
-        seed:
-          type: integer
-          title: Seed
-        stop:
-          items:
-            type: string
-          type: array
-          title: Stop
-        reasoning_effort:
-          type: string
-          enum:
-          - none
-          - minimal
-          - low
-          - medium
-          - high
-          - xhigh
-          title: Reasoning Effort
-        extra_body:
-          additionalProperties: true
-          type: object
-          title: Extra Body
-      additionalProperties: false
-      type: object
-      title: PromptTogetherInvocationParametersContent
-    PromptAnthropicThinkingConfigDisabled:
-      properties:
-        type:
-          type: string
-          const: disabled
-          title: Type
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      title: PromptAnthropicThinkingConfigDisabled
+      title: PromptAnthropicThinkingConfigAdaptive
     Prompt:
       properties:
         name:
@@ -873,22 +508,57 @@ components:
       - name
       - id
       title: Prompt
-    PromptToolRaw:
+    PromptOpenAIInvocationParameters:
       properties:
         type:
           type: string
-          const: raw
+          const: openai
           title: Type
-        raw:
-          additionalProperties: true
-          type: object
-          title: Raw
+        openai:
+          $ref: '#/components/schemas/PromptOpenAIInvocationParametersContent'
       additionalProperties: false
       type: object
       required:
       - type
-      - raw
-      title: PromptToolRaw
+      - openai
+      title: PromptOpenAIInvocationParameters
+    PromptVersionTag:
+      properties:
+        name:
+          $ref: '#/components/schemas/Identifier'
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+        id:
+          type: string
+          title: Id
+      type: object
+      required:
+      - name
+      - id
+      title: PromptVersionTag
+    PromptTemplateType:
+      type: string
+      enum:
+      - STR
+      - CHAT
+      title: PromptTemplateType
+    PromptGroqInvocationParameters:
+      properties:
+        type:
+          type: string
+          const: groq
+          title: Type
+        groq:
+          $ref: '#/components/schemas/PromptGroqInvocationParametersContent'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - groq
+      title: PromptGroqInvocationParameters
     PromptMoonshotInvocationParametersContent:
       properties:
         temperature:
@@ -934,119 +604,69 @@ components:
       additionalProperties: false
       type: object
       title: PromptMoonshotInvocationParametersContent
-    PromptAnthropicThinkingConfigEnabled:
+    PromptAwsInvocationParametersContent:
       properties:
-        type:
-          type: string
-          const: enabled
-          title: Type
-        budget_tokens:
-          type: integer
-          minimum: 1024.0
-          title: Budget Tokens
-        display:
-          type: string
-          enum:
-          - summarized
-          - omitted
-          title: Display
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - budget_tokens
-      title: PromptAnthropicThinkingConfigEnabled
-    ToolCallContentPart:
-      properties:
-        type:
-          type: string
-          const: tool_call
-          title: Type
-        tool_call_id:
-          type: string
-          title: Tool Call Id
-        tool_call:
-          oneOf:
-          - $ref: '#/components/schemas/ToolCallFunction'
-          title: Tool Call
-          discriminator:
-            propertyName: type
-            mapping:
-              function: '#/components/schemas/ToolCallFunction'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - tool_call_id
-      - tool_call
-      title: ToolCallContentPart
-    PromptVersionTag:
-      properties:
-        name:
-          $ref: '#/components/schemas/Identifier'
-        description:
-          type:
-          - string
-          - 'null'
-          title: Description
-        id:
-          type: string
-          title: Id
-      type: object
-      required:
-      - name
-      - id
-      title: PromptVersionTag
-    PromptXAIInvocationParametersContent:
-      properties:
-        temperature:
-          type: number
-          title: Temperature
         max_tokens:
           type: integer
           title: Max Tokens
-        max_completion_tokens:
-          type: integer
-          title: Max Completion Tokens
-        frequency_penalty:
+        temperature:
           type: number
-          title: Frequency Penalty
-        presence_penalty:
-          type: number
-          title: Presence Penalty
+          title: Temperature
         top_p:
           type: number
           title: Top P
-        seed:
-          type: integer
-          title: Seed
-        stop:
+        stop_sequences:
           items:
             type: string
           type: array
-          title: Stop
-        reasoning_effort:
-          type: string
-          enum:
-          - none
-          - minimal
-          - low
-          - medium
-          - high
-          - xhigh
-          title: Reasoning Effort
-        extra_body:
-          additionalProperties: true
-          type: object
-          title: Extra Body
+          title: Stop Sequences
       additionalProperties: false
       type: object
-      title: PromptXAIInvocationParametersContent
-    GetPromptVersionsResponseBody:
+      title: PromptAwsInvocationParametersContent
+    PromptAwsInvocationParameters:
+      properties:
+        type:
+          type: string
+          const: aws
+          title: Type
+        aws:
+          $ref: '#/components/schemas/PromptAwsInvocationParametersContent'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - aws
+      title: PromptAwsInvocationParameters
+    PromptOllamaInvocationParameters:
+      properties:
+        type:
+          type: string
+          const: ollama
+          title: Type
+        ollama:
+          $ref: '#/components/schemas/PromptOllamaInvocationParametersContent'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - ollama
+      title: PromptOllamaInvocationParameters
+    CreatePromptRequestBody:
+      properties:
+        prompt:
+          $ref: '#/components/schemas/PromptData'
+        version:
+          $ref: '#/components/schemas/PromptVersionData'
+      type: object
+      required:
+      - prompt
+      - version
+      title: CreatePromptRequestBody
+    GetPromptVersionTagsResponseBody:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/PromptVersion'
+            $ref: '#/components/schemas/PromptVersionTag'
           type: array
           title: Data
         next_cursor:
@@ -1058,7 +678,7 @@ components:
       required:
       - data
       - next_cursor
-      title: GetPromptVersionsResponseBody
+      title: GetPromptVersionTagsResponseBody
     PromptResponseFormatJSONSchema:
       properties:
         type:
@@ -1073,847 +693,6 @@ components:
       - type
       - json_schema
       title: PromptResponseFormatJSONSchema
-    PromptGroqInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: groq
-          title: Type
-        groq:
-          $ref: '#/components/schemas/PromptGroqInvocationParametersContent'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - groq
-      title: PromptGroqInvocationParameters
-    GetPromptResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/PromptVersion'
-      type: object
-      required:
-      - data
-      title: GetPromptResponseBody
-    PromptToolChoiceOneOrMore:
-      properties:
-        type:
-          type: string
-          const: one_or_more
-          title: Type
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      title: PromptToolChoiceOneOrMore
-    PromptOpenAIInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: openai
-          title: Type
-        openai:
-          $ref: '#/components/schemas/PromptOpenAIInvocationParametersContent'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - openai
-      title: PromptOpenAIInvocationParameters
-    PromptMessage:
-      properties:
-        role:
-          type: string
-          enum:
-          - user
-          - assistant
-          - model
-          - ai
-          - tool
-          - system
-          - developer
-          title: Role
-        content:
-          anyOf:
-          - type: string
-          - items:
-              oneOf:
-              - $ref: '#/components/schemas/TextContentPart'
-              - $ref: '#/components/schemas/ToolCallContentPart'
-              - $ref: '#/components/schemas/ToolResultContentPart'
-              discriminator:
-                propertyName: type
-                mapping:
-                  text: '#/components/schemas/TextContentPart'
-                  tool_call: '#/components/schemas/ToolCallContentPart'
-                  tool_result: '#/components/schemas/ToolResultContentPart'
-            type: array
-            minItems: 1
-          title: Content
-      additionalProperties: false
-      type: object
-      required:
-      - role
-      - content
-      title: PromptMessage
-    PromptTemplateType:
-      type: string
-      enum:
-      - STR
-      - CHAT
-      title: PromptTemplateType
-    PromptData:
-      properties:
-        name:
-          $ref: '#/components/schemas/Identifier'
-        description:
-          type:
-          - string
-          - 'null'
-          title: Description
-        source_prompt_id:
-          type:
-          - string
-          - 'null'
-          title: Source Prompt Id
-        metadata:
-          additionalProperties: true
-          type:
-          - object
-          - 'null'
-          title: Metadata
-      type: object
-      required:
-      - name
-      title: PromptData
-    PromptCerebrasInvocationParametersContent:
-      properties:
-        temperature:
-          type: number
-          title: Temperature
-        max_tokens:
-          type: integer
-          title: Max Tokens
-        max_completion_tokens:
-          type: integer
-          title: Max Completion Tokens
-        frequency_penalty:
-          type: number
-          title: Frequency Penalty
-        presence_penalty:
-          type: number
-          title: Presence Penalty
-        top_p:
-          type: number
-          title: Top P
-        seed:
-          type: integer
-          title: Seed
-        stop:
-          items:
-            type: string
-          type: array
-          title: Stop
-        reasoning_effort:
-          type: string
-          enum:
-          - none
-          - minimal
-          - low
-          - medium
-          - high
-          - xhigh
-          title: Reasoning Effort
-        extra_body:
-          additionalProperties: true
-          type: object
-          title: Extra Body
-      additionalProperties: false
-      type: object
-      title: PromptCerebrasInvocationParametersContent
-    PromptChatTemplate:
-      properties:
-        type:
-          type: string
-          const: chat
-          title: Type
-        messages:
-          items:
-            $ref: '#/components/schemas/PromptMessage'
-          type: array
-          title: Messages
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - messages
-      title: PromptChatTemplate
-    PromptDeepSeekInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: deepseek
-          title: Type
-        deepseek:
-          $ref: '#/components/schemas/PromptDeepSeekInvocationParametersContent'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - deepseek
-      title: PromptDeepSeekInvocationParameters
-    PromptAnthropicInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: anthropic
-          title: Type
-        anthropic:
-          $ref: '#/components/schemas/PromptAnthropicInvocationParametersContent'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - anthropic
-      title: PromptAnthropicInvocationParameters
-    PromptDeepSeekInvocationParametersContent:
-      properties:
-        temperature:
-          type: number
-          title: Temperature
-        max_tokens:
-          type: integer
-          title: Max Tokens
-        max_completion_tokens:
-          type: integer
-          title: Max Completion Tokens
-        frequency_penalty:
-          type: number
-          title: Frequency Penalty
-        presence_penalty:
-          type: number
-          title: Presence Penalty
-        top_p:
-          type: number
-          title: Top P
-        seed:
-          type: integer
-          title: Seed
-        stop:
-          items:
-            type: string
-          type: array
-          title: Stop
-        reasoning_effort:
-          type: string
-          enum:
-          - none
-          - minimal
-          - low
-          - medium
-          - high
-          - xhigh
-          title: Reasoning Effort
-        extra_body:
-          additionalProperties: true
-          type: object
-          title: Extra Body
-      additionalProperties: false
-      type: object
-      title: PromptDeepSeekInvocationParametersContent
-    GetPromptsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Prompt'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: GetPromptsResponseBody
-    PromptPerplexityInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: perplexity
-          title: Type
-        perplexity:
-          $ref: '#/components/schemas/PromptPerplexityInvocationParametersContent'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - perplexity
-      title: PromptPerplexityInvocationParameters
-    PromptOllamaInvocationParametersContent:
-      properties:
-        temperature:
-          type: number
-          title: Temperature
-        max_tokens:
-          type: integer
-          title: Max Tokens
-        max_completion_tokens:
-          type: integer
-          title: Max Completion Tokens
-        frequency_penalty:
-          type: number
-          title: Frequency Penalty
-        presence_penalty:
-          type: number
-          title: Presence Penalty
-        top_p:
-          type: number
-          title: Top P
-        seed:
-          type: integer
-          title: Seed
-        stop:
-          items:
-            type: string
-          type: array
-          title: Stop
-        reasoning_effort:
-          type: string
-          enum:
-          - none
-          - minimal
-          - low
-          - medium
-          - high
-          - xhigh
-          title: Reasoning Effort
-        extra_body:
-          additionalProperties: true
-          type: object
-          title: Extra Body
-      additionalProperties: false
-      type: object
-      title: PromptOllamaInvocationParametersContent
-    PromptOpenAIInvocationParametersContent:
-      properties:
-        temperature:
-          type: number
-          title: Temperature
-        max_tokens:
-          type: integer
-          title: Max Tokens
-        max_completion_tokens:
-          type: integer
-          title: Max Completion Tokens
-        frequency_penalty:
-          type: number
-          title: Frequency Penalty
-        presence_penalty:
-          type: number
-          title: Presence Penalty
-        top_p:
-          type: number
-          title: Top P
-        seed:
-          type: integer
-          title: Seed
-        stop:
-          items:
-            type: string
-          type: array
-          title: Stop
-        reasoning_effort:
-          type: string
-          enum:
-          - none
-          - minimal
-          - low
-          - medium
-          - high
-          - xhigh
-          title: Reasoning Effort
-        extra_body:
-          additionalProperties: true
-          type: object
-          title: Extra Body
-      additionalProperties: false
-      type: object
-      title: PromptOpenAIInvocationParametersContent
-    PromptToolChoiceZeroOrMore:
-      properties:
-        type:
-          type: string
-          const: zero_or_more
-          title: Type
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      title: PromptToolChoiceZeroOrMore
-    PromptVersionData:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-          title: Description
-        model_provider:
-          $ref: '#/components/schemas/ModelProvider'
-        model_name:
-          type: string
-          title: Model Name
-        template:
-          oneOf:
-          - $ref: '#/components/schemas/PromptChatTemplate'
-          - $ref: '#/components/schemas/PromptStringTemplate'
-          title: Template
-          discriminator:
-            propertyName: type
-            mapping:
-              chat: '#/components/schemas/PromptChatTemplate'
-              string: '#/components/schemas/PromptStringTemplate'
-        template_type:
-          $ref: '#/components/schemas/PromptTemplateType'
-        template_format:
-          $ref: '#/components/schemas/PromptTemplateFormat'
-        invocation_parameters:
-          oneOf:
-          - $ref: '#/components/schemas/PromptOpenAIInvocationParameters'
-          - $ref: '#/components/schemas/PromptAzureOpenAIInvocationParameters'
-          - $ref: '#/components/schemas/PromptAnthropicInvocationParameters'
-          - $ref: '#/components/schemas/PromptGoogleInvocationParameters'
-          - $ref: '#/components/schemas/PromptDeepSeekInvocationParameters'
-          - $ref: '#/components/schemas/PromptXAIInvocationParameters'
-          - $ref: '#/components/schemas/PromptOllamaInvocationParameters'
-          - $ref: '#/components/schemas/PromptAwsInvocationParameters'
-          - $ref: '#/components/schemas/PromptCerebrasInvocationParameters'
-          - $ref: '#/components/schemas/PromptFireworksInvocationParameters'
-          - $ref: '#/components/schemas/PromptGroqInvocationParameters'
-          - $ref: '#/components/schemas/PromptMoonshotInvocationParameters'
-          - $ref: '#/components/schemas/PromptPerplexityInvocationParameters'
-          - $ref: '#/components/schemas/PromptTogetherInvocationParameters'
-          title: Invocation Parameters
-          discriminator:
-            propertyName: type
-            mapping:
-              anthropic: '#/components/schemas/PromptAnthropicInvocationParameters'
-              aws: '#/components/schemas/PromptAwsInvocationParameters'
-              azure_openai: '#/components/schemas/PromptAzureOpenAIInvocationParameters'
-              cerebras: '#/components/schemas/PromptCerebrasInvocationParameters'
-              deepseek: '#/components/schemas/PromptDeepSeekInvocationParameters'
-              fireworks: '#/components/schemas/PromptFireworksInvocationParameters'
-              google: '#/components/schemas/PromptGoogleInvocationParameters'
-              groq: '#/components/schemas/PromptGroqInvocationParameters'
-              moonshot: '#/components/schemas/PromptMoonshotInvocationParameters'
-              ollama: '#/components/schemas/PromptOllamaInvocationParameters'
-              openai: '#/components/schemas/PromptOpenAIInvocationParameters'
-              perplexity: '#/components/schemas/PromptPerplexityInvocationParameters'
-              together: '#/components/schemas/PromptTogetherInvocationParameters'
-              xai: '#/components/schemas/PromptXAIInvocationParameters'
-        tools:
-          $ref: '#/components/schemas/PromptTools'
-        response_format:
-          oneOf:
-          - $ref: '#/components/schemas/PromptResponseFormatJSONSchema'
-          discriminator:
-            propertyName: type
-            mapping:
-              json_schema: '#/components/schemas/PromptResponseFormatJSONSchema'
-          title: Response Format
-      type: object
-      required:
-      - model_provider
-      - model_name
-      - template
-      - template_type
-      - template_format
-      - invocation_parameters
-      title: PromptVersionData
-    PromptAnthropicThinkingConfigAdaptive:
-      properties:
-        type:
-          type: string
-          const: adaptive
-          title: Type
-        display:
-          type: string
-          enum:
-          - summarized
-          - omitted
-          title: Display
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      title: PromptAnthropicThinkingConfigAdaptive
-    PromptGoogleInvocationParametersContent:
-      properties:
-        temperature:
-          type: number
-          title: Temperature
-        max_output_tokens:
-          type: integer
-          title: Max Output Tokens
-        stop_sequences:
-          items:
-            type: string
-          type: array
-          title: Stop Sequences
-        presence_penalty:
-          type: number
-          title: Presence Penalty
-        frequency_penalty:
-          type: number
-          title: Frequency Penalty
-        top_p:
-          type: number
-          title: Top P
-        top_k:
-          type: integer
-          title: Top K
-        thinking_config:
-          $ref: '#/components/schemas/PromptGoogleThinkingConfig'
-      additionalProperties: false
-      type: object
-      title: PromptGoogleInvocationParametersContent
-    PromptGroqInvocationParametersContent:
-      properties:
-        temperature:
-          type: number
-          title: Temperature
-        max_tokens:
-          type: integer
-          title: Max Tokens
-        max_completion_tokens:
-          type: integer
-          title: Max Completion Tokens
-        frequency_penalty:
-          type: number
-          title: Frequency Penalty
-        presence_penalty:
-          type: number
-          title: Presence Penalty
-        top_p:
-          type: number
-          title: Top P
-        seed:
-          type: integer
-          title: Seed
-        stop:
-          items:
-            type: string
-          type: array
-          title: Stop
-        reasoning_effort:
-          type: string
-          enum:
-          - none
-          - minimal
-          - low
-          - medium
-          - high
-          - xhigh
-          title: Reasoning Effort
-        extra_body:
-          additionalProperties: true
-          type: object
-          title: Extra Body
-      additionalProperties: false
-      type: object
-      title: PromptGroqInvocationParametersContent
-    PromptToolChoiceSpecificFunctionTool:
-      properties:
-        type:
-          type: string
-          const: specific_function
-          title: Type
-        function_name:
-          type: string
-          title: Function Name
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - function_name
-      title: PromptToolChoiceSpecificFunctionTool
-    PromptCerebrasInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: cerebras
-          title: Type
-        cerebras:
-          $ref: '#/components/schemas/PromptCerebrasInvocationParametersContent'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - cerebras
-      title: PromptCerebrasInvocationParameters
-    PromptToolFunctionDefinition:
-      properties:
-        name:
-          type: string
-          title: Name
-        description:
-          type: string
-          title: Description
-        parameters:
-          additionalProperties: true
-          type: object
-          title: Parameters
-        strict:
-          type: boolean
-          title: Strict
-      additionalProperties: false
-      type: object
-      required:
-      - name
-      title: PromptToolFunctionDefinition
-    PromptToolChoiceNone:
-      properties:
-        type:
-          type: string
-          const: none
-          title: Type
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      title: PromptToolChoiceNone
-    PromptAnthropicInvocationParametersContent:
-      properties:
-        max_tokens:
-          type: integer
-          title: Max Tokens
-        temperature:
-          type: number
-          title: Temperature
-        top_p:
-          type: number
-          title: Top P
-        stop_sequences:
-          items:
-            type: string
-          type: array
-          title: Stop Sequences
-        output_config:
-          $ref: '#/components/schemas/PromptAnthropicOutputConfig'
-        thinking:
-          oneOf:
-          - $ref: '#/components/schemas/PromptAnthropicThinkingConfigDisabled'
-          - $ref: '#/components/schemas/PromptAnthropicThinkingConfigEnabled'
-          - $ref: '#/components/schemas/PromptAnthropicThinkingConfigAdaptive'
-          title: Thinking
-          discriminator:
-            propertyName: type
-            mapping:
-              adaptive: '#/components/schemas/PromptAnthropicThinkingConfigAdaptive'
-              disabled: '#/components/schemas/PromptAnthropicThinkingConfigDisabled'
-              enabled: '#/components/schemas/PromptAnthropicThinkingConfigEnabled'
-        extra_body:
-          additionalProperties: true
-          type: object
-          title: Extra Body
-      additionalProperties: false
-      type: object
-      required:
-      - max_tokens
-      title: PromptAnthropicInvocationParametersContent
-    ToolResultContentPart:
-      properties:
-        type:
-          type: string
-          const: tool_result
-          title: Type
-        tool_call_id:
-          type: string
-          title: Tool Call Id
-        tool_result:
-          anyOf:
-          - type: boolean
-          - type: integer
-          - type: number
-          - type: string
-          - additionalProperties: true
-            type: object
-          - items: {}
-            type: array
-          - type: 'null'
-          title: Tool Result
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - tool_call_id
-      - tool_result
-      title: ToolResultContentPart
-    PromptFireworksInvocationParametersContent:
-      properties:
-        temperature:
-          type: number
-          title: Temperature
-        max_tokens:
-          type: integer
-          title: Max Tokens
-        max_completion_tokens:
-          type: integer
-          title: Max Completion Tokens
-        frequency_penalty:
-          type: number
-          title: Frequency Penalty
-        presence_penalty:
-          type: number
-          title: Presence Penalty
-        top_p:
-          type: number
-          title: Top P
-        seed:
-          type: integer
-          title: Seed
-        stop:
-          items:
-            type: string
-          type: array
-          title: Stop
-        reasoning_effort:
-          type: string
-          enum:
-          - none
-          - minimal
-          - low
-          - medium
-          - high
-          - xhigh
-          title: Reasoning Effort
-        extra_body:
-          additionalProperties: true
-          type: object
-          title: Extra Body
-      additionalProperties: false
-      type: object
-      title: PromptFireworksInvocationParametersContent
-    ModelProvider:
-      type: string
-      enum:
-      - OPENAI
-      - AZURE_OPENAI
-      - ANTHROPIC
-      - GOOGLE
-      - DEEPSEEK
-      - XAI
-      - OLLAMA
-      - AWS
-      - CEREBRAS
-      - FIREWORKS
-      - GROQ
-      - MOONSHOT
-      - PERPLEXITY
-      - TOGETHER
-      title: ModelProvider
-    PromptTools:
-      properties:
-        type:
-          type: string
-          const: tools
-          title: Type
-        tools:
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/PromptToolFunction'
-            - $ref: '#/components/schemas/PromptToolRaw'
-            discriminator:
-              propertyName: type
-              mapping:
-                function: '#/components/schemas/PromptToolFunction'
-                raw: '#/components/schemas/PromptToolRaw'
-          type: array
-          minItems: 1
-          title: Tools
-        tool_choice:
-          oneOf:
-          - $ref: '#/components/schemas/PromptToolChoiceNone'
-          - $ref: '#/components/schemas/PromptToolChoiceZeroOrMore'
-          - $ref: '#/components/schemas/PromptToolChoiceOneOrMore'
-          - $ref: '#/components/schemas/PromptToolChoiceSpecificFunctionTool'
-          title: Tool Choice
-          discriminator:
-            propertyName: type
-            mapping:
-              none: '#/components/schemas/PromptToolChoiceNone'
-              one_or_more: '#/components/schemas/PromptToolChoiceOneOrMore'
-              specific_function: '#/components/schemas/PromptToolChoiceSpecificFunctionTool'
-              zero_or_more: '#/components/schemas/PromptToolChoiceZeroOrMore'
-        disable_parallel_tool_calls:
-          type: boolean
-          title: Disable Parallel Tool Calls
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - tools
-      title: PromptTools
-    PromptXAIInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: xai
-          title: Type
-        xai:
-          $ref: '#/components/schemas/PromptXAIInvocationParametersContent'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - xai
-      title: PromptXAIInvocationParameters
-    PromptTogetherInvocationParameters:
-      properties:
-        type:
-          type: string
-          const: together
-          title: Type
-        together:
-          $ref: '#/components/schemas/PromptTogetherInvocationParametersContent'
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - together
-      title: PromptTogetherInvocationParameters
-    TextContentPart:
-      properties:
-        type:
-          type: string
-          const: text
-          title: Type
-        text:
-          type: string
-          title: Text
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - text
-      title: TextContentPart
-    Identifier:
-      type: string
-      pattern: ^[a-z0-9]([_a-z0-9-]*[a-z0-9])?$
-      title: Identifier
-    CreatePromptRequestBody:
-      properties:
-        prompt:
-          $ref: '#/components/schemas/PromptData'
-        version:
-          $ref: '#/components/schemas/PromptVersionData'
-      type: object
-      required:
-      - prompt
-      - version
-      title: CreatePromptRequestBody
     PromptVersion:
       properties:
         description:
@@ -1997,6 +776,210 @@ components:
       - invocation_parameters
       - id
       title: PromptVersion
+    PromptXAIInvocationParametersContent:
+      properties:
+        temperature:
+          type: number
+          title: Temperature
+        max_tokens:
+          type: integer
+          title: Max Tokens
+        max_completion_tokens:
+          type: integer
+          title: Max Completion Tokens
+        frequency_penalty:
+          type: number
+          title: Frequency Penalty
+        presence_penalty:
+          type: number
+          title: Presence Penalty
+        top_p:
+          type: number
+          title: Top P
+        seed:
+          type: integer
+          title: Seed
+        stop:
+          items:
+            type: string
+          type: array
+          title: Stop
+        reasoning_effort:
+          type: string
+          enum:
+          - none
+          - minimal
+          - low
+          - medium
+          - high
+          - xhigh
+          title: Reasoning Effort
+        extra_body:
+          additionalProperties: true
+          type: object
+          title: Extra Body
+      additionalProperties: false
+      type: object
+      title: PromptXAIInvocationParametersContent
+    PromptPerplexityInvocationParameters:
+      properties:
+        type:
+          type: string
+          const: perplexity
+          title: Type
+        perplexity:
+          $ref: '#/components/schemas/PromptPerplexityInvocationParametersContent'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - perplexity
+      title: PromptPerplexityInvocationParameters
+    PromptFireworksInvocationParametersContent:
+      properties:
+        temperature:
+          type: number
+          title: Temperature
+        max_tokens:
+          type: integer
+          title: Max Tokens
+        max_completion_tokens:
+          type: integer
+          title: Max Completion Tokens
+        frequency_penalty:
+          type: number
+          title: Frequency Penalty
+        presence_penalty:
+          type: number
+          title: Presence Penalty
+        top_p:
+          type: number
+          title: Top P
+        seed:
+          type: integer
+          title: Seed
+        stop:
+          items:
+            type: string
+          type: array
+          title: Stop
+        reasoning_effort:
+          type: string
+          enum:
+          - none
+          - minimal
+          - low
+          - medium
+          - high
+          - xhigh
+          title: Reasoning Effort
+        extra_body:
+          additionalProperties: true
+          type: object
+          title: Extra Body
+      additionalProperties: false
+      type: object
+      title: PromptFireworksInvocationParametersContent
+    ToolCallContentPart:
+      properties:
+        type:
+          type: string
+          const: tool_call
+          title: Type
+        tool_call_id:
+          type: string
+          title: Tool Call Id
+        tool_call:
+          oneOf:
+          - $ref: '#/components/schemas/ToolCallFunction'
+          title: Tool Call
+          discriminator:
+            propertyName: type
+            mapping:
+              function: '#/components/schemas/ToolCallFunction'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - tool_call_id
+      - tool_call
+      title: ToolCallContentPart
+    PromptAnthropicInvocationParameters:
+      properties:
+        type:
+          type: string
+          const: anthropic
+          title: Type
+        anthropic:
+          $ref: '#/components/schemas/PromptAnthropicInvocationParametersContent'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - anthropic
+      title: PromptAnthropicInvocationParameters
+    Identifier:
+      type: string
+      pattern: ^[a-z0-9]([_a-z0-9-]*[a-z0-9])?$
+      title: Identifier
+    PromptTogetherInvocationParameters:
+      properties:
+        type:
+          type: string
+          const: together
+          title: Type
+        together:
+          $ref: '#/components/schemas/PromptTogetherInvocationParametersContent'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - together
+      title: PromptTogetherInvocationParameters
+    ToolCallFunction:
+      properties:
+        type:
+          type: string
+          const: function
+          title: Type
+        name:
+          type: string
+          title: Name
+        arguments:
+          type: string
+          title: Arguments
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - name
+      - arguments
+      title: ToolCallFunction
+    PromptToolChoiceNone:
+      properties:
+        type:
+          type: string
+          const: none
+          title: Type
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      title: PromptToolChoiceNone
+    PromptAnthropicOutputConfig:
+      properties:
+        effort:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+          - xhigh
+          - max
+          title: Effort
+      additionalProperties: false
+      type: object
+      title: PromptAnthropicOutputConfig
     PromptVersionTagData:
       properties:
         name:
@@ -2010,3 +993,1020 @@ components:
       required:
       - name
       title: PromptVersionTagData
+    CreatePromptResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/PromptVersion'
+      type: object
+      required:
+      - data
+      title: CreatePromptResponseBody
+    PromptTemplateFormat:
+      type: string
+      enum:
+      - MUSTACHE
+      - F_STRING
+      - NONE
+      title: PromptTemplateFormat
+    PromptVersionData:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+        model_provider:
+          $ref: '#/components/schemas/ModelProvider'
+        model_name:
+          type: string
+          title: Model Name
+        template:
+          oneOf:
+          - $ref: '#/components/schemas/PromptChatTemplate'
+          - $ref: '#/components/schemas/PromptStringTemplate'
+          title: Template
+          discriminator:
+            propertyName: type
+            mapping:
+              chat: '#/components/schemas/PromptChatTemplate'
+              string: '#/components/schemas/PromptStringTemplate'
+        template_type:
+          $ref: '#/components/schemas/PromptTemplateType'
+        template_format:
+          $ref: '#/components/schemas/PromptTemplateFormat'
+        invocation_parameters:
+          oneOf:
+          - $ref: '#/components/schemas/PromptOpenAIInvocationParameters'
+          - $ref: '#/components/schemas/PromptAzureOpenAIInvocationParameters'
+          - $ref: '#/components/schemas/PromptAnthropicInvocationParameters'
+          - $ref: '#/components/schemas/PromptGoogleInvocationParameters'
+          - $ref: '#/components/schemas/PromptDeepSeekInvocationParameters'
+          - $ref: '#/components/schemas/PromptXAIInvocationParameters'
+          - $ref: '#/components/schemas/PromptOllamaInvocationParameters'
+          - $ref: '#/components/schemas/PromptAwsInvocationParameters'
+          - $ref: '#/components/schemas/PromptCerebrasInvocationParameters'
+          - $ref: '#/components/schemas/PromptFireworksInvocationParameters'
+          - $ref: '#/components/schemas/PromptGroqInvocationParameters'
+          - $ref: '#/components/schemas/PromptMoonshotInvocationParameters'
+          - $ref: '#/components/schemas/PromptPerplexityInvocationParameters'
+          - $ref: '#/components/schemas/PromptTogetherInvocationParameters'
+          title: Invocation Parameters
+          discriminator:
+            propertyName: type
+            mapping:
+              anthropic: '#/components/schemas/PromptAnthropicInvocationParameters'
+              aws: '#/components/schemas/PromptAwsInvocationParameters'
+              azure_openai: '#/components/schemas/PromptAzureOpenAIInvocationParameters'
+              cerebras: '#/components/schemas/PromptCerebrasInvocationParameters'
+              deepseek: '#/components/schemas/PromptDeepSeekInvocationParameters'
+              fireworks: '#/components/schemas/PromptFireworksInvocationParameters'
+              google: '#/components/schemas/PromptGoogleInvocationParameters'
+              groq: '#/components/schemas/PromptGroqInvocationParameters'
+              moonshot: '#/components/schemas/PromptMoonshotInvocationParameters'
+              ollama: '#/components/schemas/PromptOllamaInvocationParameters'
+              openai: '#/components/schemas/PromptOpenAIInvocationParameters'
+              perplexity: '#/components/schemas/PromptPerplexityInvocationParameters'
+              together: '#/components/schemas/PromptTogetherInvocationParameters'
+              xai: '#/components/schemas/PromptXAIInvocationParameters'
+        tools:
+          $ref: '#/components/schemas/PromptTools'
+        response_format:
+          oneOf:
+          - $ref: '#/components/schemas/PromptResponseFormatJSONSchema'
+          discriminator:
+            propertyName: type
+            mapping:
+              json_schema: '#/components/schemas/PromptResponseFormatJSONSchema'
+          title: Response Format
+      type: object
+      required:
+      - model_provider
+      - model_name
+      - template
+      - template_type
+      - template_format
+      - invocation_parameters
+      title: PromptVersionData
+    PromptPerplexityInvocationParametersContent:
+      properties:
+        temperature:
+          type: number
+          title: Temperature
+        max_tokens:
+          type: integer
+          title: Max Tokens
+        max_completion_tokens:
+          type: integer
+          title: Max Completion Tokens
+        frequency_penalty:
+          type: number
+          title: Frequency Penalty
+        presence_penalty:
+          type: number
+          title: Presence Penalty
+        top_p:
+          type: number
+          title: Top P
+        seed:
+          type: integer
+          title: Seed
+        stop:
+          items:
+            type: string
+          type: array
+          title: Stop
+        reasoning_effort:
+          type: string
+          enum:
+          - none
+          - minimal
+          - low
+          - medium
+          - high
+          - xhigh
+          title: Reasoning Effort
+        extra_body:
+          additionalProperties: true
+          type: object
+          title: Extra Body
+      additionalProperties: false
+      type: object
+      title: PromptPerplexityInvocationParametersContent
+    PromptToolChoiceZeroOrMore:
+      properties:
+        type:
+          type: string
+          const: zero_or_more
+          title: Type
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      title: PromptToolChoiceZeroOrMore
+    PromptGoogleThinkingConfig:
+      properties:
+        thinking_budget:
+          type: integer
+          title: Thinking Budget
+        thinking_level:
+          type: string
+          enum:
+          - minimal
+          - low
+          - medium
+          - high
+          title: Thinking Level
+        include_thoughts:
+          type: boolean
+          title: Include Thoughts
+      additionalProperties: false
+      type: object
+      title: PromptGoogleThinkingConfig
+    GetPromptVersionsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PromptVersion'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: GetPromptVersionsResponseBody
+    PromptXAIInvocationParameters:
+      properties:
+        type:
+          type: string
+          const: xai
+          title: Type
+        xai:
+          $ref: '#/components/schemas/PromptXAIInvocationParametersContent'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - xai
+      title: PromptXAIInvocationParameters
+    PromptGroqInvocationParametersContent:
+      properties:
+        temperature:
+          type: number
+          title: Temperature
+        max_tokens:
+          type: integer
+          title: Max Tokens
+        max_completion_tokens:
+          type: integer
+          title: Max Completion Tokens
+        frequency_penalty:
+          type: number
+          title: Frequency Penalty
+        presence_penalty:
+          type: number
+          title: Presence Penalty
+        top_p:
+          type: number
+          title: Top P
+        seed:
+          type: integer
+          title: Seed
+        stop:
+          items:
+            type: string
+          type: array
+          title: Stop
+        reasoning_effort:
+          type: string
+          enum:
+          - none
+          - minimal
+          - low
+          - medium
+          - high
+          - xhigh
+          title: Reasoning Effort
+        extra_body:
+          additionalProperties: true
+          type: object
+          title: Extra Body
+      additionalProperties: false
+      type: object
+      title: PromptGroqInvocationParametersContent
+    GetPromptResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/PromptVersion'
+      type: object
+      required:
+      - data
+      title: GetPromptResponseBody
+    PromptGoogleInvocationParameters:
+      properties:
+        type:
+          type: string
+          const: google
+          title: Type
+        google:
+          $ref: '#/components/schemas/PromptGoogleInvocationParametersContent'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - google
+      title: PromptGoogleInvocationParameters
+    PromptCerebrasInvocationParametersContent:
+      properties:
+        temperature:
+          type: number
+          title: Temperature
+        max_tokens:
+          type: integer
+          title: Max Tokens
+        max_completion_tokens:
+          type: integer
+          title: Max Completion Tokens
+        frequency_penalty:
+          type: number
+          title: Frequency Penalty
+        presence_penalty:
+          type: number
+          title: Presence Penalty
+        top_p:
+          type: number
+          title: Top P
+        seed:
+          type: integer
+          title: Seed
+        stop:
+          items:
+            type: string
+          type: array
+          title: Stop
+        reasoning_effort:
+          type: string
+          enum:
+          - none
+          - minimal
+          - low
+          - medium
+          - high
+          - xhigh
+          title: Reasoning Effort
+        extra_body:
+          additionalProperties: true
+          type: object
+          title: Extra Body
+      additionalProperties: false
+      type: object
+      title: PromptCerebrasInvocationParametersContent
+    PromptAzureOpenAIInvocationParametersContent:
+      properties:
+        temperature:
+          type: number
+          title: Temperature
+        max_tokens:
+          type: integer
+          title: Max Tokens
+        max_completion_tokens:
+          type: integer
+          title: Max Completion Tokens
+        frequency_penalty:
+          type: number
+          title: Frequency Penalty
+        presence_penalty:
+          type: number
+          title: Presence Penalty
+        top_p:
+          type: number
+          title: Top P
+        seed:
+          type: integer
+          title: Seed
+        stop:
+          items:
+            type: string
+          type: array
+          title: Stop
+        reasoning_effort:
+          type: string
+          enum:
+          - none
+          - minimal
+          - low
+          - medium
+          - high
+          - xhigh
+          title: Reasoning Effort
+        extra_body:
+          additionalProperties: true
+          type: object
+          title: Extra Body
+      additionalProperties: false
+      type: object
+      title: PromptAzureOpenAIInvocationParametersContent
+    PromptFireworksInvocationParameters:
+      properties:
+        type:
+          type: string
+          const: fireworks
+          title: Type
+        fireworks:
+          $ref: '#/components/schemas/PromptFireworksInvocationParametersContent'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - fireworks
+      title: PromptFireworksInvocationParameters
+    PromptTools:
+      properties:
+        type:
+          type: string
+          const: tools
+          title: Type
+        tools:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/PromptToolFunction'
+            - $ref: '#/components/schemas/PromptToolRaw'
+            discriminator:
+              propertyName: type
+              mapping:
+                function: '#/components/schemas/PromptToolFunction'
+                raw: '#/components/schemas/PromptToolRaw'
+          type: array
+          minItems: 1
+          title: Tools
+        tool_choice:
+          oneOf:
+          - $ref: '#/components/schemas/PromptToolChoiceNone'
+          - $ref: '#/components/schemas/PromptToolChoiceZeroOrMore'
+          - $ref: '#/components/schemas/PromptToolChoiceOneOrMore'
+          - $ref: '#/components/schemas/PromptToolChoiceSpecificFunctionTool'
+          title: Tool Choice
+          discriminator:
+            propertyName: type
+            mapping:
+              none: '#/components/schemas/PromptToolChoiceNone'
+              one_or_more: '#/components/schemas/PromptToolChoiceOneOrMore'
+              specific_function: '#/components/schemas/PromptToolChoiceSpecificFunctionTool'
+              zero_or_more: '#/components/schemas/PromptToolChoiceZeroOrMore'
+        disable_parallel_tool_calls:
+          type: boolean
+          title: Disable Parallel Tool Calls
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - tools
+      title: PromptTools
+    GetPromptsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Prompt'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: GetPromptsResponseBody
+    PromptAnthropicInvocationParametersContent:
+      properties:
+        max_tokens:
+          type: integer
+          title: Max Tokens
+        temperature:
+          type: number
+          title: Temperature
+        top_p:
+          type: number
+          title: Top P
+        stop_sequences:
+          items:
+            type: string
+          type: array
+          title: Stop Sequences
+        output_config:
+          $ref: '#/components/schemas/PromptAnthropicOutputConfig'
+        thinking:
+          oneOf:
+          - $ref: '#/components/schemas/PromptAnthropicThinkingConfigDisabled'
+          - $ref: '#/components/schemas/PromptAnthropicThinkingConfigEnabled'
+          - $ref: '#/components/schemas/PromptAnthropicThinkingConfigAdaptive'
+          title: Thinking
+          discriminator:
+            propertyName: type
+            mapping:
+              adaptive: '#/components/schemas/PromptAnthropicThinkingConfigAdaptive'
+              disabled: '#/components/schemas/PromptAnthropicThinkingConfigDisabled'
+              enabled: '#/components/schemas/PromptAnthropicThinkingConfigEnabled'
+        extra_body:
+          additionalProperties: true
+          type: object
+          title: Extra Body
+      additionalProperties: false
+      type: object
+      required:
+      - max_tokens
+      title: PromptAnthropicInvocationParametersContent
+    ToolResultContentPart:
+      properties:
+        type:
+          type: string
+          const: tool_result
+          title: Type
+        tool_call_id:
+          type: string
+          title: Tool Call Id
+        tool_result:
+          anyOf:
+          - type: boolean
+          - type: integer
+          - type: number
+          - type: string
+          - additionalProperties: true
+            type: object
+          - items: {}
+            type: array
+          - type: 'null'
+          title: Tool Result
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - tool_call_id
+      - tool_result
+      title: ToolResultContentPart
+    PromptStringTemplate:
+      properties:
+        type:
+          type: string
+          const: string
+          title: Type
+        template:
+          type: string
+          title: Template
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - template
+      title: PromptStringTemplate
+    PromptMoonshotInvocationParameters:
+      properties:
+        type:
+          type: string
+          const: moonshot
+          title: Type
+        moonshot:
+          $ref: '#/components/schemas/PromptMoonshotInvocationParametersContent'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - moonshot
+      title: PromptMoonshotInvocationParameters
+    PromptChatTemplate:
+      properties:
+        type:
+          type: string
+          const: chat
+          title: Type
+        messages:
+          items:
+            $ref: '#/components/schemas/PromptMessage'
+          type: array
+          title: Messages
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - messages
+      title: PromptChatTemplate
+    PromptToolRaw:
+      properties:
+        type:
+          type: string
+          const: raw
+          title: Type
+        raw:
+          additionalProperties: true
+          type: object
+          title: Raw
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - raw
+      title: PromptToolRaw
+    PromptOllamaInvocationParametersContent:
+      properties:
+        temperature:
+          type: number
+          title: Temperature
+        max_tokens:
+          type: integer
+          title: Max Tokens
+        max_completion_tokens:
+          type: integer
+          title: Max Completion Tokens
+        frequency_penalty:
+          type: number
+          title: Frequency Penalty
+        presence_penalty:
+          type: number
+          title: Presence Penalty
+        top_p:
+          type: number
+          title: Top P
+        seed:
+          type: integer
+          title: Seed
+        stop:
+          items:
+            type: string
+          type: array
+          title: Stop
+        reasoning_effort:
+          type: string
+          enum:
+          - none
+          - minimal
+          - low
+          - medium
+          - high
+          - xhigh
+          title: Reasoning Effort
+        extra_body:
+          additionalProperties: true
+          type: object
+          title: Extra Body
+      additionalProperties: false
+      type: object
+      title: PromptOllamaInvocationParametersContent
+    PromptData:
+      properties:
+        name:
+          $ref: '#/components/schemas/Identifier'
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+        source_prompt_id:
+          type:
+          - string
+          - 'null'
+          title: Source Prompt Id
+        metadata:
+          additionalProperties: true
+          type:
+          - object
+          - 'null'
+          title: Metadata
+      type: object
+      required:
+      - name
+      title: PromptData
+    PromptToolChoiceOneOrMore:
+      properties:
+        type:
+          type: string
+          const: one_or_more
+          title: Type
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      title: PromptToolChoiceOneOrMore
+    PromptAzureOpenAIInvocationParameters:
+      properties:
+        type:
+          type: string
+          const: azure_openai
+          title: Type
+        azure_openai:
+          $ref: '#/components/schemas/PromptAzureOpenAIInvocationParametersContent'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - azure_openai
+      title: PromptAzureOpenAIInvocationParameters
+    PromptGoogleInvocationParametersContent:
+      properties:
+        temperature:
+          type: number
+          title: Temperature
+        max_output_tokens:
+          type: integer
+          title: Max Output Tokens
+        stop_sequences:
+          items:
+            type: string
+          type: array
+          title: Stop Sequences
+        presence_penalty:
+          type: number
+          title: Presence Penalty
+        frequency_penalty:
+          type: number
+          title: Frequency Penalty
+        top_p:
+          type: number
+          title: Top P
+        top_k:
+          type: integer
+          title: Top K
+        thinking_config:
+          $ref: '#/components/schemas/PromptGoogleThinkingConfig'
+      additionalProperties: false
+      type: object
+      title: PromptGoogleInvocationParametersContent
+    PromptAnthropicThinkingConfigEnabled:
+      properties:
+        type:
+          type: string
+          const: enabled
+          title: Type
+        budget_tokens:
+          type: integer
+          minimum: 1024.0
+          title: Budget Tokens
+        display:
+          type: string
+          enum:
+          - summarized
+          - omitted
+          title: Display
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - budget_tokens
+      title: PromptAnthropicThinkingConfigEnabled
+    PromptToolFunctionDefinition:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        parameters:
+          additionalProperties: true
+          type: object
+          title: Parameters
+        strict:
+          type: boolean
+          title: Strict
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      title: PromptToolFunctionDefinition
+    PromptToolChoiceSpecificFunctionTool:
+      properties:
+        type:
+          type: string
+          const: specific_function
+          title: Type
+        function_name:
+          type: string
+          title: Function Name
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - function_name
+      title: PromptToolChoiceSpecificFunctionTool
+    PromptDeepSeekInvocationParameters:
+      properties:
+        type:
+          type: string
+          const: deepseek
+          title: Type
+        deepseek:
+          $ref: '#/components/schemas/PromptDeepSeekInvocationParametersContent'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - deepseek
+      title: PromptDeepSeekInvocationParameters
+    PromptResponseFormatJSONSchemaDefinition:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        schema:
+          additionalProperties: true
+          type: object
+          title: Schema
+        strict:
+          type: boolean
+          title: Strict
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      title: PromptResponseFormatJSONSchemaDefinition
+    PromptToolFunction:
+      properties:
+        type:
+          type: string
+          const: function
+          title: Type
+        function:
+          $ref: '#/components/schemas/PromptToolFunctionDefinition'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - function
+      title: PromptToolFunction
+    PromptOpenAIInvocationParametersContent:
+      properties:
+        temperature:
+          type: number
+          title: Temperature
+        max_tokens:
+          type: integer
+          title: Max Tokens
+        max_completion_tokens:
+          type: integer
+          title: Max Completion Tokens
+        frequency_penalty:
+          type: number
+          title: Frequency Penalty
+        presence_penalty:
+          type: number
+          title: Presence Penalty
+        top_p:
+          type: number
+          title: Top P
+        seed:
+          type: integer
+          title: Seed
+        stop:
+          items:
+            type: string
+          type: array
+          title: Stop
+        reasoning_effort:
+          type: string
+          enum:
+          - none
+          - minimal
+          - low
+          - medium
+          - high
+          - xhigh
+          title: Reasoning Effort
+        extra_body:
+          additionalProperties: true
+          type: object
+          title: Extra Body
+      additionalProperties: false
+      type: object
+      title: PromptOpenAIInvocationParametersContent
+    ModelProvider:
+      type: string
+      enum:
+      - OPENAI
+      - AZURE_OPENAI
+      - ANTHROPIC
+      - GOOGLE
+      - DEEPSEEK
+      - XAI
+      - OLLAMA
+      - AWS
+      - CEREBRAS
+      - FIREWORKS
+      - GROQ
+      - MOONSHOT
+      - PERPLEXITY
+      - TOGETHER
+      title: ModelProvider
+    PromptCerebrasInvocationParameters:
+      properties:
+        type:
+          type: string
+          const: cerebras
+          title: Type
+        cerebras:
+          $ref: '#/components/schemas/PromptCerebrasInvocationParametersContent'
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - cerebras
+      title: PromptCerebrasInvocationParameters
+    TextContentPart:
+      properties:
+        type:
+          type: string
+          const: text
+          title: Type
+        text:
+          type: string
+          title: Text
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - text
+      title: TextContentPart
+    PromptMessage:
+      properties:
+        role:
+          type: string
+          enum:
+          - user
+          - assistant
+          - model
+          - ai
+          - tool
+          - system
+          - developer
+          title: Role
+        content:
+          anyOf:
+          - type: string
+          - items:
+              oneOf:
+              - $ref: '#/components/schemas/TextContentPart'
+              - $ref: '#/components/schemas/ToolCallContentPart'
+              - $ref: '#/components/schemas/ToolResultContentPart'
+              discriminator:
+                propertyName: type
+                mapping:
+                  text: '#/components/schemas/TextContentPart'
+                  tool_call: '#/components/schemas/ToolCallContentPart'
+                  tool_result: '#/components/schemas/ToolResultContentPart'
+            type: array
+            minItems: 1
+          title: Content
+      additionalProperties: false
+      type: object
+      required:
+      - role
+      - content
+      title: PromptMessage
+    PromptAnthropicThinkingConfigDisabled:
+      properties:
+        type:
+          type: string
+          const: disabled
+          title: Type
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      title: PromptAnthropicThinkingConfigDisabled
+    PromptDeepSeekInvocationParametersContent:
+      properties:
+        temperature:
+          type: number
+          title: Temperature
+        max_tokens:
+          type: integer
+          title: Max Tokens
+        max_completion_tokens:
+          type: integer
+          title: Max Completion Tokens
+        frequency_penalty:
+          type: number
+          title: Frequency Penalty
+        presence_penalty:
+          type: number
+          title: Presence Penalty
+        top_p:
+          type: number
+          title: Top P
+        seed:
+          type: integer
+          title: Seed
+        stop:
+          items:
+            type: string
+          type: array
+          title: Stop
+        reasoning_effort:
+          type: string
+          enum:
+          - none
+          - minimal
+          - low
+          - medium
+          - high
+          - xhigh
+          title: Reasoning Effort
+        extra_body:
+          additionalProperties: true
+          type: object
+          title: Extra Body
+      additionalProperties: false
+      type: object
+      title: PromptDeepSeekInvocationParametersContent
+    PromptTogetherInvocationParametersContent:
+      properties:
+        temperature:
+          type: number
+          title: Temperature
+        max_tokens:
+          type: integer
+          title: Max Tokens
+        max_completion_tokens:
+          type: integer
+          title: Max Completion Tokens
+        frequency_penalty:
+          type: number
+          title: Frequency Penalty
+        presence_penalty:
+          type: number
+          title: Presence Penalty
+        top_p:
+          type: number
+          title: Top P
+        seed:
+          type: integer
+          title: Seed
+        stop:
+          items:
+            type: string
+          type: array
+          title: Stop
+        reasoning_effort:
+          type: string
+          enum:
+          - none
+          - minimal
+          - low
+          - medium
+          - high
+          - xhigh
+          title: Reasoning Effort
+        extra_body:
+          additionalProperties: true
+          type: object
+          title: Extra Body
+      additionalProperties: false
+      type: object
+      title: PromptTogetherInvocationParametersContent

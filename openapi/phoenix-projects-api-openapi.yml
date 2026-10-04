@@ -227,6 +227,15 @@ paths:
           description: Unprocessable Entity
 components:
   schemas:
+    UpdateProjectRequestBody:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+      type: object
+      title: UpdateProjectRequestBody
     GetProjectsResponseBody:
       properties:
         data:
@@ -244,25 +253,6 @@ components:
       - data
       - next_cursor
       title: GetProjectsResponseBody
-    Project:
-      properties:
-        name:
-          type: string
-          minLength: 1
-          title: Name
-        description:
-          type:
-          - string
-          - 'null'
-          title: Description
-        id:
-          type: string
-          title: Id
-      type: object
-      required:
-      - name
-      - id
-      title: Project
     UpdateProjectResponseBody:
       properties:
         data:
@@ -287,6 +277,25 @@ components:
       required:
       - data
       title: CreateProjectResponseBody
+    Project:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+        id:
+          type: string
+          title: Id
+      type: object
+      required:
+      - name
+      - id
+      title: Project
     CreateProjectRequestBody:
       properties:
         name:
@@ -302,12 +311,3 @@ components:
       required:
       - name
       title: CreateProjectRequestBody
-    UpdateProjectRequestBody:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-          title: Description
-      type: object
-      title: UpdateProjectRequestBody
