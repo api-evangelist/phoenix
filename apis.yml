@@ -604,6 +604,9 @@ apis:
   - type: TypeScriptSDK
     url: https://www.npmjs.com/package/@arizeai/phoenix-client
 common:
+  - type: CapabilityMap
+    url: capabilities/phoenix-capability-edges.yml
+    name: Arize Phoenix Business Capability Map
   - type: AgenticAccess
     url: agentic-access/phoenix-agentic-access.yml
   - type: DomainSecurity

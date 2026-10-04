@@ -1,0 +1,68 @@
+slug: phoenix
+provider: Arize Phoenix
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Spans
+  spec_file: phoenix-spans-api-openapi.yml
+  capability_id: BC-4220.20
+  capability_id_l1: BC-4220
+  capability_name: Observability Management
+  confidence: 0.8
+  evidence: POST /v1/projects/{project_identifier}/spans  "Create spans"; GET /v1/projects/{project_identifier}/spans/otlpv1  "Search
+    spans"; schemas OtlpEvent, OtlpKeyValue, SpanContext
+  reason: Ingestion, search and annotation of OpenTelemetry spans — distributed tracing telemetry, which
+    is squarely Observability Management (logs, metrics, traces).
+- tag: Traces
+  spec_file: phoenix-traces-api-openapi.yml
+  capability_id: BC-4220.20
+  capability_id_l1: BC-4220
+  capability_name: Observability Management
+  confidence: 0.8
+  evidence: GET /v1/projects/{project_identifier}/traces  "List traces for a project"; schema TraceSpanData;
+    DELETE /v1/traces/{trace_identifier}
+  reason: Listing, annotating and deleting application traces built on OpenTelemetry — trace telemetry
+    management, i.e. Observability Management.
+- tag: Datasets
+  spec_file: phoenix-datasets-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.72
+  evidence: GET /v1/datasets/{id}/jsonl/openai_ft  "Download dataset examples as OpenAI fine-tuning JSONL
+    file"; "Upload dataset from JSON, JSONL, CSV, or PyArrow"
+  reason: Curation of example datasets used for LLM evaluation and fine-tuning — an AI/ML lifecycle (MLOps)
+    artefact rather than enterprise master data or analytics reporting. Mapped to Artificial Intelligence
+    Management with moderate confidence since 'dataset' could also read as generic data management.
+- tag: Prompts
+  spec_file: phoenix-prompts-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.72
+  evidence: POST /v1/prompts  "Create a new prompt"; GET /v1/prompts/{prompt_identifier}/versions  "List
+    prompt versions"; schemas PromptAnthropicOutputConfig, PromptGoogleInvocationParameters
+  reason: Versioned prompt templates with per-LLM-provider invocation parameters — prompt asset lifecycle
+    management within the AI/ML (LLMOps) practice. Not source control of product code, since the artefacts
+    are model prompts and provider configs.
+- tag: Experiments
+  spec_file: phoenix-experiments-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.7
+  evidence: POST /v1/datasets/{dataset_id}/experiments  "Create experiment on a dataset"; POST /v1/experiment_evaluations  "Create
+    or update evaluation for an experiment run"
+  reason: These are LLM/model evaluation experiment runs against datasets — model evaluation in the AI/ML
+    lifecycle. Deliberately NOT product A/B testing (BC-4280.50), which concerns feature experiments on
+    end users.
