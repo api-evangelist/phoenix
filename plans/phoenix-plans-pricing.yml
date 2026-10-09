@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Arize Phoenix Plans and Pricing
 description: >
   Arize Phoenix offers multiple deployment and pricing tiers. The open-source
@@ -114,3 +118,42 @@ plans:
       - Reduced AX Pro or Enterprise pricing
       - Full platform access
     url: https://arize.com/pricing/
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - hybrid
+  - negotiated
+  units: []
+  plans:
+  - name: Phoenix Open Source
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: AX Free
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: AX Pro
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: AX Enterprise
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Startup Program
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
