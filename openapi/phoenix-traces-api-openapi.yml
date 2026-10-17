@@ -265,17 +265,54 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    AnnotateTracesResponseBody:
+    ValidationError:
       properties:
-        data:
+        loc:
           items:
-            $ref: '#/components/schemas/InsertedTraceAnnotation'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Data
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
-      - data
-      title: AnnotateTracesResponseBody
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    AnnotationResult:
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
+          title: Label
+          description: The label assigned by the annotation
+        score:
+          type:
+          - number
+          - 'null'
+          title: Score
+          description: The score assigned by the annotation
+        explanation:
+          type:
+          - string
+          - 'null'
+          title: Explanation
+          description: Explanation of the annotation result
+      type: object
+      title: AnnotationResult
     GetTracesResponseBody:
       properties:
         data:
@@ -293,6 +330,133 @@ components:
       - data
       - next_cursor
       title: GetTracesResponseBody
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CreateTraceNoteResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/InsertedTraceAnnotation'
+      type: object
+      required:
+      - data
+      title: CreateTraceNoteResponseBody
+    CreateTraceNoteRequestBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/TraceNoteData'
+      type: object
+      required:
+      - data
+      title: CreateTraceNoteRequestBody
+    TraceSpanData:
+      properties:
+        id:
+          type: string
+          title: Id
+        span_id:
+          type: string
+          title: Span Id
+        parent_id:
+          type:
+          - string
+          - 'null'
+          title: Parent Id
+        name:
+          type: string
+          title: Name
+        span_kind:
+          type: string
+          title: Span Kind
+        status_code:
+          type: string
+          title: Status Code
+        start_time:
+          type: string
+          format: date-time
+          title: Start Time
+        end_time:
+          type: string
+          format: date-time
+          title: End Time
+      type: object
+      required:
+      - id
+      - span_id
+      - parent_id
+      - name
+      - span_kind
+      - status_code
+      - start_time
+      - end_time
+      title: TraceSpanData
+    TraceData:
+      properties:
+        id:
+          type: string
+          title: Id
+        trace_id:
+          type: string
+          title: Trace Id
+        project_id:
+          type: string
+          title: Project Id
+        start_time:
+          type: string
+          format: date-time
+          title: Start Time
+        end_time:
+          type: string
+          format: date-time
+          title: End Time
+        token_count_prompt:
+          type: integer
+          title: Token Count Prompt
+          description: Cumulative prompt token count across all spans in the trace.
+          default: 0
+        token_count_completion:
+          type: integer
+          title: Token Count Completion
+          description: Cumulative completion token count across all spans in the trace.
+          default: 0
+        token_count_total:
+          type: integer
+          title: Token Count Total
+          description: Cumulative total token count across all spans in the trace (prompt + completion).
+          default: 0
+        spans:
+          items:
+            $ref: '#/components/schemas/TraceSpanData'
+          type:
+          - array
+          - 'null'
+          title: Spans
+      type: object
+      required:
+      - id
+      - trace_id
+      - project_id
+      - start_time
+      - end_time
+      title: TraceData
+    AnnotateTracesRequestBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TraceAnnotationData'
+          type: array
+          title: Data
+          description: The trace annotations to be upserted
+      type: object
+      required:
+      - data
+      title: AnnotateTracesRequestBody
     InsertedTraceAnnotation:
       properties:
         id:
@@ -303,14 +467,17 @@ components:
       required:
       - id
       title: InsertedTraceAnnotation
-    CreateTraceNoteRequestBody:
+    AnnotateTracesResponseBody:
       properties:
         data:
-          $ref: '#/components/schemas/TraceNoteData'
+          items:
+            $ref: '#/components/schemas/InsertedTraceAnnotation'
+          type: array
+          title: Data
       type: object
       required:
       - data
-      title: CreateTraceNoteRequestBody
+      title: AnnotateTracesResponseBody
     TraceNoteData:
       properties:
         trace_id:
@@ -372,170 +539,3 @@ components:
       - annotator_kind
       - trace_id
       title: TraceAnnotationData
-    CreateTraceNoteResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/InsertedTraceAnnotation'
-      type: object
-      required:
-      - data
-      title: CreateTraceNoteResponseBody
-    AnnotateTracesRequestBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/TraceAnnotationData'
-          type: array
-          title: Data
-          description: The trace annotations to be upserted
-      type: object
-      required:
-      - data
-      title: AnnotateTracesRequestBody
-    TraceSpanData:
-      properties:
-        id:
-          type: string
-          title: Id
-        span_id:
-          type: string
-          title: Span Id
-        parent_id:
-          type:
-          - string
-          - 'null'
-          title: Parent Id
-        name:
-          type: string
-          title: Name
-        span_kind:
-          type: string
-          title: Span Kind
-        status_code:
-          type: string
-          title: Status Code
-        start_time:
-          type: string
-          format: date-time
-          title: Start Time
-        end_time:
-          type: string
-          format: date-time
-          title: End Time
-      type: object
-      required:
-      - id
-      - span_id
-      - parent_id
-      - name
-      - span_kind
-      - status_code
-      - start_time
-      - end_time
-      title: TraceSpanData
-    AnnotationResult:
-      properties:
-        label:
-          type:
-          - string
-          - 'null'
-          title: Label
-          description: The label assigned by the annotation
-        score:
-          type:
-          - number
-          - 'null'
-          title: Score
-          description: The score assigned by the annotation
-        explanation:
-          type:
-          - string
-          - 'null'
-          title: Explanation
-          description: Explanation of the annotation result
-      type: object
-      title: AnnotationResult
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    TraceData:
-      properties:
-        id:
-          type: string
-          title: Id
-        trace_id:
-          type: string
-          title: Trace Id
-        project_id:
-          type: string
-          title: Project Id
-        start_time:
-          type: string
-          format: date-time
-          title: Start Time
-        end_time:
-          type: string
-          format: date-time
-          title: End Time
-        token_count_prompt:
-          type: integer
-          title: Token Count Prompt
-          description: Cumulative prompt token count across all spans in the trace.
-          default: 0
-        token_count_completion:
-          type: integer
-          title: Token Count Completion
-          description: Cumulative completion token count across all spans in the trace.
-          default: 0
-        token_count_total:
-          type: integer
-          title: Token Count Total
-          description: Cumulative total token count across all spans in the trace (prompt + completion).
-          default: 0
-        spans:
-          items:
-            $ref: '#/components/schemas/TraceSpanData'
-          type:
-          - array
-          - 'null'
-          title: Spans
-      type: object
-      required:
-      - id
-      - trace_id
-      - project_id
-      - start_time
-      - end_time
-      title: TraceData

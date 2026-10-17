@@ -845,23 +845,6 @@ components:
       - annotator_kind
       - session_id
       title: SessionAnnotation
-    SessionAnnotationsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SessionAnnotation'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: SessionAnnotationsResponseBody
     SpanAnnotationsResponseBody:
       properties:
         data:
@@ -879,6 +862,62 @@ components:
       - data
       - next_cursor
       title: SpanAnnotationsResponseBody
+    SessionAnnotationsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SessionAnnotation'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: SessionAnnotationsResponseBody
+    AnnotationResult:
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
+          title: Label
+          description: The label assigned by the annotation
+        score:
+          type:
+          - number
+          - 'null'
+          title: Score
+          description: The score assigned by the annotation
+        explanation:
+          type:
+          - string
+          - 'null'
+          title: Explanation
+          description: Explanation of the annotation result
+      type: object
+      title: AnnotationResult
+    TraceAnnotationsResponseBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TraceAnnotation'
+          type: array
+          title: Data
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: TraceAnnotationsResponseBody
     TraceAnnotation:
       properties:
         id:
@@ -945,45 +984,6 @@ components:
       - annotator_kind
       - trace_id
       title: TraceAnnotation
-    AnnotationResult:
-      properties:
-        label:
-          type:
-          - string
-          - 'null'
-          title: Label
-          description: The label assigned by the annotation
-        score:
-          type:
-          - number
-          - 'null'
-          title: Score
-          description: The score assigned by the annotation
-        explanation:
-          type:
-          - string
-          - 'null'
-          title: Explanation
-          description: Explanation of the annotation result
-      type: object
-      title: AnnotationResult
-    TraceAnnotationsResponseBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/TraceAnnotation'
-          type: array
-          title: Data
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: TraceAnnotationsResponseBody
     SpanAnnotation:
       properties:
         id:

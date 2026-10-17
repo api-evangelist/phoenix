@@ -227,15 +227,6 @@ paths:
           description: Unprocessable Entity
 components:
   schemas:
-    UpdateProjectRequestBody:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-          title: Description
-      type: object
-      title: UpdateProjectRequestBody
     GetProjectsResponseBody:
       properties:
         data:
@@ -253,14 +244,6 @@ components:
       - data
       - next_cursor
       title: GetProjectsResponseBody
-    UpdateProjectResponseBody:
-      properties:
-        data:
-          $ref: '#/components/schemas/Project'
-      type: object
-      required:
-      - data
-      title: UpdateProjectResponseBody
     GetProjectResponseBody:
       properties:
         data:
@@ -269,6 +252,38 @@ components:
       required:
       - data
       title: GetProjectResponseBody
+    UpdateProjectResponseBody:
+      properties:
+        data:
+          $ref: '#/components/schemas/Project'
+      type: object
+      required:
+      - data
+      title: UpdateProjectResponseBody
+    CreateProjectRequestBody:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+      type: object
+      required:
+      - name
+      title: CreateProjectRequestBody
+    UpdateProjectRequestBody:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          title: Description
+      type: object
+      title: UpdateProjectRequestBody
     CreateProjectResponseBody:
       properties:
         data:
@@ -296,18 +311,3 @@ components:
       - name
       - id
       title: Project
-    CreateProjectRequestBody:
-      properties:
-        name:
-          type: string
-          minLength: 1
-          title: Name
-        description:
-          type:
-          - string
-          - 'null'
-          title: Description
-      type: object
-      required:
-      - name
-      title: CreateProjectRequestBody
