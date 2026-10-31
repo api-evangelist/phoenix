@@ -1,4 +1,4 @@
-# Arize Phoenix (phoenix)
+# Arize Phoenix
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,48 +66,188 @@
 
 Arize Phoenix is an open-source AI observability and evaluation platform built on OpenTelemetry, enabling developers to trace, evaluate, and debug LLM applications in production or locally. Phoenix exposes a REST API for programmatically ingesting spans and traces, managing datasets, running experiments, submitting annotations, and querying evaluation results. The platform supports a wide range of LLM frameworks including LangChain, LlamaIndex, OpenAI, Anthropic, and CrewAI through auto-instrumentation. Phoenix can be self-hosted in a single command or used as a managed cloud service (Arize AX), with authentication via API keys and OAuth2/OIDC for enterprise deployments.
 
-- **APIs.json:** https://raw.githubusercontent.com/api-evangelist/phoenix/refs/heads/main/apis.yml
-- **Naftiko:** https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=phoenix-api-evangelist&utm_content=repo
+**Areas:** LLM Observability · AI Evaluation · OpenTelemetry · Tracing · LLMOps · AI Monitoring · Open Source · Prompt Engineering · Datasets · Experiments
 
-## Tags
+## Arize Phoenix on APIs.io
 
-LLM Observability, AI Evaluation, OpenTelemetry, Tracing, LLMOps, AI Monitoring, Open Source, Prompt Engineering, Datasets, Experiments
+Everything profiled for Arize Phoenix is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/phoenix/](https://apis.io/providers/phoenix/)** — or go straight to one of the APIs or properties below.
 
-## APIs
+### APIs (17)
 
-| Name | Description | Human URL | Base URL |
-|------|-------------|-----------|----------|
-| Arize Phoenix REST API | REST API for trace ingestion, annotation management, dataset upload/export, experiment management, and project operations. | https://arize.com/docs/phoenix | https://app.phoenix.arize.com |
+- [Arize Phoenix Annotation Configs API](https://apis.io/apis/phoenix/phoenix-annotation-configs-api/) — The annotation_configs API from Arize Phoenix — 3 operation(s) for annotation_configs.
+- [Arize Phoenix Annotations API](https://apis.io/apis/phoenix/phoenix-annotations-api/) — The annotations API from Arize Phoenix — 3 operation(s) for annotations.
+- [Arize Phoenix Arize Phoenix Version API](https://apis.io/apis/phoenix/phoenix-arize-phoenix-version-api/) — The Arize Phoenix Version API from Arize Phoenix — 1 operation(s) for arize phoenix version.
+- [Arize Phoenix Auth API](https://apis.io/apis/phoenix/phoenix-auth-api/) — The Auth API from Arize Phoenix — 6 operation(s) for auth.
+- [Arize Phoenix Chat API](https://apis.io/apis/phoenix/phoenix-chat-api/) — The chat API from Arize Phoenix — 2 operation(s) for chat.
+- [Arize Phoenix Datasets API](https://apis.io/apis/phoenix/phoenix-datasets-api/) — The datasets API from Arize Phoenix — 9 operation(s) for datasets.
+- [Arize Phoenix Experiments API](https://apis.io/apis/phoenix/phoenix-experiments-api/) — The experiments API from Arize Phoenix — 8 operation(s) for experiments.
+- [Arize Phoenix Healthz API](https://apis.io/apis/phoenix/phoenix-healthz-api/) — The Healthz API from Arize Phoenix — 1 operation(s) for healthz.
+- [Arize Phoenix Projects API](https://apis.io/apis/phoenix/phoenix-projects-api/) — The projects API from Arize Phoenix — 2 operation(s) for projects.
+- [Arize Phoenix Prompts API](https://apis.io/apis/phoenix/phoenix-prompts-api/) — The prompts API from Arize Phoenix — 8 operation(s) for prompts.
+- [Arize Phoenix Readyz API](https://apis.io/apis/phoenix/phoenix-readyz-api/) — The Readyz API from Arize Phoenix — 1 operation(s) for readyz.
+- [Arize Phoenix Secrets API](https://apis.io/apis/phoenix/phoenix-secrets-api/) — The secrets API from Arize Phoenix — 1 operation(s) for secrets.
+- [Arize Phoenix Sessions API](https://apis.io/apis/phoenix/phoenix-sessions-api/) — The sessions API from Arize Phoenix — 5 operation(s) for sessions.
+- [Arize Phoenix Spans API](https://apis.io/apis/phoenix/phoenix-spans-api/) — The spans API from Arize Phoenix — 6 operation(s) for spans.
+- [Arize Phoenix Traces API](https://apis.io/apis/phoenix/phoenix-traces-api/) — The traces API from Arize Phoenix — 4 operation(s) for traces.
+- [Arize Phoenix Users API](https://apis.io/apis/phoenix/phoenix-users-api/) — The users API from Arize Phoenix — 3 operation(s) for users.
+- [Arize Phoenix Oauth2 API](https://apis.io/apis/phoenix/phoenix-oauth2-api/) — The Oauth2 API from Arize Phoenix — 2 operation(s) for oauth2.
 
-## Plans, Rate Limits, and FinOps
+### Published properties
 
-| Resource | Description |
-|----------|-------------|
-| [Plans & Pricing](plans/phoenix-plans-pricing.yml) | Open Source (free/self-hosted), AX Free (25k spans/mo), AX Pro ($50/mo, 50k spans), AX Enterprise (custom) |
-| [Rate Limits](rate-limits/phoenix-rate-limits.yml) | Monthly span and ingestion limits per plan; bearer token auth; brute-force login protection |
-| [FinOps](finops/phoenix-finops.yml) | FOCUS-aligned cost model covering span and ingestion billing dimensions, unit economics, and optimization recommendations |
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Timestamps
+#### Agentic access (1)
 
-| Field | Value |
-|-------|-------|
-| Created | 2026-06-13 |
-| Modified | 2026-06-13 |
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Common
+- [Phoenix Agentic Access](https://apis.io/agentic-access/phoenix/phoenix-agentic-access/)
 
-| Type | URL |
-|------|-----|
-| Website | https://arize.com/phoenix/ |
-| Documentation | https://arize.com/docs/phoenix |
-| GitHub Org | https://github.com/Arize-ai |
-| LinkedIn | https://www.linkedin.com/company/arizeai |
-| Blog | https://arize.com/blog/ |
-| Pricing | https://arize.com/pricing/ |
-| X | https://twitter.com/arizeai |
+#### JSON Schema (10)
 
-## Maintainers
+The data models the API reads and writes.
 
-| Name | Email |
-|------|-------|
-| Kin Lane | kin@apievangelist.com |
+- [AnnotateSpansRequestBody](https://apis.io/schemas/phoenix/phoenix-annotatespansrequestbody/)
+- [AnnotateSpansResponseBody](https://apis.io/schemas/phoenix/phoenix-annotatespansresponsebody/)
+- [AnnotationResult](https://apis.io/schemas/phoenix/phoenix-annotationresult/)
+- [Dataset](https://apis.io/schemas/phoenix/phoenix-dataset/)
+- [DatasetVersion](https://apis.io/schemas/phoenix/phoenix-datasetversion/)
+- [Experiment](https://apis.io/schemas/phoenix/phoenix-experiment/)
+- [ExperimentRun](https://apis.io/schemas/phoenix/phoenix-experimentrun/)
+- [Project](https://apis.io/schemas/phoenix/phoenix-project/)
+- [Span](https://apis.io/schemas/phoenix/phoenix-span/)
+- [SpanAnnotation](https://apis.io/schemas/phoenix/phoenix-spanannotation/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Phoenix Context](https://apis.io/jsonld/phoenix/phoenix-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Arize Phoenix Vocabulary](https://apis.io/vocabularies/phoenix/phoenix-vocabulary/)
+
+#### Examples (4)
+
+Example requests and responses.
+
+- [Phoenix Annotate Spans Example](https://apis.io/examples/phoenix/phoenix-annotate-spans-example/)
+- [Phoenix Create Experiment Example](https://apis.io/examples/phoenix/phoenix-create-experiment-example/)
+- [Phoenix Create Project Example](https://apis.io/examples/phoenix/phoenix-create-project-example/)
+- [Phoenix Create Span Example](https://apis.io/examples/phoenix/phoenix-create-span-example/)
+
+#### Collections (17)
+
+Postman and Open Collection request collections.
+
+- [Arize-Phoenix REST annotation_configs API](https://apis.io/collections/phoenix/open-phoenix-annotation-configs-api/)
+- [Arize-Phoenix REST annotation_configs annotations API](https://apis.io/collections/phoenix/open-phoenix-annotations-api/)
+- [Arize-Phoenix REST annotation_configs Arize Phoenix Version API](https://apis.io/collections/phoenix/open-phoenix-arize-phoenix-version-api/)
+- [Arize-Phoenix REST annotation_configs Auth API](https://apis.io/collections/phoenix/open-phoenix-auth-api/)
+- [Arize-Phoenix REST annotation_configs chat API](https://apis.io/collections/phoenix/open-phoenix-chat-api/)
+- [Arize-Phoenix REST annotation_configs datasets API](https://apis.io/collections/phoenix/open-phoenix-datasets-api/)
+- [Arize-Phoenix REST annotation_configs experiments API](https://apis.io/collections/phoenix/open-phoenix-experiments-api/)
+- [Arize-Phoenix REST annotation_configs Healthz API](https://apis.io/collections/phoenix/open-phoenix-healthz-api/)
+- [Arize-Phoenix REST annotation_configs Oauth2 API](https://apis.io/collections/phoenix/open-phoenix-oauth2-api/)
+- [Arize-Phoenix REST annotation_configs projects API](https://apis.io/collections/phoenix/open-phoenix-projects-api/)
+- [Arize-Phoenix REST annotation_configs prompts API](https://apis.io/collections/phoenix/open-phoenix-prompts-api/)
+- [Arize-Phoenix REST annotation_configs Readyz API](https://apis.io/collections/phoenix/open-phoenix-readyz-api/)
+- [Arize-Phoenix REST annotation_configs secrets API](https://apis.io/collections/phoenix/open-phoenix-secrets-api/)
+- [Arize-Phoenix REST annotation_configs sessions API](https://apis.io/collections/phoenix/open-phoenix-sessions-api/)
+- [Arize-Phoenix REST annotation_configs spans API](https://apis.io/collections/phoenix/open-phoenix-spans-api/)
+- [Arize-Phoenix REST annotation_configs traces API](https://apis.io/collections/phoenix/open-phoenix-traces-api/)
+- [Arize-Phoenix REST annotation_configs users API](https://apis.io/collections/phoenix/open-phoenix-users-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Arize Phoenix — jsonschema rules](https://apis.io/rules/phoenix/phoenix-jsonschema-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Phoenix Domain Security](https://apis.io/security/phoenix/phoenix-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Phoenix Plans Pricing](https://apis.io/plans/phoenix/phoenix-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Phoenix Rate Limits](https://apis.io/rate-limits/phoenix/phoenix-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Phoenix Finops](https://apis.io/finops/phoenix/phoenix-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://arize.com/phoenix/)
+- [Documentation](https://arize.com/docs/phoenix)
+- [Pricing](https://arize.com/pricing/)
+- [Blog](https://arize.com/blog/)
+
+## API Evangelist rating
+
+**Kin Score 32.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 51.5 |
+| Contract governance | 23.5 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 11.9 |
+| Access clarity | 18.4 |
+
+**Agent readiness 23.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/phoenix/](https://apis.io/providers/phoenix/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Arize Phoenix: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/phoenix/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
